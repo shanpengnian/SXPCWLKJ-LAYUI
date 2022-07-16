@@ -1,0 +1,2495 @@
+{
+  "modules": [
+    {
+      "name": "DB_REVERSE_MYSQL",
+      "chnname": "逆向解析_MYSQL",
+      "entities": [
+        {
+          "title": "p_api",
+          "chnname": "API表",
+          "fields": [
+            {
+              "name": "api_id",
+              "type": "INT_10",
+              "chnname": "",
+              "remark": "",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true,
+              "defaultValue": ""
+            },
+            {
+              "name": "user_id",
+              "type": "INT_10",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "task_code",
+              "type": "VARCHAR_300",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_name",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_url",
+              "type": "VARCHAR_300",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_site",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_key",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_one",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_two",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_three",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_four",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_five",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_six",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_seven",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_eight",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_nine",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_ten",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_ten_one",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_ten_two",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_ten_three",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_ten_four",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_ten_five",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_ten_six",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_ten_seven",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_ten_eight",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_ten_nine",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_twenty",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_twenty_one",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_twenty_two",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_twenty_three",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_twenty_four",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_twenty_five",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_twenty_six",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_twenty_seven",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_twenty_eight",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_twenty_nine",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "api_thirty",
+              "type": "VARCHAR_200",
+              "chnname": "",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "title": "p_code",
+          "chnname": "编码表",
+          "fields": [
+            {
+              "name": "code_id",
+              "type": "INT_10",
+              "chnname": "编码ID",
+              "remark": "",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true,
+              "defaultValue": ""
+            },
+            {
+              "name": "code_name",
+              "type": "VARCHAR_100",
+              "chnname": "编码名称",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "code_code",
+              "type": "VARCHAR_200",
+              "chnname": "唯一编码",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "code_type",
+              "type": "INT_10",
+              "chnname": "类型",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "title": "p_department",
+          "chnname": "部门表",
+          "fields": [
+            {
+              "name": "department_id",
+              "type": "INT_10",
+              "chnname": "部门ID",
+              "remark": "",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true,
+              "defaultValue": ""
+            },
+            {
+              "name": "department_name",
+              "type": "VARCHAR_500",
+              "chnname": "部门名",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "department_desc",
+              "type": "VARCHAR_500",
+              "chnname": "描述",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "department_fathe",
+              "type": "INT_10",
+              "chnname": "上级部门ID部门",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "department_state",
+              "type": "INT_10",
+              "chnname": "1：正常2：禁用",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "department_sort",
+              "type": "INT_10",
+              "chnname": "排序",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "department_outher",
+              "type": "VARCHAR_200",
+              "chnname": "其他",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "title": "p_emai_config",
+          "chnname": "系统邮箱配置",
+          "fields": [
+            {
+              "name": "email_id",
+              "type": "INT_10",
+              "chnname": "ID",
+              "remark": "",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true,
+              "defaultValue": ""
+            },
+            {
+              "name": "user_id",
+              "type": "INT_10",
+              "chnname": "用户ID",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "smtp_server",
+              "type": "VARCHAR_100",
+              "chnname": "邮箱服务地址",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "port",
+              "type": "INT_10",
+              "chnname": "端口",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "send_email",
+              "type": "VARCHAR_100",
+              "chnname": "账号",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "send_nickname",
+              "type": "VARCHAR_100",
+              "chnname": "昵称",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "send_password",
+              "type": "VARCHAR_150",
+              "chnname": "密码",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "title": "p_function",
+          "chnname": "权限资源",
+          "fields": [
+            {
+              "name": "fun_id",
+              "type": "INT_10",
+              "chnname": "权限ID",
+              "remark": "",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true,
+              "defaultValue": ""
+            },
+            {
+              "name": "fun_name",
+              "type": "VARCHAR_50",
+              "chnname": "权限名称",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "fun_code",
+              "type": "VARCHAR_50",
+              "chnname": "权限编码",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "father_id",
+              "type": "INT_10",
+              "chnname": "父ID",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "depth",
+              "type": "INT_10",
+              "chnname": "深度",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "left_node",
+              "type": "INT_10",
+              "chnname": "左节点",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "right_node",
+              "type": "INT_10",
+              "chnname": "右节点",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "level",
+              "type": "INT_10",
+              "chnname": "级别",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "machine_path",
+              "type": "VARCHAR_100",
+              "chnname": "地址头",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "link_path",
+              "type": "VARCHAR_100",
+              "chnname": "内部链接地址",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "external_path",
+              "type": "VARCHAR_100",
+              "chnname": "外部连接",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "sort",
+              "type": "INT_10",
+              "chnname": "排序",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "path_type",
+              "type": "INT_10",
+              "chnname": "链接类型",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "icon",
+              "type": "VARCHAR_200",
+              "chnname": "图标",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "open_type",
+              "type": "INT_10",
+              "chnname": "1：iframe窗口打开\n            2：web打开，_blank\n            3：web打开",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "is_open",
+              "type": "VARCHAR_200",
+              "chnname": "是否默认展开",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "title": "p_log",
+          "chnname": "系统日志表",
+          "fields": [
+            {
+              "name": "log_id",
+              "type": "INT_10",
+              "chnname": "ID",
+              "remark": "",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true,
+              "defaultValue": ""
+            },
+            {
+              "name": "log_type",
+              "type": "INT_10",
+              "chnname": "日志类型1增2删3改4查",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "log_desc",
+              "type": "TEXT",
+              "chnname": "描述",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "log_time",
+              "type": "DATETIME",
+              "chnname": "日志时间",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "user_id",
+              "type": "INT_10",
+              "chnname": "用户ID",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "log_level",
+              "type": "INT_10",
+              "chnname": "级别1：普通日志  2：重要日志   3：系统报错  4：一级漏洞\n",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "log_ip",
+              "type": "VARCHAR_500",
+              "chnname": "IP",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "is_collect",
+              "type": "INT_10",
+              "chnname": "是否处理0：未处理 1：已处理",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "title": "p_member",
+          "chnname": "用户表",
+          "fields": [
+            {
+              "name": "member_id",
+              "type": "INT_10",
+              "chnname": "用户id",
+              "remark": "",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true,
+              "defaultValue": ""
+            },
+            {
+              "name": "user_id",
+              "type": "INT_10",
+              "chnname": "商家id",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "member_name",
+              "type": "VARCHAR_255",
+              "chnname": "用户名称",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "member_account",
+              "type": "VARCHAR_255",
+              "chnname": "账号",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "member_phone",
+              "type": "VARCHAR_255",
+              "chnname": "手机号",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "member_icon",
+              "type": "VARCHAR_255",
+              "chnname": "头像",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "member_password",
+              "type": "VARCHAR_255",
+              "chnname": "密码",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "member_state",
+              "type": "VARCHAR_255",
+              "chnname": "状态",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "member_sex",
+              "type": "VARCHAR_255",
+              "chnname": "性别1:保密2:男3:女",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "update_time",
+              "type": "DATETIME",
+              "chnname": "最后登陆时间",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "add_time",
+              "type": "DATETIME",
+              "chnname": "注册时间",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "wx_open_id",
+              "type": "VARCHAR_200",
+              "chnname": "微信openid",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "member_note",
+              "type": "VARCHAR_255",
+              "chnname": "用户备注",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "title": "p_role",
+          "chnname": "角色表",
+          "fields": [
+            {
+              "name": "role_id",
+              "type": "INT_10",
+              "chnname": "角色ID",
+              "remark": "",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true,
+              "defaultValue": ""
+            },
+            {
+              "name": "role_name",
+              "type": "VARCHAR_50",
+              "chnname": "角色名称",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "role_desc",
+              "type": "VARCHAR_500",
+              "chnname": "角色描述",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "role_type",
+              "type": "INT_10",
+              "chnname": "角色类型：\n1:管理角色\n2：用户角色\n3：其他",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "role_sort",
+              "type": "INT_10",
+              "chnname": "排序",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "role_rank",
+              "type": "INT_10",
+              "chnname": "越大级别越高",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "code_id",
+              "type": "INT_10",
+              "chnname": "编码ID",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "title": "p_role_fun",
+          "chnname": "角色权限关系表",
+          "fields": [
+            {
+              "name": "fun_id",
+              "type": "INT_10",
+              "chnname": "资源ID",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "role_id",
+              "type": "INT_10",
+              "chnname": "角色ID",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "title": "p_tasks",
+          "chnname": "定时器表",
+          "fields": [
+            {
+              "name": "task_id",
+              "type": "INT_10",
+              "chnname": "ID",
+              "remark": "",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true,
+              "defaultValue": ""
+            },
+            {
+              "name": "task_name",
+              "type": "VARCHAR_200",
+              "chnname": "名称",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "task_code",
+              "type": "VARCHAR_200",
+              "chnname": "表达式",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "task_state",
+              "type": "INT_10",
+              "chnname": "状态1：正常2：禁用",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "task_function",
+              "type": "VARCHAR_100",
+              "chnname": "执行方法",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "task_num",
+              "type": "INT_10",
+              "chnname": "执行次数",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "task_sort",
+              "type": "INT_10",
+              "chnname": "排序",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "task_start_time",
+              "type": "DATETIME",
+              "chnname": "生效时间",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "task_end_time",
+              "type": "DATETIME",
+              "chnname": "结束时间",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "task_update_time",
+              "type": "DATETIME",
+              "chnname": "更新时间",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "task_note",
+              "type": "VARCHAR_500",
+              "chnname": "描述",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "title": "p_user",
+          "chnname": "用户表",
+          "fields": [
+            {
+              "name": "user_id",
+              "type": "INT_10",
+              "chnname": "用户ID",
+              "remark": "",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true,
+              "defaultValue": ""
+            },
+            {
+              "name": "department_id",
+              "type": "INT_10",
+              "chnname": "部门ID",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "user_phone",
+              "type": "VARCHAR_50",
+              "chnname": "手机号",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "user_account",
+              "type": "VARCHAR_50",
+              "chnname": "账号",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "user_password",
+              "type": "VARCHAR_50",
+              "chnname": "密码",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "user_email",
+              "type": "VARCHAR_50",
+              "chnname": "邮箱",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "user_name",
+              "type": "VARCHAR_50",
+              "chnname": "名称",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "user_check",
+              "type": "INT_10",
+              "chnname": "1：正常2：禁用3：停用",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "is_super",
+              "type": "INT_10",
+              "chnname": "是否超级管理员",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "icon",
+              "type": "VARCHAR_500",
+              "chnname": "头像",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "user_qq",
+              "type": "VARCHAR_50",
+              "chnname": "qq",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "user_describe",
+              "type": "TEXT",
+              "chnname": "描述",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "creation_time",
+              "type": "DATETIME",
+              "chnname": "创建时间",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "wechat_uid",
+              "type": "VARCHAR_200",
+              "chnname": "微信OpenID",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "title": "p_user_money",
+          "chnname": "用户余额表",
+          "fields": [
+            {
+              "name": "user_money_id",
+              "type": "INT_10",
+              "chnname": "余额ID",
+              "remark": "",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true,
+              "defaultValue": ""
+            },
+            {
+              "name": "user_id",
+              "type": "INT_10",
+              "chnname": "用户ID",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "available_money",
+              "type": "DECIMAL_10_2",
+              "chnname": "可用余额",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "total_money",
+              "type": "DECIMAL_10_2",
+              "chnname": "总余额",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "has_been_money",
+              "type": "DECIMAL_10_2",
+              "chnname": "总消费金额",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "add_time",
+              "type": "DATETIME",
+              "chnname": "添加时间",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "title": "p_user_role",
+          "chnname": "用户角色表",
+          "fields": [
+            {
+              "name": "user_id",
+              "type": "INT_10",
+              "chnname": "用户ID",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "role_id",
+              "type": "INT_10",
+              "chnname": "角色ID",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ]
+        },
+        {
+          "title": "p_user_water_money",
+          "chnname": "会员资金流水表",
+          "fields": [
+            {
+              "name": "user_water_id",
+              "type": "INT_10",
+              "chnname": "流水ID",
+              "remark": "",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true,
+              "defaultValue": ""
+            },
+            {
+              "name": "user_id",
+              "type": "INT_10",
+              "chnname": "用户ID",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "user_water_money",
+              "type": "DECIMAL_10_2",
+              "chnname": "流水金额",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "user_water_type",
+              "type": "INT_10",
+              "chnname": "流水类型1支出2收入",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "user_water_time",
+              "type": "DATETIME",
+              "chnname": "时间",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "user_water_ip",
+              "type": "VARCHAR_500",
+              "chnname": "流水ip",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "user_water_desc",
+              "type": "VARCHAR_500",
+              "chnname": "描述",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ]
+        }
+      ],
+      "associations": [
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "p_user_role",
+            "field": "user_id"
+          },
+          "to": {
+            "entity": "p_user",
+            "field": "user_id"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "p_user_role",
+            "field": "role_id"
+          },
+          "to": {
+            "entity": "p_role",
+            "field": "role_id"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "p_role_fun",
+            "field": "role_id"
+          },
+          "to": {
+            "entity": "p_role",
+            "field": "role_id"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "p_role_fun",
+            "field": "fun_id"
+          },
+          "to": {
+            "entity": "p_function",
+            "field": "fun_id"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "p_user_money",
+            "field": "user_id"
+          },
+          "to": {
+            "entity": "p_user",
+            "field": "user_id"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "p_user_water_money",
+            "field": "user_id"
+          },
+          "to": {
+            "entity": "p_user",
+            "field": "user_id"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "p_member",
+            "field": "user_id"
+          },
+          "to": {
+            "entity": "p_user",
+            "field": "user_id"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "p_user",
+            "field": "department_id"
+          },
+          "to": {
+            "entity": "p_department",
+            "field": "department_id"
+          }
+        }
+      ],
+      "graphCanvas": {
+        "nodes": [
+          {
+            "shape": "table",
+            "title": "p_function",
+            "moduleName": false,
+            "x": 2170,
+            "y": 370,
+            "id": "1e920805"
+          },
+          {
+            "shape": "table",
+            "title": "p_user",
+            "moduleName": false,
+            "x": 860,
+            "y": 370,
+            "id": "8ffc9265"
+          },
+          {
+            "shape": "table",
+            "title": "p_role",
+            "moduleName": false,
+            "x": 1510,
+            "y": 300,
+            "id": "006bcb8b"
+          },
+          {
+            "shape": "table",
+            "title": "p_user_role",
+            "moduleName": false,
+            "x": 1220,
+            "y": 560,
+            "id": "b1ee68ab"
+          },
+          {
+            "shape": "table",
+            "title": "p_role_fun",
+            "moduleName": false,
+            "x": 1820,
+            "y": 590,
+            "id": "e06ab608"
+          },
+          {
+            "shape": "table",
+            "title": "p_user_money",
+            "moduleName": false,
+            "x": 400,
+            "y": 300,
+            "id": "8f7e9489"
+          },
+          {
+            "shape": "table",
+            "title": "p_user_water_money",
+            "moduleName": false,
+            "x": 370,
+            "y": 500,
+            "id": "36bb36a4"
+          },
+          {
+            "shape": "table",
+            "title": "p_tasks",
+            "moduleName": false,
+            "x": 380,
+            "y": 830,
+            "id": "4bca5595"
+          },
+          {
+            "shape": "table",
+            "title": "p_member",
+            "moduleName": false,
+            "x": 1270,
+            "y": 860,
+            "id": "47c95956"
+          },
+          {
+            "shape": "table",
+            "title": "p_log",
+            "moduleName": false,
+            "x": 460,
+            "y": 1120,
+            "id": "2c76db7a"
+          },
+          {
+            "shape": "table",
+            "title": "p_emai_config",
+            "moduleName": false,
+            "x": 990,
+            "y": 1120,
+            "id": "f94cd086"
+          },
+          {
+            "shape": "table",
+            "title": "p_department",
+            "moduleName": false,
+            "x": 417,
+            "y": 57,
+            "id": "f3b5bf3e"
+          },
+          {
+            "shape": "table",
+            "title": "p_code",
+            "moduleName": false,
+            "x": 1360,
+            "y": 1100,
+            "id": "cc3a819e"
+          },
+          {
+            "shape": "table",
+            "title": "p_api",
+            "moduleName": false,
+            "x": 1860,
+            "y": 1060,
+            "id": "e1acb638"
+          }
+        ],
+        "edges": [
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "b1ee68ab",
+            "target": "8ffc9265",
+            "id": "462d569f",
+            "controlPoints": [
+              {
+                "x": 1119.470703125,
+                "y": 562.5357142857143
+              },
+              {
+                "x": 1051.7001953125,
+                "y": 252.1209677419355
+              }
+            ],
+            "sourceAnchor": 0,
+            "targetAnchor": 1
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "b1ee68ab",
+            "target": "006bcb8b",
+            "id": "2621cff6",
+            "controlPoints": [
+              {
+                "x": 1320.529296875,
+                "y": 582.8214285714286
+              },
+              {
+                "x": 1358.6474609375,
+                "y": 252.22058823529412
+              }
+            ],
+            "sourceAnchor": 3,
+            "targetAnchor": 0
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "e06ab608",
+            "target": "006bcb8b",
+            "id": "f9cbee27",
+            "controlPoints": [
+              {
+                "x": 1721.1376953125,
+                "y": 612.8214285714286
+              },
+              {
+                "x": 1661.3525390625,
+                "y": 252.22058823529412
+              }
+            ],
+            "sourceAnchor": 2,
+            "targetAnchor": 1
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "e06ab608",
+            "target": "1e920805",
+            "id": "6d31f943",
+            "controlPoints": [
+              {
+                "x": 1918.8623046875,
+                "y": 592.5357142857143
+              },
+              {
+                "x": 1981.94775390625,
+                "y": 228.42493619879113
+              }
+            ],
+            "sourceAnchor": 1,
+            "targetAnchor": 0
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "8f7e9489",
+            "target": "8ffc9265",
+            "id": "4fbe9633",
+            "controlPoints": [
+              {
+                "x": 565.822265625,
+                "y": 282.3833333333333
+              },
+              {
+                "x": 668.2998046875,
+                "y": 252.1209677419355
+              }
+            ],
+            "sourceAnchor": 3,
+            "targetAnchor": 0
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "36bb36a4",
+            "target": "8ffc9265",
+            "id": "d25eff58",
+            "controlPoints": [
+              {
+                "x": 563.818359375,
+                "y": 472.3382352941177
+              },
+              {
+                "x": 668.2998046875,
+                "y": 252.1209677419355
+              }
+            ],
+            "sourceAnchor": 3,
+            "targetAnchor": 0
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "47c95956",
+            "target": "8ffc9265",
+            "id": "48cfc996",
+            "controlPoints": [
+              {
+                "x": 1080.9658203125,
+                "y": 772.198275862069
+              },
+              {
+                "x": 1051.7001953125,
+                "y": 252.1209677419355
+              }
+            ],
+            "sourceAnchor": 2,
+            "targetAnchor": 1
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "8ffc9265",
+            "target": "f3b5bf3e",
+            "id": "2bfa0b53",
+            "controlPoints": [
+              {
+                "x": 668.2998046875,
+                "y": 272.18548387096774
+              },
+              {
+                "x": 597.376953125,
+                "y": 9.220588235294116
+              }
+            ],
+            "sourceAnchor": 2,
+            "targetAnchor": 1
+          }
+        ]
+      }
+    }
+  ],
+  "dataTypeDomains": {
+    "datatype": [
+      {
+        "name": "默认字串",
+        "code": "DefaultString",
+        "apply": {
+          "JAVA": {
+            "type": "String"
+          },
+          "MYSQL": {
+            "type": "VARCHAR(32)"
+          },
+          "ORACLE": {
+            "type": "NVARCHAR2(32)"
+          },
+          "SQLServer": {
+            "type": "NVARCHAR(32)"
+          },
+          "PostgreSQL": {
+            "type": "VARCHAR(32)"
+          }
+        }
+      },
+      {
+        "name": "标识号",
+        "code": "IdOrKey",
+        "apply": {
+          "JAVA": {
+            "type": "String"
+          },
+          "ORACLE": {
+            "type": "VARCHAR2(32)"
+          },
+          "MYSQL": {
+            "type": "VARCHAR(32)"
+          },
+          "SQLServer": {
+            "type": "VARCHAR(32)"
+          },
+          "PostgreSQL": {
+            "type": "VARCHAR(32)"
+          }
+        }
+      },
+      {
+        "name": "标识号-长",
+        "code": "LongKey",
+        "apply": {
+          "MYSQL": {
+            "type": "VARCHAR(64)"
+          },
+          "ORACLE": {
+            "type": "VARCHAR2(64)"
+          },
+          "JAVA": {
+            "type": "String"
+          },
+          "SQLServer": {
+            "type": "VARCHAR(64)"
+          },
+          "PostgreSQL": {
+            "type": "VARCHAR(64)"
+          }
+        }
+      },
+      {
+        "name": "名称",
+        "code": "Name",
+        "apply": {
+          "JAVA": {
+            "type": "String"
+          },
+          "MYSQL": {
+            "type": "VARCHAR(128)"
+          },
+          "ORACLE": {
+            "type": "NVARCHAR2(128)"
+          },
+          "SQLServer": {
+            "type": "NVARCHAR(128)"
+          },
+          "PostgreSQL": {
+            "type": "VARCHAR(128)"
+          }
+        }
+      },
+      {
+        "name": "备注说明",
+        "code": "Intro",
+        "apply": {
+          "JAVA": {
+            "type": "String"
+          },
+          "MYSQL": {
+            "type": "VARCHAR(512)"
+          },
+          "ORACLE": {
+            "type": "NVARCHAR2(512)"
+          },
+          "SQLServer": {
+            "type": "NVARCHAR(512)"
+          },
+          "PostgreSQL": {
+            "type": "VARCHAR(512)"
+          }
+        }
+      },
+      {
+        "name": "字串-短",
+        "code": "ShortString",
+        "apply": {
+          "JAVA": {
+            "type": "String"
+          },
+          "MYSQL": {
+            "type": "VARCHAR(128)"
+          },
+          "ORACLE": {
+            "type": "NVARCHAR2(128)"
+          },
+          "SQLServer": {
+            "type": "NVARCHAR(128)"
+          },
+          "PostgreSQL": {
+            "type": "VARCHAR(128)"
+          }
+        }
+      },
+      {
+        "name": "字串-中",
+        "code": "MiddleString",
+        "apply": {
+          "JAVA": {
+            "type": "String"
+          },
+          "MYSQL": {
+            "type": "VARCHAR(1024)"
+          },
+          "ORACLE": {
+            "type": "NVARCHAR2(1024)"
+          },
+          "SQLServer": {
+            "type": "NVARCHAR(1024)"
+          },
+          "PostgreSQL": {
+            "type": "VARCHAR(1024)"
+          }
+        }
+      },
+      {
+        "name": "字串-长",
+        "code": "LongString",
+        "apply": {
+          "JAVA": {
+            "type": "String"
+          },
+          "ORACLE": {
+            "type": "NVARCHAR2(3072)"
+          },
+          "MYSQL": {
+            "type": "VARCHAR(3072)"
+          },
+          "SQLServer": {
+            "type": "NVARCHAR(3072)"
+          },
+          "PostgreSQL": {
+            "type": "VARCHAR(3072)"
+          }
+        }
+      },
+      {
+        "name": "大文本",
+        "code": "LongText",
+        "apply": {
+          "JAVA": {
+            "type": "String"
+          },
+          "MYSQL": {
+            "type": "TEXT"
+          },
+          "ORACLE": {
+            "type": "CLOB"
+          },
+          "SQLServer": {
+            "type": "NTEXT"
+          },
+          "PostgreSQL": {
+            "type": "TEXT"
+          }
+        }
+      },
+      {
+        "name": "小数",
+        "code": "Double",
+        "apply": {
+          "JAVA": {
+            "type": "Double"
+          },
+          "MYSQL": {
+            "type": "DECIMAL(32,10)"
+          },
+          "ORACLE": {
+            "type": "NUMBER(32,10)"
+          },
+          "SQLServer": {
+            "type": "DECIMAL(32,10)"
+          },
+          "PostgreSQL": {
+            "type": "DECIMAL(32,10)"
+          }
+        }
+      },
+      {
+        "name": "比例",
+        "code": "Ratio",
+        "apply": {
+          "MYSQL": {
+            "type": "DECIMAL(4,2)"
+          },
+          "JAVA": {
+            "type": "Double"
+          },
+          "ORACLE": {
+            "type": "NUMBER(4,2)"
+          },
+          "SQLServer": {
+            "type": "DECIMAL(4,2)"
+          },
+          "PostgreSQL": {
+            "type": "DECIMAL(4,2)"
+          }
+        }
+      },
+      {
+        "name": "整数",
+        "code": "Integer",
+        "apply": {
+          "JAVA": {
+            "type": "Integer"
+          },
+          "MYSQL": {
+            "type": "INT"
+          },
+          "ORACLE": {
+            "type": "INT"
+          },
+          "SQLServer": {
+            "type": "INT"
+          },
+          "PostgreSQL": {
+            "type": "INT"
+          }
+        }
+      },
+      {
+        "name": "大整数",
+        "code": "BigInt",
+        "apply": {
+          "MYSQL": {
+            "type": "BIGINT"
+          },
+          "JAVA": {
+            "type": "Long"
+          },
+          "ORACLE": {
+            "type": "NUMBER"
+          },
+          "SQLServer": {
+            "type": "BIGINT"
+          },
+          "PostgreSQL": {
+            "type": "BIGINT"
+          }
+        }
+      },
+      {
+        "name": "金额",
+        "code": "Money",
+        "apply": {
+          "JAVA": {
+            "type": "Double"
+          },
+          "MYSQL": {
+            "type": "DECIMAL(32,8)"
+          },
+          "ORACLE": {
+            "type": "NUMBER(32,8)"
+          },
+          "SQLServer": {
+            "type": "DECIMAL(32,8)"
+          },
+          "PostgreSQL": {
+            "type": "DECIMAL(32,8)"
+          }
+        }
+      },
+      {
+        "name": "是否",
+        "code": "YesNo",
+        "apply": {
+          "JAVA": {
+            "type": "String"
+          },
+          "MYSQL": {
+            "type": "VARCHAR(1)"
+          },
+          "ORACLE": {
+            "type": "VARCHAR2(1)"
+          },
+          "SQLServer": {
+            "type": "VARCHAR(1)"
+          },
+          "PostgreSQL": {
+            "type": "VARCHAR(1)"
+          }
+        }
+      },
+      {
+        "name": "数据字典",
+        "code": "Dict",
+        "apply": {
+          "JAVA": {
+            "type": "String"
+          },
+          "MYSQL": {
+            "type": "VARCHAR(32)"
+          },
+          "ORACLE": {
+            "type": "VARCHAR2(32)"
+          },
+          "SQLServer": {
+            "type": "VARCHAR(32)"
+          },
+          "PostgreSQL": {
+            "type": "VARCHAR(32)"
+          }
+        }
+      },
+      {
+        "name": "日期",
+        "code": "Date",
+        "apply": {
+          "JAVA": {
+            "type": "Date"
+          },
+          "MYSQL": {
+            "type": "DATE"
+          },
+          "ORACLE": {
+            "type": "DATE"
+          },
+          "SQLServer": {
+            "type": "DATE"
+          },
+          "PostgreSQL": {
+            "type": "DATE"
+          }
+        }
+      },
+      {
+        "name": "日期时间",
+        "code": "DateTime",
+        "apply": {
+          "JAVA": {
+            "type": "Date"
+          },
+          "MYSQL": {
+            "type": "DATETIME"
+          },
+          "ORACLE": {
+            "type": "DATE"
+          },
+          "SQLServer": {
+            "type": "DATE"
+          },
+          "PostgreSQL": {
+            "type": "DATE"
+          }
+        }
+      },
+      {
+        "name": "单字符",
+        "code": "Char",
+        "apply": {
+          "MYSQL": {
+            "type": "CHAR(1)"
+          },
+          "ORACLE": {
+            "type": "CHAR(1)"
+          },
+          "JAVA": {
+            "type": "String"
+          },
+          "SQLServer": {
+            "type": "CHAR(1)"
+          },
+          "PostgreSQL": {
+            "type": "CHAR(1)"
+          }
+        }
+      },
+      {
+        "name": "DATETIME",
+        "code": "DATETIME",
+        "apply": {
+          "MYSQL": {
+            "type": "DATETIME"
+          }
+        }
+      },
+      {
+        "name": "DECIMAL_10_2",
+        "code": "DECIMAL_10_2",
+        "apply": {
+          "MYSQL": {
+            "type": "DECIMAL(10,2)"
+          }
+        }
+      },
+      {
+        "name": "INT_10",
+        "code": "INT_10",
+        "apply": {
+          "MYSQL": {
+            "type": "INT(10)"
+          }
+        }
+      },
+      {
+        "name": "TEXT",
+        "code": "TEXT",
+        "apply": {
+          "MYSQL": {
+            "type": "TEXT"
+          }
+        }
+      },
+      {
+        "name": "VARCHAR_100",
+        "code": "VARCHAR_100",
+        "apply": {
+          "MYSQL": {
+            "type": "VARCHAR(100)"
+          }
+        }
+      },
+      {
+        "name": "VARCHAR_150",
+        "code": "VARCHAR_150",
+        "apply": {
+          "MYSQL": {
+            "type": "VARCHAR(150)"
+          }
+        }
+      },
+      {
+        "name": "VARCHAR_200",
+        "code": "VARCHAR_200",
+        "apply": {
+          "MYSQL": {
+            "type": "VARCHAR(200)"
+          }
+        }
+      },
+      {
+        "name": "VARCHAR_255",
+        "code": "VARCHAR_255",
+        "apply": {
+          "MYSQL": {
+            "type": "VARCHAR(255)"
+          }
+        }
+      },
+      {
+        "name": "VARCHAR_300",
+        "code": "VARCHAR_300",
+        "apply": {
+          "MYSQL": {
+            "type": "VARCHAR(300)"
+          }
+        }
+      },
+      {
+        "name": "VARCHAR_50",
+        "code": "VARCHAR_50",
+        "apply": {
+          "MYSQL": {
+            "type": "VARCHAR(50)"
+          }
+        }
+      },
+      {
+        "name": "VARCHAR_500",
+        "code": "VARCHAR_500",
+        "apply": {
+          "MYSQL": {
+            "type": "VARCHAR(500)"
+          }
+        }
+      }
+    ],
+    "database": [
+      {
+        "code": "MYSQL",
+        "template": "DROP TABLE {{=it.entity.title}};\n$blankline\nCREATE TABLE {{=it.entity.title}}(\n{{ pkList = [] ; }}\n{{~it.entity.fields:field:index}}\n    {{? field.pk }}{{ pkList.push(field.name) }}{{?}}\n    {{=field.name}} {{=field.type}} {{= field.pk ? 'NOT NULL' : '' }} COMMENT '{{=it.func.join(field.chnname,field.remark,';')}}' {{= index < it.entity.fields.length-1 ? ',' : ( pkList.length>0 ? ',' :'' ) }}\n{{~}}\n{{? pkList.length >0 }}\n    PRIMARY KEY ({{~pkList:pkName:i}}{{= pkName }}{{= i<pkList.length-1 ? ',' : '' }}{{~}})\n{{?}}\n) COMMENT = '{{=it.func.join(it.entity.chnname,it.entity.remark,';') }}'",
+        "fileShow": true,
+        "defaultDatabase": true,
+        "createTableTemplate": "CREATE TABLE {{=it.entity.title}}(\n{{ pkList = [] ; }}\n{{~it.entity.fields:field:index}}\n    {{? field.pk }}{{ pkList.push(field.name) }}{{?}}\n    {{=field.name}} {{=field.type}} {{= field.notNull ? 'NOT NULL' : '' }} {{= field.autoIncrement ? 'AUTO_INCREMENT' : '' }} {{= field.defaultValue ? it.func.join('DEFAULT',field.defaultValue,' ') : '' }} COMMENT '{{=it.func.join(field.chnname,field.remark,' ')}}' {{= index < it.entity.fields.length-1 ? ',' : ( pkList.length>0 ? ',' :'' ) }}\n{{~}}\n{{? pkList.length >0 }}\n    PRIMARY KEY ({{~pkList:pkName:i}}{{= pkName }}{{= i<pkList.length-1 ? ',' : '' }}{{~}})\n{{?}}\n) COMMENT = '{{=it.func.join(it.entity.chnname,it.entity.remark,' ') }}'{{=it.separator}}\n$blankline\n",
+        "deleteTableTemplate": "DROP TABLE {{=it.entity.title}}{{=it.separator}}",
+        "rebuildTableTemplate": "create table PDMAN_UP_{{=it.oldEntity.title}}\nas select * from {{=it.oldEntity.title}}{{=it.separator}}\n$blankline\n\ndrop table {{=it.oldEntity.title}}{{=it.separator}}\n$blankline\n\nCREATE TABLE {{=it.newEntity.title}}(\n{{ pkList = [] ; }}\n{{~it.newEntity.fields:field:index}}\n    {{? field.pk }}{{ pkList.push(field.name) }}{{?}}\n    {{=field.name}} {{=field.type}} {{= field.notNull ? 'NOT NULL' : '' }} COMMENT '{{=it.func.join(field.chnname,field.remark,';')}}' {{= index < it.newEntity.fields.length-1 ? ',' : ( pkList.length>0 ? ',' :'' ) }}\n{{~}}\n{{? pkList.length >0 }}\n    PRIMARY KEY ({{~pkList:pkName:i}}{{= pkName }}{{= i<pkList.length-1 ? ',' : '' }}{{~}})\n{{?}}\n) COMMENT = '{{=it.func.join(it.newEntity.chnname,it.newEntity.remark,';') }}'{{=it.separator}}\n$blankline\n\n{{ sameCols = it.func.intersect(it.newEntity.fields,it.oldEntity.fields) ;}}\ninsert into {{=it.newEntity.title}}(\n{{~sameCols:field:index}}\n    {{=field.name}}{{? index<sameCols.length-1}},{{?}}\n{{~}}\n) \nselect \n{{~sameCols:field:index}}\n    {{=field.name}}{{? index<sameCols.length-1}},{{?}}\n{{~}}\nfrom PDMAN_UP_{{=it.oldEntity.title}}{{=it.separator}}\n$blankline\n\ndrop table PDMAN_UP_{{=it.oldEntity.title}}{{=it.separator}}\n$blankline\n{{~it.newEntity.indexs:index}}\nALTER TABLE {{=it.newEntity.title}} ADD {{? index.isUnique}}UNIQUE{{??}}INDEX{{?}} {{=index.name}}({{=it.func.join(...index.fields,',')}}){{=it.separator}}\n{{~}}",
+        "createFieldTemplate": "ALTER TABLE {{=it.entity.title}} ADD COLUMN {{=it.field.name}} {{=it.field.type}} {{? it.field.notNull}}NOT NULL{{?}} {{? it.field.defaultValue}}DEFAULT {{? null==it.field.defaultValue}}NULL{{??}}'{{=it.field.defaultValue}}'{{?}}{{?}} {{? it.field.autoIncrement}}AUTO_INCREMENT{{?}} {{? it.field.pk}}PRIMARY KEY{{?}} {{? it.field.chnname}}COMMENT '{{=it.field.chnname}}'{{?}} {{? it.field.addAfter}}AFTER {{=it.field.addAfter}}{{?}}{{=it.separator}}",
+        "updateFieldTemplate": "ALTER TABLE {{=it.entity.title}} MODIFY COLUMN {{=it.field.name}} {{=it.field.type}} {{? it.field.notNull}}NOT NULL{{?}} {{? it.field.defaultValue}}DEFAULT {{? null==it.field.defaultValue}}NULL{{??}}'{{=it.field.defaultValue}}'{{?}}{{?}} {{? it.field.autoIncrement}}AUTO_INCREMENT{{?}} {{? it.field.chnname}}COMMENT '{{=it.field.chnname}}'{{?}}{{=it.separator}}",
+        "deleteFieldTemplate": "ALTER TABLE {{=it.entity.title}} DROP {{=it.field.name}}{{=it.separator}}",
+        "deleteIndexTemplate": "ALTER TABLE {{=it.entity.title}} DROP INDEX {{=it.index.name}}{{=it.separator}}",
+        "createIndexTemplate": "ALTER TABLE {{=it.entity.title}} ADD {{? it.index.isUnique}}UNIQUE{{??}}INDEX{{?}} {{=it.index.name}}({{=it.func.join(...it.index.fields,',')}}){{=it.separator}}",
+        "updateTableComment": "ALTER TABLE {{=it.entity.title}} COMMENT '{{=it.entity.chnname}}'{{=it.separator}}"
+      },
+      {
+        "code": "ORACLE",
+        "template": "DROP TABLE {{=it.entity.title}}{{=it.separator}}\n$blankline\nCREATE TABLE {{=it.entity.title}}(\n{{ pkList = [] ; }}\n{{~it.entity.fields:field:index}}\n    {{? field.pk }}{{ pkList.push(field.name) }}{{?}}\n    {{=field.name}} {{=field.type}}  {{= field.pk ? 'NOT NULL' : '' }} {{= index < it.entity.fields.length-1 ? ',' : ( pkList.length>0 ? ',' :'' ) }}\n{{~}}\n{{? pkList.length >0 }}\n    PRIMARY KEY ({{~pkList:pkName:i}}{{= pkName }}{{= i<pkList.length-1 ? ',' : '' }}{{~}})\n{{?}}\n){{=it.separator}}\n$blankline\nCOMMENT ON TABLE {{=it.entity.title}} IS '{{=it.func.join(it.entity.chnname,it.entity.remark,';') }}'{{=it.separator}}\n{{~it.entity.fields:field:index}}\nCOMMENT ON COLUMN {{=it.entity.title}}.{{=field.name}} IS '{{=it.func.join(field.chnname,field.remark,';')}}'{{=it.separator}}\n{{~}}",
+        "createTableTemplate": "CREATE TABLE {{=it.entity.title}}(\n{{ pkList = [] ; }}\n{{~it.entity.fields:field:index}}\n    {{? field.pk }}{{ pkList.push(field.name) }}{{?}}\n    {{=field.name}} {{=field.type}}{{? field.defaultValue}} DEFAULT {{=field.defaultValue}}{{?}}{{= field.notNull ? ' NOT NULL' : '' }}{{= index < it.entity.fields.length-1 ? ',' : ( pkList.length>0 ? ',' :'' ) }}\n{{~}}\n{{? pkList.length >0 }}\n    PRIMARY KEY ({{~pkList:pkName:i}}{{= pkName }}{{= i<pkList.length-1 ? ',' : '' }}{{~}})\n{{?}}\n){{=it.separator}}\n$blankline\n{{? it.entity.chnname || it.entity.remark}}COMMENT ON TABLE {{=it.entity.title}} IS {{? it.entity.remark}}'{{=it.entity.remark}}'{{??}}'{{=it.entity.chnname}}'{{?}}{{=it.separator}}{{?}}\n{{~it.entity.fields:field:index}}\n{{? field.chnname || field.remark}}COMMENT ON COLUMN {{=it.entity.title}}.{{=field.name}} IS {{? field.remark}}'{{=field.remark}}'{{??}}'{{=field.chnname}}'{{?}}{{=it.separator}}{{?}}\n{{~}}",
+        "deleteTableTemplate": "DROP TABLE {{=it.entity.title}}{{=it.separator}}\r\n$blankline",
+        "rebuildTableTemplate": "CREATE TABLE PDMAN_UP_{{=it.oldEntity.title}}\nAS SELECT * FROM {{=it.oldEntity.title}}{{=it.separator}}\n$blankline\nDROP TABLE {{=it.oldEntity.title}}{{=it.separator}}\n$blankline\nCREATE TABLE {{=it.newEntity.title}}(\n{{ pkList = [] ; }}{{~it.newEntity.fields:field:index}}{{? field.pk }}{{ pkList.push(field.name) }}{{?}}    {{=field.name}} {{=field.type}}{{? field.defaultValue}} DEFAULT {{=field.defaultValue}}{{?}}{{= field.notNull ? ' NOT NULL' : '' }}{{= index < it.newEntity.fields.length-1 ? ',' : ( pkList.length>0 ? ',' :'' ) }}\n{{~}}{{? pkList.length >0 }}    PRIMARY KEY ({{~pkList:pkName:i}}{{= pkName }}{{= i<pkList.length-1 ? ',' : '' }}{{~}}){{?}}\n){{=it.separator}}\n$blankline\n{{? it.newEntity.chnname || it.newEntity.remark}}COMMENT ON TABLE {{=it.newEntity.title}} IS {{? it.newEntity.remark}}'{{=it.entity.remark}}'{{??}}'{{=it.newEntity.chnname}}'{{?}};{{?}}{{=it.separator}}\n{{~it.newEntity.fields:field:index}}\n{{? field.chnname || field.remark}}COMMENT ON COLUMN {{=it.newEntity.title}}.{{=field.name}} IS {{? field.remark}}'{{=field.remark}}'{{??}}'{{=field.chnname}}'{{?}};{{?}}{{=it.separator}}\n{{~}}\n{{ sameCols = it.func.intersect(it.newEntity.fields,it.oldEntity.fields) ;}}\n$blankline\nINSERT INTO {{=it.newEntity.title}}(\n{{~sameCols:field:index}}   {{=field.name}}{{? index<sameCols.length-1}},{{?}}\n{{~}}) \nSELECT\n{{~sameCols:field:index}}   {{=field.name}}{{? index<sameCols.length-1}},{{?}}\n{{~}}FROM PDMAN_UP_{{=it.oldEntity.title}}{{=it.separator}}\n\nDROP TABLE PDMAN_UP_{{=it.oldEntity.title}}{{=it.separator}}\n{{~it.newEntity.indexs:index}}\nCREATE{{? index.isUnique}} UNIQUE{{?}} INDEX {{=index.name}} ON {{=it.newEntity.title}}({{=it.func.join(index.fields,',')}}){{=it.separator}}\n{{~}}",
+        "createFieldTemplate": "ALTER TABLE {{=it.entity.title}} ADD({{=it.field.name}} {{=it.field.type}}{{? it.field.defaultValue}} DEFAULT {{=it.field.defaultValue}}{{?}}{{? it.field.notNull}} NOT NULL{{?}}){{=it.separator}}\r\n{{? it.field.chnname || it.field.remark}}COMMENT ON COLUMN {{=it.entity.title}}.{{=it.field.name}} IS {{? it.field.remark}}'{{=it.field.remark}}'{{??}}'{{=it.field.chnname}}'{{?}}{{=it.separator}}{{?}}\r\n$blankline",
+        "updateFieldTemplate": "ALTER TABLE {{=it.entity.title}} MODIFY({{=it.field.name}} {{=it.field.type}}{{? it.field.defaultValue}} DEFAULT {{=it.field.defaultValue}}{{?}}{{? it.field.notNull}} NOT NULL{{?}}){{=it.separator}}\r\n{{? it.field.chnname || it.field.remark}}COMMENT ON COLUMN {{=it.entity.title}}.{{=it.field.name}} IS {{? it.field.remark}}'{{=it.field.remark}}'{{??}}'{{=it.field.chnname}}'{{?}}{{=it.separator}}{{=it.separator}}{{?}}\r\n$blankline",
+        "deleteFieldTemplate": "ALTER TABLE {{=it.entity.title}} DROP({{=it.field.name}}){{=it.separator}}\r\n$blankline",
+        "deleteIndexTemplate": "DROP INDEX {{=it.entity.title}}.{{=it.index.name}}{{=it.separator}}\r\n$blankline",
+        "createIndexTemplate": "CREATE{{? it.index.isUnique}} UNIQUE{{?}} INDEX {{=it.index.name}} ON {{=it.entity.title}}({{=it.func.join(it.index.fields,',')}}){{=it.separator}}\r\n$blankline",
+        "updateTableComment": "{{? it.entity.chnname || it.entity.remark}}COMMENT ON TABLE {{=it.entity.title}} IS {{? it.entity.remark}}'{{=it.entity.remark}}'{{??}}'{{=it.entity.chnname}}'{{?}}{{=it.separator}}{{?}}\r\n$blankline"
+      },
+      {
+        "code": "SQLServer",
+        "createTableTemplate": "CREATE TABLE {{=it.entity.title}}(\n{{ pkList = [] ; }}\n{{~it.entity.fields:field:index}}\n    {{? field.pk }}{{ pkList.push(field.name) }}{{?}}\n    {{=field.name}} {{=field.type}} {{= field.notNull ? 'NOT NULL' : '' }} {{= field.autoIncrement ? 'IDENTITY(1,1)' : '' }} {{= field.defaultValue ? it.func.join('DEFAULT',field.defaultValue,' ') : '' }}  {{= index < it.entity.fields.length-1 ? ',' : ( pkList.length>0 ? ',' :'' ) }}\n{{~}}\n{{? pkList.length >0 }}\n    CONSTRAINT PK_{{=it.entity.title}} PRIMARY KEY CLUSTERED ({{~pkList:pkName:i}}{{= pkName }} ASC {{= i<pkList.length-1 ? ',' : '' }}{{~}}) ON [PRIMARY] \n{{?}}\n){{=it.separator}}\n\n$blankline\nEXECUTE sp_addextendedproperty N'MS_Description', '{{= it.entity.chnname || it.entity.remark}}', N'user', N'dbo', N'table', N'{{=it.entity.title}}', NULL, NULL{{=it.separator}}\n{{~it.entity.fields:field:index}}\n{{? field.chnname || field.remark}}EXECUTE sp_addextendedproperty N'MS_Description', {{? field.remark}}'{{=field.remark}}'{{??}}'{{=field.chnname}}'{{?}}, N'user', N'dbo', N'table', N'{{=it.entity.title}}', N'column', N'{{=field.name}}'{{=it.separator}}{{?}}\n{{~}}\n",
+        "deleteTableTemplate": "",
+        "rebuildTableTemplate": "",
+        "createFieldTemplate": "",
+        "updateFieldTemplate": "",
+        "deleteFieldTemplate": "",
+        "deleteIndexTemplate": "",
+        "createIndexTemplate": "",
+        "updateTableComment": ""
+      },
+      {
+        "code": "PostgreSQL",
+        "template": "DROP TABLE {{=it.entity.title}};\n$blankline\nCREATE TABLE {{=it.entity.title}}(\n{{ pkList = [] ; }}\n{{~it.entity.fields:field:index}}\n    {{? field.pk }}{{ pkList.push(field.name) }}{{?}}\n    {{=field.name}} {{=field.type}} {{= field.pk ? 'NOT NULL' : '' }} COMMENT '{{=it.func.join(field.chnname,field.remark,';')}}' {{= index < it.entity.fields.length-1 ? ',' : ( pkList.length>0 ? ',' :'' ) }}\n{{~}}\n{{? pkList.length >0 }}\n    PRIMARY KEY ({{~pkList:pkName:i}}{{= pkName }}{{= i<pkList.length-1 ? ',' : '' }}{{~}})\n{{?}}\n) COMMENT = '{{=it.func.join(it.entity.chnname,it.entity.remark,';') }}'",
+        "createTableTemplate": "CREATE TABLE {{=it.entity.title}}(\n{{ pkList = [] ; }}\n{{~it.entity.fields:field:index}}\n    {{? field.pk }}{{ pkList.push(field.name) }}{{?}}\n    {{=field.name}} {{=field.type}}{{? field.defaultValue}} DEFAULT {{=field.defaultValue}}{{?}}{{= field.notNull ? ' NOT NULL' : '' }}{{= index < it.entity.fields.length-1 ? ',' : ( pkList.length>0 ? ',' :'' ) }}\n{{~}}\n{{? pkList.length >0 }}\n    PRIMARY KEY ({{~pkList:pkName:i}}{{= pkName }}{{= i<pkList.length-1 ? ',' : '' }}{{~}})\n{{?}}\n){{=it.separator}}\n$blankline\n{{? it.entity.chnname || it.entity.remark}}COMMENT ON TABLE {{=it.entity.title}} IS {{? it.entity.remark}}'{{=it.entity.remark}}'{{??}}'{{=it.entity.chnname}}'{{?}}{{=it.separator}}{{?}}\n{{~it.entity.fields:field:index}}\n{{? field.chnname || field.remark}}COMMENT ON COLUMN {{=it.entity.title}}.{{=field.name}} IS {{? field.remark}}'{{=field.remark}}'{{??}}'{{=field.chnname}}'{{?}}{{=it.separator}}{{?}}\n{{~}}",
+        "deleteTableTemplate": "DROP TABLE {{=it.entity.title}}{{=it.separator}}",
+        "rebuildTableTemplate": "create table PDMAN_UP_{{=it.oldEntity.title}}\nas select * from {{=it.oldEntity.title}}{{=it.separator}}\n$blankline\n\ndrop table {{=it.oldEntity.title}}{{=it.separator}}\n$blankline\n\nCREATE TABLE {{=it.newEntity.title}}(\n{{ pkList = [] ; }}\n{{~it.newEntity.fields:field:index}}\n    {{? field.pk }}{{ pkList.push(field.name) }}{{?}}\n    {{=field.name}} {{=field.type}} {{= field.notNull ? 'NOT NULL' : '' }} COMMENT '{{=it.func.join(field.chnname,field.remark,';')}}' {{= index < it.newEntity.fields.length-1 ? ',' : ( pkList.length>0 ? ',' :'' ) }}\n{{~}}\n{{? pkList.length >0 }}\n    PRIMARY KEY ({{~pkList:pkName:i}}{{= pkName }}{{= i<pkList.length-1 ? ',' : '' }}{{~}})\n{{?}}\n) COMMENT = '{{=it.func.join(it.newEntity.chnname,it.newEntity.remark,';') }}'{{=it.separator}}\n$blankline\n\n{{ sameCols = it.func.intersect(it.newEntity.fields,it.oldEntity.fields) ;}}\ninsert into {{=it.newEntity.title}}(\n{{~sameCols:field:index}}\n    {{=field.name}}{{? index<sameCols.length-1}},{{?}}\n{{~}}\n) \nselect \n{{~sameCols:field:index}}\n    {{=field.name}}{{? index<sameCols.length-1}},{{?}}\n{{~}}\nfrom PDMAN_UP_{{=it.oldEntity.title}}{{=it.separator}}\n$blankline\n\ndrop table PDMAN_UP_{{=it.oldEntity.title}}{{=it.separator}}",
+        "createFieldTemplate": "ALTER TABLE {{=it.entity.title}} ADD COLUMN {{=it.field.name}} {{=it.field.type}} {{? it.field.notNull}}NOT NULL{{?}} {{? it.field.defaultValue}}DEFAULT {{? null==it.field.defaultValue}}NULL{{??}}'{{=it.field.defaultValue}}'{{?}}{{?}} {{? it.field.autoIncrement}}AUTO_INCREMENT{{?}} {{? it.field.pk}}PRIMARY KEY{{?}} {{? it.field.chnname}}COMMENT '{{=it.field.chnname}}'{{?}} {{? it.field.addAfter}}AFTER {{=it.field.addAfter}}{{?}}{{=it.separator}}",
+        "updateFieldTemplate": "ALTER TABLE {{=it.entity.title}} MODIFY COLUMN {{=it.field.name}} {{=it.field.type}} {{? it.field.notNull}}NOT NULL{{?}} {{? it.field.defaultValue}}DEFAULT {{? null==it.field.defaultValue}}NULL{{??}}'{{=it.field.defaultValue}}'{{?}}{{?}} {{? it.field.autoIncrement}}AUTO_INCREMENT{{?}} {{? it.field.chnname}}COMMENT '{{=it.field.chnname}}'{{?}}{{=it.separator}}",
+        "deleteFieldTemplate": "ALTER TABLE {{=it.entity.title}} DROP {{=it.field.name}}{{=it.separator}}",
+        "deleteIndexTemplate": "ALTER TABLE {{=it.entity.title}} DROP INDEX {{=it.index.name}}{{=it.separator}}",
+        "createIndexTemplate": "ALTER TABLE {{=it.entity.title}} ADD {{? it.index.isUnique}}UNIQUE{{??}}INDEX{{?}} {{=it.index.name}}({{=it.func.join(...it.index.fields,',')}}){{=it.separator}}",
+        "updateTableComment": "ALTER TABLE {{=it.entity.title}} COMMENT '{{=it.entity.chnname}}'{{=it.separator}}"
+      },
+      {
+        "code": "JAVA",
+        "template": "package group.rober.pdman.{{=it.module.name}}.entity;\n$blankline\nimport javax.persistence.*;\nimport java.io.Serializable;\nimport java.util.Date;\n$blankline\n$blankline\n\n/** {{=it.entity.chnname}} */\n@Table(name=\"{{=it.entity.title}}\")\npublic class {{=it.func.camel(it.entity.title,true) }} implements Serializable,Cloneable{\n{{~it.entity.fields:field:index}}\n    /** {{=it.func.join(field.chnname,field.remark,';')}} */\n    {{? field.pk }}\n    @Id\n    @GeneratedValue\n    {{?}}\n    private {{=field.type}} {{=it.func.camel(field.name,false)}} ;\n{{~}}\n$blankline\n{{~it.entity.fields:field:index}}\n    /** {{=it.func.join(field.chnname,field.remark,';')}} */\n    public {{=field.type}} get{{=it.func.camel(field.name,true)}}(){\n        return this.{{=it.func.camel(field.name,false)}};\n    }\n    /** {{=it.func.join(field.chnname,field.remark,';')}} */\n    public void set{{=it.func.camel(field.name,true)}}({{=field.type}} {{= it.func.camel(field.name,false) }}){\n        this.{{=it.func.camel(field.name,false)}} = {{= it.func.camel(field.name,false) }};\n    }\n{{~}}\n}",
+        "createTableTemplate": "package group.rober.pdman.{{=it.module.name}}.entity;\n$blankline\nimport javax.persistence.*;\nimport java.io.Serializable;\nimport java.util.Date;\n$blankline\n$blankline\n@Table(name=\"{{=it.entity.title}}\")\npublic class {{=it.func.camel(it.entity.title,true) }} implements Serializable,Cloneable{\n{{~it.entity.fields:field:index}}\n    /** {{=it.func.join(field.chnname,field.remark,';')}} */\n    {{? field.pk }}\n    @Id\n    @GeneratedValue\n    {{?}}\n    private {{=field.type}} {{=it.func.camel(field.name,false)}} ;\n{{~}}\n$blankline\n{{~it.entity.fields:field:index}}\n    /** {{=it.func.join(field.chnname,field.remark,';')}} */\n    public {{=field.type}} get{{=it.func.camel(field.name,true)}}(){\n        return this.{{=it.func.camel(field.name,false)}};\n    }\n    /** {{=it.func.join(field.chnname,field.remark,';')}} */\n    public void set{{=it.func.camel(field.name,true)}}({{=field.type}} {{= it.func.camel(field.name,false) }}){\n        this.{{=it.func.camel(field.name,false)}} = {{= it.func.camel(field.name,false) }};\n    }\n{{~}}\n}",
+        "deleteTableTemplate": "",
+        "rebuildTableTemplate": "",
+        "createFieldTemplate": "",
+        "updateFieldTemplate": "",
+        "deleteFieldTemplate": "",
+        "deleteIndexTemplate": "",
+        "createIndexTemplate": "",
+        "updateTableComment": ""
+      }
+    ]
+  },
+  "profile": {
+    "dbs": [
+      {
+        "name": "sxpcwlkj-son",
+        "defaultDB": true,
+        "properties": {
+          "driver_class_name": "com.mysql.jdbc.Driver",
+          "url": "jdbc:mysql://bt.jfgapp.com:3306/sxpcwlkj_son?characterEncoding=UTF-8&useSSL=false&useUnicode=true&serverTimezone=UTC",
+          "password": "i3zrEH3Wd6bXr8TN",
+          "username": "sxpcwlkj_son"
+        }
+      }
+    ]
+  }
+}

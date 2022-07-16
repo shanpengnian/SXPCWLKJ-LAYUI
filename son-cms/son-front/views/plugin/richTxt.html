@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Layui-Tinymce</title>
+		<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+	</head>
+
+	<body>
+		<div style="width: 98%;margin: 1% auto;">
+			<textarea name="" id="edit">这里是<span style="color: #e03e2d;"><em>edit初始化</em></span>的内容</textarea>
+			<hr />
+			<div class="layui-btn-group" style="margin-top: 10px">
+				<button class="layui-btn" lay-event="setContent">设置内容</button>
+				<button class="layui-btn" lay-event="insertContent">插入内容</button>
+				<button class="layui-btn" lay-event="getContent">获取内容</button>
+				<button class="layui-btn" lay-event="getText">获取文本</button>
+				<button class="layui-btn" lay-event="clearContent">清空内容</button>
+				<button class="layui-btn" lay-event="reload">重载编辑器</button>
+				<button class="layui-btn" lay-event="destroy">销毁编辑器</button>
+				<button class="layui-btn" lay-event="render">加载编辑器</button>
+			</div>
+			<!-- <br /><hr />
+     同时插入第二个编辑器，配置相互独立
+     <hr />
+     <textarea name="" id="edit2">这里是<span style="color: #e03e2d;"><em>edit2初始化</em></span>的内容</textarea>
+ -->
+		</div>
+
+	</body>
+	<script src="../../layuiadmin/layui/layui.js"></script>
+	<script>
+		layui.config({
+			base: '../../layuiadmin/' //静态资源所在路径
+		}).extend({
+			index: 'lib/index', //主入口模块
+			tinymce: 'modules/tinymce'
+		}).use(['tinymce', 'util', 'layer'], function() {
+			var $ = layui.$,
+				layer = layui.layer,
+				tinymce = layui.tinymce,
+				util = layui.util;
+
+            var requrl='http://localhost:8088/'
+
+			function getToken() {
+				return layui.data('layuiAdmin').token;
+			}
+
+			tinymce.init({
+				selector: "#edit", // 编辑器选择器
+				//plugins: "advlist autolink link image lists charmap print preview", // 图片上传插件
+				//menubar: "insert", // 菜单栏按钮
+				//toolbar: "image code bullist numlist", // 工具栏按钮
+				auto_focus: true, //自动获取焦点
+				skin: 'oxide-dark', //主题
+				//content_css : '/mycontent.css' , //自定义样式
+				statusbar: false, //隐藏状态栏
+				//contextmenu: "link image imagetools table spellchecker",
+				width: '100%',
+				height: 600,
+				target: 'el',
+				automatic_uploads: true, // 图片自动上传
+				images_upload_handler: function(blobInfo, success, failure) {
+					var form = new FormData();
+					form.append('files', blobInfo.blob(), blobInfo.filename());
+					$.ajax({
+						url: requrl+"txtFileUpload",
+						type: "post",
+						data: form,
+						headers: {
+							"Access-Control-Allow-Origin": "*",
+							"token": getToken()
+						},
+						processData: false,
+						contentType: false,
+						success: function(data) {
+							success(data.location);
+						},
+						error: function(e) {
+							alert("图片上传失败");
+						}
+					});
+				},
+				file_picker_callback: function(callback, value, meta) {
+					var input = document.createElement('input');
+					input.setAttribute('type', 'file');
+					input.onchange = function() {
+						var file = this.files[0];
+						var form = new FormData();
+						form.append("files", file);
+						$.ajax({
+							url: requrl+"txtFileUpload",
+							type: "post",
+							data: form,
+							headers: {
+								"Access-Control-Allow-Origin": "*",
+								"token": getToken()
+							},
+							processData: false,
+							contentType: false,
+							success: function(data) {
+								callback(data.location);
+							},
+							error: function(e) {
+								alert("图片上传失败");
+							}
+						});
+					};
+
+					input.click();
+
+				},
+				image_class_list: [{
+						title: 'None',
+						value: ''
+					},
+					{
+						title: 'Left',
+						value: 'alignleft'
+					}, // 图片向左对齐
+					{
+						title: 'Center',
+						value: 'aligncenter'
+					}, // 图片居中对齐
+					{
+						title: 'Right',
+						value: 'alignright'
+					} // 图片向右对齐
+				],
+				setup: function(editor) {
+					console.log("ID为: " + editor.id + " 的编辑器即将初始化.");
+				},
+				init_instance_callback: function(editor) {
+					console.log("ID为: " + editor.id + " 的编辑器已初始化完成.");
+				}
+			});
+
+
+			util.event('lay-event', {
+				getContent: function() {
+					var content = tinymce.get('#edit').getContent()
+					layer.alert(content)
+				},
+				setContent: function() {
+					tinymce.get('#edit').setContent('点击按钮设置的内容：<span style="color: #e03e2d;">' + new Date() + '</span>')
+				},
+				clearContent: function() {
+					tinymce.get('#edit').setContent('')
+				},
+				insertContent: function() {
+					tinymce.get('#edit').insertContent('<b>插入内容</b>')
+				},
+				getText: function() {
+					console.log(tinymce.get('#edit').getContent())
+					var text = tinymce.get('#edit').getContent({
+						format: 'text'
+					})
+					layer.alert(text)
+				},
+				reload: function() {
+					tinymce.reload({
+						elem: '#edit'
+						// 所有参数都可以重新设置 ...
+					}, function(opt) {
+						//重载完成后回调函数，会把所有参数回传，
+						//重载仅仅重新渲染编辑器，不会清空textarea，可手动清空或设置
+						tinymce.get('#edit').setContent('')
+					})
+				},
+				destroy: function() {
+					tinymce.get('#edit').destroy()
+				},
+				render: function() {
+					tinymce.render({
+						elem: '#edit',
+						height: '500px'
+					})
+				}
+			});
+
+
+		});
+	</script>
+	<style>
+		.tox .tox-dialog {
+			border: none;
+		}
+
+		.tox .tox-dialog,
+		.tox .tox-button,
+		.tox .tox-textarea,
+		.tox .tox-textfield,
+		.tox .tox-selectfield select,
+		.tox .tox-toolbar-textfield {
+			border-radius: 0;
+		}
+
+		.tox .tox-dialog-wrap__backdrop {
+			background-color: rgba(0, 0, 0, .3);
+		}
+	</style>
+</html>

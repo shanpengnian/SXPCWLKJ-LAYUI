@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>编辑用户</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+	</head>
+	<body>
+		<form class="layui-form" action="javacript:void(0);"  lay-filter="layuiadmin-form-example"  style="padding: 20px 0 0 0;">
+			<div class="layui-form-item">
+				<label class="layui-form-label">用户昵称</label>
+				<div class="layui-input-inline">
+					<input type="text" name="memberName" lay-verify="required" placeholder="请输入用户昵称" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">用户账号</label>
+				<div class="layui-input-inline">
+					<input type="text" name="memberAccount" lay-verify="required" placeholder="请输入用户账号" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">手机号码</label>
+				<div class="layui-input-inline">
+					<input type="text" name="memberPhone" lay-verify="phone" placeholder="请输入号码" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">头像</label>
+				<div class="layui-input-inline">
+					<input type="text" id="layuiadmin-upload-file-url" name="memberIcon" lay-verify="required" placeholder="请上传图片" autocomplete="off" class="layui-input">
+				</div>
+				<button style="float: left;" type="button" class="layui-btn" id="layuiadmin-upload-file">上传图片</button>
+			</div>
+			<div class="layui-form-item">
+			    <label class="layui-form-label">性别</label>
+			    <div class="layui-input-block">
+			       <input type="radio" name="memberSex" value="1" title="保密" checked>
+				   <input type="radio" name="memberSex" value="2" title="男">
+			       <input type="radio" name="memberSex" value="3" title="女">
+			    </div>
+			 </div>
+			 <div class="layui-form-item">
+			     <label class="layui-form-label">状态</label>
+			     <div class="layui-input-block">
+			        <input type="radio" name="memberState" value="1" title="正常" checked>
+			 	    <input type="radio" name="memberState" value="2" title="禁用">
+			     </div>
+			 </div>
+			<div class="layui-form-item layui-form-text">
+			    <label class="layui-form-label">描述</label>
+			    <div class="layui-input-block" style="width: 300px;">
+			      <textarea name="memberNote" placeholder="请输入内容" class="layui-textarea"></textarea>
+			    </div>
+			</div>
+			<div class="layui-form-item" lay-filter="sex">
+				<label class="layui-form-label">备注</label>
+				<div class="layui-input-block" style="width: 300px">
+					<blockquote class="layui-elem-quote" style="width: 51%;margin-right: 10px;float: left">密码默认6个1</blockquote>
+					<div id="inpassrord"></div>
+				</div>
+			</div>
+			<!--影藏域-->
+			<input type="hidden" name="memberId" />
+			<div class="layui-form-item layui-hide">
+				<input type="button" lay-submit lay-filter="LAY-obj-from-submit" id="LAY-obj-from-submit" value="确认">
+			</div>
+		</form>
+
+		<script src="../../layuiadmin/layui/layui.js"></script>
+		<script>
+			var resData;
+
+			function child(obj) {
+				console.log(JSON.stringify(obj));
+				resData = obj;
+			}
+			layui.config({
+				base: '../../layuiadmin/' //静态资源所在路径
+			}).extend({
+				index: 'lib/index', //主入口模块
+				common: 'common'
+			}).use(['index', 'form', 'upload', 'common'], function() {
+				var $ = layui.$,
+					form = layui.form,
+					layer = layui.layer,
+					setter = layui.setter,
+					admin = layui.admin,
+					common = layui.common,
+					upload = layui.upload;
+				resDat = {
+					"type": 1,
+					"ojbId": 0
+				}
+				$("[name='memberId']").val(resDat.ojbId);
+				if (resData.type == 1) {
+					
+				} else {
+					
+					//回显
+					common.get("adminMember/selectById", {
+						"memberId": resData.objId
+					}, function(res) {
+						
+						
+						//给表单赋值
+						form.val("layuiadmin-form-example", res.data);
+					});
+				}
+				
+				
+				
+				//上传图片
+				var fileSrc = $('#layuiadmin-upload-file-url');
+				common.file(upload, "#layuiadmin-upload-file", "fileUploadToQiniuyun", function(res) {
+					console.log(JSON.stringify(res))
+					if (res.state == 1) {
+						fileSrc.val(res.data);
+					} else {
+						layer.msg(res.msg, {
+							icon: 5
+						});
+					}
+				})
+
+			})
+		</script>
+	</body>
+</html>

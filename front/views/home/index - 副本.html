@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>layuiAdmin 控制台主页一</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+		<link rel="stylesheet" href="../../plugin/jQueryRunning/css/jquery.running.css">
+	</head>
+	<body>
+
+		<div class="layui-fluid">
+			<div class="layui-row layui-col-space15">
+				<div class="layui-col-xs12 layui-col-sm6 layui-col-md8">
+					<div class="layui-row layui-col-space15">
+						<div class="layui-col-xs12 layui-col-sm12 layui-col-md6">
+							<div class="layui-card">
+								<div class="layui-card-header">快捷方式</div>
+								<div class="layui-card-body">
+
+									<div class="layui-carousel layadmin-carousel layadmin-shortcut">
+										<div carousel-item>
+											<ul class="layui-row layui-col-space10">
+												<li class="layui-col-xs3">
+													<a lay-href="home/homepage1.html">
+														<i class="layui-icon layui-icon-console"></i>
+														<cite>主页一</cite>
+													</a>
+												</li>
+												<li class="layui-col-xs3">
+													<a lay-href="home/homepage2.html">
+														<i class="layui-icon layui-icon-chart"></i>
+														<cite>主页二</cite>
+													</a>
+												</li>
+												<li class="layui-col-xs3">
+													<a lay-href="component/layer/list.html">
+														<i class="layui-icon layui-icon-template-1"></i>
+														<cite>弹层</cite>
+													</a>
+												</li>
+												<li class="layui-col-xs3">
+													<a layadmin-event="im">
+														<i class="layui-icon layui-icon-chat"></i>
+														<cite>聊天</cite>
+													</a>
+												</li>
+												<li class="layui-col-xs3">
+													<a lay-href="component/progress/index.html">
+														<i class="layui-icon layui-icon-find-fill"></i>
+														<cite>进度条</cite>
+													</a>
+												</li>
+												<li class="layui-col-xs3">
+													<a lay-href="app/workorder/list.html">
+														<i class="layui-icon layui-icon-survey"></i>
+														<cite>工单</cite>
+													</a>
+												</li>
+												<li class="layui-col-xs3">
+													<a lay-href="user/user/list.html">
+														<i class="layui-icon layui-icon-user"></i>
+														<cite>用户</cite>
+													</a>
+												</li>
+												<li class="layui-col-xs3">
+													<a lay-href="set/system/website.html">
+														<i class="layui-icon layui-icon-set"></i>
+														<cite>设置</cite>
+													</a>
+												</li>
+											</ul>
+											<ul class="layui-row layui-col-space10">
+												<li class="layui-col-xs3">
+													<a lay-href="set/user/info.html">
+														<i class="layui-icon layui-icon-set"></i>
+														<cite>我的资料</cite>
+													</a>
+												</li>
+												<li class="layui-col-xs3">
+													<a lay-href="set/user/info.html">
+														<i class="layui-icon layui-icon-set"></i>
+														<cite>我的资料</cite>
+													</a>
+												</li>
+												<li class="layui-col-xs3">
+													<a lay-href="set/user/info.html">
+														<i class="layui-icon layui-icon-set"></i>
+														<cite>我的资料</cite>
+													</a>
+												</li>
+												<li class="layui-col-xs3">
+													<a lay-href="set/user/info.html">
+														<i class="layui-icon layui-icon-set"></i>
+														<cite>我的资料</cite>
+													</a>
+												</li>
+												<li class="layui-col-xs3">
+													<a lay-href="set/user/info.html">
+														<i class="layui-icon layui-icon-set"></i>
+														<cite>我的资料</cite>
+													</a>
+												</li>
+												<li class="layui-col-xs3">
+													<a lay-href="set/user/info.html">
+														<i class="layui-icon layui-icon-set"></i>
+														<cite>我的资料</cite>
+													</a>
+												</li>
+												<li class="layui-col-xs3">
+													<a lay-href="set/user/info.html">
+														<i class="layui-icon layui-icon-set"></i>
+														<cite>我的资料</cite>
+													</a>
+												</li>
+												<li class="layui-col-xs3">
+													<a lay-href="set/user/info.html">
+														<i class="layui-icon layui-icon-set"></i>
+														<cite>我的资料</cite>
+													</a>
+												</li>
+											</ul>
+
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 layui-col-sm12 layui-col-md6">
+							<div class="layui-card">
+								<div class="layui-card-header">状态</div>
+								<div class="layui-card-body">
+
+									<div class="layui-carousel layadmin-carousel layadmin-backlog">
+										<div class="layui-row">
+											<div class="layui-col-xs4 layui-col-sm4 layui-col-md4 layui-row" style="text-align: center">
+												<div style="width: 100%;height: 40px;text-align: center;line-height: 40px">
+													<span>负载状态</span>
+												</div>
+												<div style="width: 100%;height: 110px;text-align: center">
+													<canvas id="my_html" width="100" height="100"></canvas>
+												</div>
+												<div style="width: 100%;height: 40px;text-align: center;line-height: 40px">
+													<span>运行流畅</span>
+												</div>
+											</div>
+											<div class="layui-col-xs4 layui-col-sm4 layui-col-md4 layui-row" style="text-align: center">
+												<div style="width: 100%;height: 40px;text-align: center;line-height: 40px">
+													<span>CPU使用率</span>
+												</div>
+												<div style="width: 100%;height: 110px;text-align: center">
+													<canvas id="neicun" width="100" height="100"></canvas>
+												</div>
+												<div style="width: 100%;height: 40px;text-align: center;line-height: 40px">
+													<span th:text="${sys.sysCpu}" /> 核
+												</div>
+											</div>
+											<div class="layui-col-xs4 layui-col-sm4 layui-col-md4 layui-row" style="text-align: center">
+												<div style="width: 100%;height: 40px;text-align: center;line-height: 40px">
+													<span>内心使用率</span>
+												</div>
+												<div style="width: 100%;height: 110px;text-align: center">
+													<canvas id="css" width="100" height="100"></canvas>
+												</div>
+												<div style="width: 100%;height: 40px;text-align: center;line-height: 40px">
+													<span th:text="${sys.sysShenyuNeicun}" />/<span th:text="${sys.sysNeicun}" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 layui-col-sm12 layui-col-md9">
+							<div class="layui-card">
+								<div class="layui-card-header">数据概览</div>
+								<div class="layui-card-body">
+
+									<div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade" lay-filter="LAY-index-dataview">
+										<div carousel-item id="LAY-index-dataview">
+											<div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
+											<div></div>
+											<div></div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 layui-col-sm12 layui-col-md3">
+							<div class="layui-card" style="min-height: 395px">
+								<div class="layui-card-header">
+									西决心语
+									<i class="layui-icon layui-icon-tips" lay-tips="要支持的噢" lay-offset="5"></i>
+								</div>
+								<div class="layui-card-body layui-text layadmin-text">
+									<p>
+										此系统框架用的都是当下主流的框架,目前继承的功能可以快速的开发绝大数的定制功能开发,支持高速缓存Redis,后台的持久层用的是
+										MybatisPlus框架几乎做到的NotSql的操作,开发效率极高,还集成了MQTT通信方便功能的扩展。
+									</p>
+									<p>我是一个热爱开发的程序员,平时写了一些随笔博客,希望对热爱开发的朋友有所帮助,欢迎联系我定制App,小程序,PC网站,运营系统 QQ:942879858。</p>
+									<p>—— 西决（<a href="https://blog.sxpcwlkj.com/" target="_blank">XIJUE</a>）</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+					<div class="layui-row layui-col-space15">
+
+						<div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<div class="layui-card">
+								<div class="layui-card-header">系统余额</div>
+								<div class="layui-card-body layui-text" style="height: 185px;">
+									<div class="layui-row layui-col-space15">
+										<div class="layui-col-xs6 layui-col-sm6 layui-col-md6" style="margin-top: 5px">
+											<table class="layui-table" lay-skin="row">
+												<colgroup>
+													<col width="100">
+													<col>
+													<col>
+												</colgroup>
+												<tbody>
+													<thead>
+														<tr>
+															<td style="text-align: center">名称</td>
+															<td style="text-align: center">余量</td>
+														</tr>
+													</thead>
+													<tr>
+														<td style="text-align: center">系统余额</td>
+														<td style="text-align: center">99990 次</td>
+													</tr>
+
+													<tr>
+														<td style="text-align: center">短信</td>
+														<td style="text-align: center">99990 条</td>
+													</tr>
+													<tr>
+														<td style="text-align: center">直播流量</td>
+														<td style="text-align: center">9990 G</td>
+													</tr>
+
+												</tbody>
+											</table>
+										</div>
+										<div class="layui-col-xs2 layui-col-sm2 layui-col-md2">
+											<div style="text-align: center;padding: 10px 0px;color: white">
+												<div style="width: 100%;background-color:#f9b977;padding: 5px 0px;border-radius: 5px">
+													<h4>余额</h4>
+													<p style="height: 40px;line-height: 40px" th:text="${sysMoney.sysPice}+'元'"></p>
+												</div>
+
+											</div>
+											<div style="text-align: center;padding: 0px 0px 10px 0px;color: white">
+												<div style="width: 100%;background-color: #f77d77;padding: 5px 0px;border-radius: 5px">
+													<h4>总消费</h4>
+													<p style="height: 40px;line-height: 40px" th:text="${sysMoney.sysAllpice}+'元'"></p>
+												</div>
+											</div>
+
+										</div>
+										<div class="layui-col-xs12 layui-col-sm4 layui-col-md4">
+											<div style="width: 100%;background-color: #eae6e6;margin: 10px 0px;border-radius: 5px">
+												<div class="layui-row" style="padding: 5px 10px">
+													<div class="layui-col-md12" style="margin-bottom: 10px">
+														<div class="layui-input-block" style="margin-left: 0px;display:flex;">
+															<div class="" style="line-height: 38px">充值金额:</div>
+															<input type="number" style="width: 45%;margin-left: 5%;text-align: center" name="pice" lay-verify="pice"
+															 autocomplete="off" value="10" placeholder="充值金额" class="layui-input">
+														</div>
+													</div>
+													<div class="layui-col-md12" style="margin-bottom: 10px">
+														<button type="button" class="layui-btn layui-btn-fluid" id="weixinPay">
+															微信充值
+														</button>
+													</div>
+													<div class="layui-col-md12" style="margin-bottom: 10px">
+														<button type="button" class="layui-btn layui-btn-normal layui-btn-fluid" id="aiply">支付宝充值
+														</button>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<div class="layui-card">
+								<div class="layui-card-header">版本信息</div>
+								<div class="layui-card-body layui-text" style="margin: 8px 0px;">
+									<table class="layui-table">
+										<colgroup>
+											<col width="150">
+											<col>
+										</colgroup>
+										<tbody>
+											<tr>
+												<td>系统名称</td>
+												<td>
+													1
+												</td>
+											</tr>
+											<tr>
+												<td>系统框架</td>
+												<td>
+													Springboot+MybatisPlus+Redis+Shiro+Mqtt+Layui
+												</td>
+											</tr>
+											<tr>
+												<td>系统版本</td>
+												<td>
+													1
+												</td>
+											</tr>
+
+											<tr>
+												<td>当前服务IP</td>
+												<td>
+													127.0.0.1
+												</td>
+											</tr>
+
+											<tr>
+												<td>JVM版本</td>
+												<td>
+													1.8
+												</td>
+											</tr>
+
+											<tr>
+												<td>JVM空闲内存</td>
+												<td>
+													100 k
+												</td>
+											</tr>
+											<tr>
+												<td>JVM内存</td>
+												<td>
+													100 k
+												</td>
+											</tr>
+											<tr>
+												<td>时区</td>
+												<td>
+													100 k
+												</td>
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="layer_notice" style="width: 150px;height: 180px;padding: 10px;background-color: white;text-align: center;display: none">
+			<img id="payImg" src="http://blog.sxpcwlkj.com/wp-content/uploads/2020/11/123.png" style="width: 150px;height: 150px;">
+			<p style="margin-top: 10px">微信扫码支付</p>
+		</div>
+		<script src="../../layuiadmin/layui/layui.js?t=1"></script>
+		<script type="text/javascript" src="../../plugin/jQueryRunning/js/jquery.min.js"></script>
+		<script type="text/javascript" src="../../plugin/cavasProgress/js/progress.js"></script>
+		<script>
+			layui.config({
+				base: '../../layuiadmin/' //静态资源所在路径
+			}).extend({
+				index: 'lib/index' //主入口模块
+			}).use(['index', 'console', 'form', 'common'], function() {
+				var $ = layui.$,
+					layer = layui.layer,
+					laytpl = layui.laytpl,
+					setter = layui.setter,
+					view = layui.view,
+					common = layui.common,
+					admin = layui.admin,
+					form = layui.form;
+
+				function getToken() {
+					return layui.data(setter.tableName).token;
+				}
+				$("#aiply").click(function(res) {
+					var pice = $("[name='pice']").val();
+					if (pice <= 0) {
+						layer.msg("金额输入有误");
+						return false;
+					}
+					common.get("commonPay/voucher", {
+						"piceNum": pice,
+						"productId": 1,
+						"orderCount": 1
+					}, function(res) {
+						var orderId = res.data;
+
+						layer.alert("1:扫码付款后请不要关闭支付宝充值页面;<br>2:等待系统自动返回充值结果;<br>3:提前关闭会造成充值失败;<br>4:充值结束后刷新此页面查看余额。", {
+							skin: 'layui-layer-molv' //样式类名
+								,
+							btn: ['去付款'],
+							closeBtn: 0
+						}, function(index) {
+							//window.location.href = "${ctx}/alipay/goAlipay?orderId="+orderId+"&describe=集福购会员充值";
+							window.open(layui.setter.requeryUrl + "alipay/goAlipay?orderId=" + orderId + "&describe=集福购会员充值&token=" +
+								getToken())
+							layer.close(index);
+							var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+							parent.layer.close(index); //再执行关闭
+							parent.location.reload();
+						});
+
+						// common.get("alipay/goAlipay", {
+						// 	"orderId": id,
+						// 	"describe": "系统余额充值"
+						// }, function(res) {
+						// 	console.log(res.data)
+						// 	// //res即为后端返回的form表单
+						// 	// //js创建一个div将form表单添加上去
+						// 	// const div = document.createElement('div')
+						// 	// div.innerHTML = res.data;
+						// 	// document.body.appendChild(div)
+						// 	// //调用form表单
+						// 	// document.forms[0].submit();
+
+						// });
+
+					});
+
+				});
+
+
+
+				$("#weixinPay").click(function() {
+					$(".display").css({
+						"display": ""
+					});
+					var pice = $("[name='pice']").val();
+					if (pice <= 0) {
+						layer.msg("金额输入有误");
+						return false;
+					}
+					//微信下单
+					common.get("commonPay/voucher", {
+						"piceNum": pice,
+						"productId": 1,
+						"orderCount": 1
+					}, function(res) {
+						var id = res.data;
+						admin.req({
+							url: layui.setter.requeryUrl + 'wxPay/getQRCode',
+							data: {
+								"orderId": id,
+								"describe": "系统余额充值"
+							},
+							done: function(res) {
+								$("#payImg").attr('src', res.data);
+								huiDiao(id);
+							}
+						});
+					});
+
+					var index = layer.open({
+						type: 1,
+						shade: false,
+						title: false, //不显示标题
+						content: $('.layer_notice'), //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+						cancel: function() {
+							$("[name='pice']").val("10")
+							$(".display").css({
+								"display": "none"
+							});
+							clearInterval(time);
+						}
+					});
+					var i = 0;
+					var time;
+
+					function huiDiao(orderId) {
+						//console.log(orderId)
+						time = setInterval(function() {
+							//console.log(i++)
+							common.get("wxPay/notifyWeChatPnPay", {
+								"orderId": orderId
+							}, function(res) {
+								if (res.state == 1) {
+									clearInterval(time)
+									layer.msg(res.msg, {
+										offset: '15px',
+										icon: 1,
+										time: 1500
+									}, function() {
+										layer.close(index); //关闭弹层
+										location.reload();
+									});
+								} else {
+									layer.msg(res.msg, {
+										offset: '15px',
+										icon: 1,
+										time: 1500
+									}, function() {
+										//location.reload()
+									});
+								}
+							});
+						}, 1500);
+					}
+				});
+				
+				//系统信息
+				common.get("home/selectSysinfo",{},function(res){
+					
+					console.log(res)
+					
+				})
+				
+			});
+		</script>
+		<script>
+			var p1 = new Progress({
+				el: 'my_html', //canvas元素id
+				deg: 30, //绘制角度
+				timer: 10, //绘制时间
+				lineWidth: 6, //线宽
+				lineBgColor: '#e2e2e2', //底圆颜色
+				lineColor: '#5aac0c', //动态圆颜色
+				textColor: '#000', //文本颜色
+				fontSize: 20, //字体大小
+				circleRadius: 100 //圆半径
+			});
+
+			var p2 = new Progress({
+				el: 'css', //canvas元素id
+				deg: 75, //绘制角度
+				timer: 20, //绘制时间
+				lineWidth: 6, //线宽
+				lineBgColor: '#e2e2e2', //底圆颜色
+				lineColor: '#e4393c', //动态圆颜色
+				textColor: '#000', //文本颜色
+				fontSize: 20, //字体大小
+				circleRadius: 100 //圆半径
+			});
+			var p3 = new Progress({
+				el: 'neicun', //canvas元素id
+				deg: 35, //绘制角度
+				timer: 40, //绘制时间
+				lineWidth: 6, //线宽
+				lineBgColor: '#e2e2e2', //底圆颜色
+				lineColor: '#50b1ff', //动态圆颜色
+				textColor: '#000', //文本颜色
+				fontSize: 20, //字体大小
+				circleRadius: 100 //圆半径
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>支付宝设置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card ">
+                <div class="layui-card-header">支付宝设置</div>
+                <div class="layui-card-body" pad15>
+
+                    <div class="layui-form" wid100 lay-filter="">
+                        <div class="layui-form-item layui-row">
+                            <div style="margin-top: 20px" class="layui-col-sm6 layui-col-md8 ">
+                                <label class="layui-form-label">支付应用ID</label>
+                                <div class="layui-input-block" style="width: 50%;">
+                                    <input type="text" name="appId"  class="layui-input"  placeholder="">
+                                </div>
+                            </div>
+                            <div style="margin-top: 20px" class="layui-col-sm6 layui-col-md4">
+                                <div class="layui-input-inline layui-input-company"><a href="/article/articlelook?tutorialId=32">教程</a></div>
+                                <div class="layui-form-mid layui-word-aux">---</div>
+                            </div>
+                            <div style="margin-top: 20px" class="layui-col-sm6 layui-col-md8 ">
+                                <label class="layui-form-label">商户私钥</label>
+                                <div class="layui-input-block" style="width: 50%;">
+                                    <textarea style="min-height: 150px" name="merchantPrivateKey"  placeholder="请输入内容" class="layui-textarea"></textarea>
+                                </div>
+                            </div>
+                            <div style="margin-top: 20px" class="layui-col-sm6 layui-col-md4">
+                                <div class="layui-input-inline layui-input-company"><a href="/article/articlelook?tutorialId=32">教程</a></div>
+                                <div class="layui-form-mid layui-word-aux">---</div>
+                            </div>
+                            <div style="margin-top: 20px" class="layui-col-sm6 layui-col-md8 ">
+                                <label class="layui-form-label">公钥</label>
+                                <div class="layui-input-block" style="width: 50%;">
+                                    <textarea style="min-height: 150px" name="alipayPublicKey"  placeholder="请输入内容" class="layui-textarea"></textarea>
+                                </div>
+                            </div>
+                            <div style="margin-top: 20px" class="layui-col-sm6 layui-col-md4">
+                                <div class="layui-input-inline layui-input-company"><a href="/article/articlelook?tutorialId=32">教程</a></div>
+                                <div class="layui-form-mid layui-word-aux">---</div>
+                            </div>
+                           
+                            <div style="margin-top: 20px" class="layui-col-sm6 layui-col-md8 ">
+                                <label class="layui-form-label">同步通知链接</label>
+                                <div class="layui-input-block" style="width: 50%;">
+                                    <input type="text" name="returnUrl"  class="layui-input"  placeholder="">
+                                </div>
+                            </div>
+                            <div style="margin-top: 20px" class="layui-col-sm6 layui-col-md4">
+                                <div class="layui-input-inline layui-input-company"><a href="/article/articlelook?tutorialId=32">教程</a></div>
+                                <div class="layui-form-mid layui-word-aux">---</div>
+                            </div>
+                            <div style="margin-top: 20px" class="layui-col-sm6 layui-col-md8 ">
+                                <label class="layui-form-label">签名方式</label>
+                                <div class="layui-input-block" style="width: 50%;">
+                                    <input type="text" name="signType" class="layui-input"  placeholder="">
+                                </div>
+                            </div>
+                            <div style="margin-top: 20px" class="layui-col-sm6 layui-col-md4">
+                                <div class="layui-input-inline layui-input-company"><a href="/article/articlelook?tutorialId=32">教程</a></div>
+                                <div class="layui-form-mid layui-word-aux">---</div>
+                            </div>
+
+                            <div style="margin-top: 20px" class="layui-col-sm6 layui-col-md8 ">
+                                <label class="layui-form-label">编码格式</label>
+                                <div class="layui-input-block" style="width: 50%;">
+                                    <input type="text" name="alipayCharset"   class="layui-input"  placeholder="绑定域名拥有自己的网站">
+                                </div>
+                            </div>
+                            <div style="margin-top: 20px" class="layui-col-sm6 layui-col-md4">
+                                <div class="layui-input-inline layui-input-company"><a href="/article/articlelook?tutorialId=32">教程</a></div>
+                                <div class="layui-form-mid layui-word-aux">---</div>
+                            </div>
+                            <div style="margin-top: 20px" class="layui-col-sm6 layui-col-md8 ">
+                                <label class="layui-form-label">支付宝网关</label>
+                                <div class="layui-input-block" style="width: 50%;">
+                                    <input type="text" name="gatewayUrl" class="layui-input"  placeholder="绑定域名拥有自己的网站">
+                                </div>
+                            </div>
+                            <div style="margin-top: 20px" class="layui-col-sm6 layui-col-md4">
+                                <div class="layui-input-inline layui-input-company"><a href="/article/articlelook?tutorialId=32">教程</a></div>
+                                <div class="layui-form-mid layui-word-aux">---</div>
+                            </div>
+							<div style="margin-top: 20px" class="layui-col-sm6 layui-col-md8 ">
+							    <label class="layui-form-label">成功返回地址</label>
+							    <div class="layui-input-block" style="width: 50%;">
+							        <input type="text" name="notifyUrl"   class="layui-input"  placeholder="">
+							    </div>
+							</div>
+							<div style="margin-top: 20px" class="layui-col-sm6 layui-col-md4">
+							    <div class="layui-input-inline layui-input-company"><a href="/article/articlelook?tutorialId=32">教程</a></div>
+							    <div class="layui-form-mid layui-word-aux">---</div>
+							</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit lay-filter="set_alipay">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '../../layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'form', 'upload','common'], function(){
+        var $ = layui.$
+            ,form = layui.form
+            ,admin = layui.admin
+			,common=layui.common
+            ,upload = layui.upload ;
+			
+			common.get("api/getAlipay", {}, function(res) {
+				$("[name='appId']").val(res.data.appId);
+				$("[name='merchantPrivateKey']").val(res.data.merchantPrivateKey);
+				$("[name='alipayPublicKey']").val(res.data.alipayPublicKey);
+				$("[name='notifyUrl']").val(res.data.notifyUrl);
+				$("[name='returnUrl']").val(res.data.returnUrl);
+				$("[name='signType']").val(res.data.signType);
+				$("[name='alipayCharset']").val(res.data.alipayCharset);
+				$("[name='gatewayUrl']").val(res.data.gatewayUrl);
+			});
+
+        //监听提交
+        form.on('submit(set_alipay)', function(data){
+            //layer.msg(JSON.stringify(data.field));
+			common.post("api/setAlipay",data.field, function(res) {
+				layer.msg(res.msg, {
+						offset: '15px',
+						icon: 1,
+						time: 1500
+					}, function() {
+						//location.reload()
+						//table.reload('LAY-api-back-manage'); //数据刷新
+						//layer.close(index); //关闭弹层
+					});
+				});
+				return false;
+           
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

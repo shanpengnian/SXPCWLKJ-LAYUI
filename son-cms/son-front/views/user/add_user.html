@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>编辑用户</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+	</head>
+	<body>
+		<div class="layui-form" lay-filter="layuiadmin-form-useradmin" id="layuiadmin-form-useradmin" style="padding: 20px 0 0 0;">
+			<div class="layui-form-item">
+				<label class="layui-form-label">用户名</label>
+				<div class="layui-input-inline">
+					<input type="text" name="username" lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">手机号码</label>
+				<div class="layui-input-inline">
+					<input type="text" name="phone" lay-verify="phone" placeholder="请输入号码" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">QQ</label>
+				<div class="layui-input-inline">
+					<input type="text" name="qq" lay-verify="number" placeholder="请输入QQ号" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">邮箱</label>
+				<div class="layui-input-inline">
+					<input type="text" name="email" lay-verify="email" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">头像</label>
+				<div class="layui-input-inline">
+					<input type="text" name="avatar" lay-verify="required" placeholder="请上传图片" autocomplete="off" class="layui-input">
+				</div>
+				<button style="float: left;" type="button" class="layui-btn" id="layuiadmin-upload-useradmin">上传图片</button>
+			</div>
+			<div class="layui-form-item" lay-filter="sex" id="shouQuan">
+				<label class="layui-form-label">选择角色</label>
+				<div class="layui-input-block" id="LAY-user-add-role" style="width: 300px"></div>
+				<div id="inrole" style="width: 60%;float: right;padding-right: 78px"></div>
+			</div>
+			<div class="layui-form-item" lay-filter="sex">
+				<label class="layui-form-label">备注</label>
+				<div class="layui-input-block" style="width: 300px">
+					<blockquote class="layui-elem-quote" style="width: 51%;margin-right: 10px;float: left">密码默认6个1</blockquote>
+					<div id="inpassrord"></div>
+				</div>
+			</div>
+			<div class="layui-form-item" lay-filter="sex">
+				<label class="layui-form-label">余额充值</label>
+				<div class="layui-input-inline" style="width: 112px">
+					<input type="number" name="balance" placeholder="" autocomplete="off" class="layui-input">
+				</div>
+				<button type="button" class="layui-btn" id="user-add-monery">充值</button>
+				<button type="button" class="layui-btn layui-btn-warm" id="user-add-USER">进入用户</button>
+			</div>
+
+			<!--影藏域-->
+			<input type="hidden" name="userId" />
+			<div class="layui-form-item layui-hide">
+				<input type="button" lay-submit lay-filter="LAY-user-front-submit" id="LAY-user-front-submit" value="确认">
+			</div>
+		</div>
+
+		<script src="../../layuiadmin/layui/layui.js"></script>
+		<script>
+			var resData;
+
+			function child(obj) {
+				console.log(JSON.stringify(obj));
+				resData = obj;
+			}
+			layui.config({
+				base: '../../layuiadmin/' //静态资源所在路径
+			}).extend({
+				index: 'lib/index', //主入口模块
+				common: 'common'
+			}).use(['index', 'form', 'upload', 'common'], function() {
+				var $ = layui.$,
+					form = layui.form,
+					layer = layui.layer,
+					setter = layui.setter,
+					admin = layui.admin,
+					common = layui.common,
+					upload = layui.upload;
+				resDat = {
+					"type": 1,
+					"userId": 0
+				}
+				$("[name='userId']").val(resDat.userId);
+				if (resData.type == 1) {
+					common.get("user/selectAllRole", {}, function(res) {
+						var html = "";
+						var tep = 1;
+						$.each(res.data, function(key, value) {
+							//console.log(key+"========"+JSON.stringify(value))
+							// html+="<input type='radio' name='fole'  value='"+value.roleId+" title='00'>"
+							if (value.roleId == 1) {
+								html += " <input type='radio' name='roleId' value='" + value.roleId + "' title='" + value.roleName +
+									" 'disabled>";
+							} else {
+								if (tep == 1) {
+									html += " <input type='radio' name='roleId' value='" + value.roleId + "' title='" + value.roleName +
+										"'checked>";
+									tep = 2;
+								} else {
+									html += " <input type='radio' name='roleId' value='" + value.roleId + "' title='" + value.roleName +
+										"'>";
+								}
+							}
+						})
+						$('#LAY-user-add-role').html(html);
+						form.render("radio");
+						//layui.element.render();
+					})
+				} else {
+					if (resData.userId != 1) {
+						var rolehtml =
+							"<button type='button' class='layui-btn layui-btn-sm layui-btn-danger' id='rerole' style='float: right;height: 30px;width: 95px;'>授权</button>";
+						$("#inrole").html(rolehtml);
+
+						//授权
+						$("#rerole").click(function() {
+							var rol = $('input:radio:checked').val();
+							common.post("user/updateUserRole", {
+								"userId": resData.userId,
+								"roleId": rol
+							}, function(res) {
+								layer.msg(res.msg, {
+									offset: '15px',
+									icon: 1,
+									time: 1500
+								}, function() {
+									var rolehtml =
+										"<button type='button' class='layui-btn layui-btn-sm layui-btn-normal' id='rerole' style='float: right;height: 30px;width: 95px;'>已授权</button>";
+									$("#inrole").html(rolehtml);
+								});
+							});
+						});
+					} else {
+						$("#shouQuan").hide();
+					}
+					var rehtml =
+						"<button type='button' class='layui-btn layui-btn-sm layui-btn-danger' id='repass' style='float: left;height: 50px;width: 95px'>重置密码</button>";
+					$("#inpassrord").html(rehtml);
+					//重置密码
+					$("#repass").click(function() {
+						common.post("user/updateUserPass", {
+							"userId": resData.userId
+						}, function(res) {
+							layer.msg(res.msg, {
+								offset: '15px',
+								icon: 1,
+								time: 1500
+							}, function() {
+								layer.msg(res.msg, {
+									offset: '15px',
+									icon: 1,
+									time: 1500
+								}, function() {
+									var rehtml =
+										"<button type='button' class='layui-btn layui-btn-sm layui-btn-normal' id='repass' style='float: left;height: 50px;width: 95px'>已重置</button>";
+									$("#inpassrord").html(rehtml);
+								});
+							});
+						});
+					});
+
+					//回显
+					common.get("user/queryUserByUserId", {
+						"userId": resData.userId
+					}, function(res) {
+						var role = res.data.role;
+						$("[name='username']").val(res.data.loginname);
+						$("[name='phone']").val(res.data.telphone);
+						$("[name='qq']").val(res.data.qq);
+						$("[name='email']").val(res.data.email);
+						$("[name='avatar']").val(res.data.icon);
+
+						common.get("user/selectAllRole", {
+							"userId": resData.userId
+						}, function(res) {
+							var html = "";
+							var tep = 1;
+							$.each(res.data, function(key, value) {
+								//console.log(key+"========"+JSON.stringify(value))
+								// html+="<input type='radio' name='fole'  value='"+value.roleId+" title='00'>"
+								if (value.roleId == 1) {
+									/* html+=" <input type='radio' name='roleId' value='"+value.roleId+"' title='"+value.roleName+" 'disabled>";*/
+								} else {
+									if (value.roleName == role) {
+										html += " <input type='radio' name='roleId' value='" + value.roleId + "' title='" + value.roleName +
+											"'checked>";
+									} else {
+										html += " <input type='radio' name='roleId' value='" + value.roleId + "' title='" + value.roleName +
+											"'>";
+									}
+								}
+							})
+							$('#LAY-user-add-role').html(html);
+							form.render("radio");
+						});
+					});
+				}
+
+				function getToken() {
+					return layui.data(setter.tableName).token;
+				}
+				upload.render({
+					elem: '#layuiadmin-upload-useradmin',
+					headers: {
+						'Access-Control-Allow-Origin': "*",
+						'token': getToken()
+					},
+					url: layui.setter.requeryUrl + 'fileUploadToQiniuyun',
+					accept: 'file',
+					method: 'POST',
+					
+					acceptMime: 'image/*',
+					done: function(res) {
+						$(this.item).prev("div").children("input").val(res.data)
+					}
+				});
+
+				//充值
+
+				$("#user-add-monery").click(function() {
+					var balance = $("[name='balance']").val();
+					if (balance <= 0) {
+						layer.msg("充值金额输入有误！");
+						return false;
+					}
+					common.get("user/adduserMoney", {
+						"userId": resData.userId,
+						"pic": balance
+					}, function(res) {
+						layer.msg(res.msg, {
+							offset: '15px',
+							icon: 1,
+							time: 1500
+						}, function() {});
+					});
+				});
+
+				$("#user-add-USER").click(function() {
+					common.get("user/adduserUSER", {
+						"userId": resData.userId
+					}, function(res) {
+						layer.msg(res.msg, {
+							offset: '15px',
+							icon: 1,
+							time: 1500
+						}, function() {
+							var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+							parent.location.reload()
+						});
+					});
+				});
+
+			})
+		</script>
+	</body>
+</html>

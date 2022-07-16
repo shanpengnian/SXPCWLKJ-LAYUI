@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="sxpcwlkj:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>sxpcwlkj</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="sxpcwlkj-son.war">
+      <element id="artifact" artifact-name="sxpcwlkj:war exploded" />
+    </root>
+  </artifact>
+</component>

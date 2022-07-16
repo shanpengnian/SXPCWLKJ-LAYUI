@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>添加角色</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+	</head>
+	<body>
+		<div class="layui-form" lay-filter="layuiadmin-form-role" id="layuiadmin-form-role" style="padding: 20px 30px 0 0;">
+			<div class="layui-form-item">
+				<label class="layui-form-label">角色名称</label>
+				<div class="layui-input-block">
+					<input type="text" name="name" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">角色编码</label>
+				<div class="layui-input-block">
+					<select name='codeId' id="LAY-user-add-role-code"></select>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">角色级别</label>
+				<div class="layui-input-block" style="width: 150px">
+					<input type="text" name="roleRank" required lay-verify="number" value="10" placeholder="值越大级别越高" autocomplete="off"
+					 class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">排序</label>
+				<div class="layui-input-block" style="width: 150px">
+					<input type="text" name="roleSort" required lay-verify="number" value="1" placeholder="值越小越靠前" autocomplete="off"
+					 class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">角色类型</label>
+				<div class="layui-input-block">
+					<input type="radio" name="roletype" value="1" title="管理员角色">
+					<input type="radio" name="roletype" value="2" title="商家角色" checked>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">权限范围</label>
+				<div class="layui-input-block" id="LAY-user-add-function"></div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">具体描述</label>
+				<div class="layui-input-block">
+					<textarea type="text" name="descr" lay-verify="required" autocomplete="off" class="layui-textarea"></textarea>
+				</div>
+			</div>
+
+			<input type="hidden" name="roleId" />
+			<div class="layui-form-item layui-hide">
+				<button class="layui-btn" lay-submit lay-filter="LAY-user-role-submit" id="LAY-user-role-submit">提交</button>
+			</div>
+		</div>
+
+		<script src="../../layuiadmin/layui/layui.js"></script>
+		<script>
+			var resData;
+			function child(obj) {
+				//console.log(JSON.stringify(obj));
+				resData = obj;
+			}
+			layui.config({
+				base: '../../layuiadmin/' //静态资源所在路径
+			}).extend({
+				index: 'lib/index' ,//主入口模块
+				common: 'common'
+			}).use(['index', 'layer', 'laytpl', 'view', 'form', 'admin', 'table', 'laypage', 'common'], function(exports) {
+				var $ = layui.$,
+					layer = layui.layer,
+					laytpl = layui.laytpl,
+					setter = layui.setter,
+					view = layui.view,
+					table = layui.table,
+					admin = layui.admin,
+					laypage = layui.laypage,
+					common = layui.common,
+					form = layui.form;
+
+				var type = resData.type; //1：添加角色  2：  编辑角色
+				var roleId =resData.roleId;
+				$("[name='roleId']").val(roleId);
+				//console.log(type+"---"+roleId)
+				if (type == 1) {
+					/*可添加的角色编码*/
+					common.get("user/getRoleCode", {}, function(res) {
+						var html = '';
+						$.each(res.data, function(key, value) {
+							html += "<option  value='" + value.codeId + "'>" + value.codeCode + "</option>";
+						})
+						$('#LAY-user-add-role-code').html(html);
+						form.render("select");
+					});
+
+					/*所有权限列表*/
+					common.get("user/getNumeTreeAll", {}, function(res) {
+						var html = '';
+						$.each(res.data, function(key, value) {
+							html += "<input class='one' type='checkbox' name='checkbox[" + value.funId +
+								"]' lay-skin='primary' title=" + value.title + ">";
+							$.each(value.list, function(keyTwo, valueTwo) {
+								html += "<input type='checkbox' name='checkbox[" + valueTwo.funId + "]' lay-skin='primary' title=" +
+									valueTwo.title + ">"
+								$.each(valueTwo.list, function(keyThree, valueThree) {
+									html += "<input type='checkbox' name='checkbox[" + valueThree.funId + "]' lay-skin='primary' title=" +
+										valueThree.title + ">";
+								})
+							})
+						})
+						$('#LAY-user-add-function').html(html);
+						form.render("checkbox");
+					});
+
+				} else {
+					
+					common.get("user/queryRoleByRoleId",{"roleId":roleId},function(res){
+						//console.log(JSON.stringify(res))
+						$("[name='name']").val(res.data.role.roleName);
+						$("[name='descr']").val(res.data.role.roleDesc)
+						$("[name='roleRank']").val(res.data.role.roleRank);
+						$("[name='roleRank']").val(res.data.role.roleRank);
+						$("[name='roleSort']").val(res.data.role.roleSort);
+						$(" select option[value='" + res.data.role.roleCodeId + "']").attr("selected", "selected");
+						// $("input:radio[value='"+res.data.role.roleType+"']").attr('checked','true');
+						if (res.data.role.roleType == 1) {
+							$("[name='roletype']").eq(0).attr('checked', 'true');
+						}
+						
+						form.render("select");
+						form.render("radio");
+						var html = '';
+						$.each(res.data.list, function(key, value) {
+							if (value.type == 1) {
+								html += "<input type='checkbox' name='checkbox[" + value.funId +
+									"]' lay-skin='primary' checked  title=" + value.title + ">";
+							} else {
+								html += "<input type='checkbox' name='checkbox[" + value.funId + "]' lay-skin='primary'  title=" +
+									value.title + ">";
+							}
+						})
+						var id = res.data.role.codeId;
+						/*可添加的角色编码*/
+						common.get("user/getRoleCode",{},function(res){
+							var html = '';
+							$.each(res.data, function(key, value) {
+								//console.log(JSON.stringify(value))
+								if (id == value.codeId) {
+									html += "<option  value='" + value.codeId + "' selected>" + value.codeCode + "</option>";
+								} else {
+									html += "<option  value='" + value.codeId + "'>" + value.codeCode + "</option>";
+								}
+													
+							})
+							$('#LAY-user-add-role-code').html(html);
+							form.render("select");
+						});
+						
+						$('#LAY-user-add-function').html(html);
+						form.render("checkbox");
+					});
+				}
+			})
+		</script>
+	</body>
+</html>

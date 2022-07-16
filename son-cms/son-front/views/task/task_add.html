@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>添加任务</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+</head>
+<body>
+<div class="layui-form" lay-filter="layuiadmin-form-role" id="layuiadmin-form-role" style="padding: 20px 30px 0 0;">
+    <div class="layui-form-item">
+        <label class="layui-form-label">定时名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="taskName" required  lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">定时编码</label>
+        <div class="layui-input-block" style="width: 230px;display: flex">
+            <input style="flex: 4" type="text"  name="taskCode" required  lay-verify="required" value="" placeholder="定时编码格式" autocomplete="off" class="layui-input">
+            <button style="flex: 1;margin-left: 10px;height: 36px;line-height: 36px" class="layui-btn layui-btn-sm" id="zxTaskCode">在线工具</button>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">执行方法</label>
+        <div class="layui-input-block" style="width: 150px">
+            <input type="text" name="taskFunction" required  lay-verify="required"  placeholder="" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">执行次数</label>
+        <div class="layui-input-block" style="width: 150px">
+            <input type="text" name="taskNum" required  lay-verify="number" value="100000" placeholder="值越小越靠前" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">排序</label>
+        <div class="layui-input-block" style="width: 150px">
+            <input type="text" name="taskSort" required  lay-verify="number" value="1" placeholder="值越小越靠前" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">生效日期</label>
+        <div class="layui-input-block" style="width: 150px">
+            <input type="text" id="taskStartTime" name="taskStartTime" required  lay-verify="required"   autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">失效日期</label>
+        <div class="layui-input-block" style="width: 150px">
+            <input type="text" id="taskEndTime" name="taskEndTime" required  lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">定时状态</label>
+        <div class="layui-input-block">
+            <input type="radio" name="taskState" value="1" title="启用" checked>
+            <input type="radio" name="taskState" value="2" title="禁用">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">具体描述</label>
+        <div class="layui-input-block">
+            <textarea type="text" name="taskNote" lay-verify="required" autocomplete="off" class="layui-textarea"></textarea>
+        </div>
+    </div>
+
+    <input type="hidden" name="taskId" th:value="${taskId}?: 0"/>
+    <div class="layui-form-item layui-hide">
+        <button class="layui-btn" lay-submit lay-filter="LAY-task-submit" id="LAY-task-submit">提交</button>
+    </div>
+</div>
+
+<script src="../../layuiadmin/layui/layui.js"></script>
+<script>
+	var resData;
+	function child(obj) {
+		//console.log(JSON.stringify(obj));
+		resData = obj;
+	}
+    layui.config({
+        base: '../../layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' ,//主入口模块
+		common: 'common'
+    }).use(['jquery','index', 'form','laydate','common'],function () {
+        var $ = layui.$,
+            cron = layui.cron
+            ,layer = layui.layer
+            ,laytpl = layui.laytpl
+            ,setter = layui.setter
+            ,view = layui.view
+            ,admin = layui.admin
+			,common=layui.common
+            ,form = layui.form;
+			var type = resData.type; //1：添加角色  2：  编辑角色
+			var taskId =resData.taskId;
+			$("[name='taskId']").val(taskId);
+        var laydate = layui.laydate;
+
+        //console.log(type+"---"+roleId)
+
+        $("#zxTaskCode").click(function () {
+            layer.open({
+                type: 2,
+                title: '在线工具',
+                shadeClose: true,
+                shade: false,
+                maxmin: true, //开启最大化最小化按钮
+                area: ['100%', '100%'],
+                content: 'https://cron.qqe2.com/'
+            });
+        });
+
+        //生效时间
+        laydate.render({
+            type:"datetime"
+            ,min: '2020-1-1'
+            ,max: '2099-12-30'
+            ,elem: '#taskStartTime' //指定元素
+        });
+
+        //失效时间
+        laydate.render({
+            type:"datetime"
+            ,min: '2020-1-1'
+            ,max: '2099-12-30'
+            ,elem: '#taskEndTime' //指定元素
+        });
+
+        if(type==1){}else{
+			common.get("task/selectTaskOne",{"taskId":taskId},function(res){
+                    //console.log(JSON.stringify(res))
+                    //{"taskId":1,"taskName":"测试一","taskCode":"11111","taskFunction":"test","taskNum":10000,
+                    // "taskSort":1,"taskStartTime":"2020-12-29 19:26:34","taskEndTime":"2020-12-31 19:26:36",
+                    // "taskState":1,"taskUpdateTime":null,"taskNote":"及时测试一下........."}}
+                    $("[name='taskId']").val(res.data.taskId);
+                    $("[name='taskName']").val(res.data.taskName)
+                    $("[name='taskCode']").val(res.data.taskCode);
+                    $("[name='taskFunction']").val(res.data.taskFunction);
+                    $("[name='taskNum']").val(res.data.taskNum);
+                    $("[name='taskSort']").val(res.data.taskSort);
+                    $("[name='taskStartTime']").val(res.data.taskStartTime);
+                    $("[name='taskEndTime']").val(res.data.taskEndTime);
+                    $("input:radio[value='"+res.data.taskState+"']").attr('checked','true');
+                    $("[name='taskNote']").val(res.data.taskNote);
+                    // if(res.data.role.roleType==1){
+                    //     $("[name='roletype']").eq(0).attr('checked','true');
+                    // }
+                    //
+                    // form.render("select");
+                    // form.render("radio");
+                    //
+                    form.render();
+                });
+            
+        }
+    })
+</script>
+</body>
+</html>

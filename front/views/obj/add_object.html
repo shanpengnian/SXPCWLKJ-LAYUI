@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>编辑项目</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+	</head>
+	<body>
+
+		<div class="layui-form" lay-filter="layuiadmin-form-useradmin" id="layuiadmin-form-useradmin" style="padding: 20px 0 0 0;">
+			<div class="layui-form-item">
+				<label class="layui-form-label">接口名称</label>
+				<div class="layui-input-inline" style="width: 350px">
+					<input type="text" name="objectName" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">项目编码</label>
+				<div class="layui-input-inline" style="width: 350px">
+					<input type="text" name="objectCode" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"
+					 disabled>
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">秘钥</label>
+				<div class="layui-input-inline" style="width: 350px">
+					<textarea name="objectKey" placeholder="请输入内容" class="layui-textarea" style="min-height: 140px" disabled></textarea>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">备注</label>
+				<div class="layui-input-inline" style="width: 350px">
+					<textarea name="note" placeholder="请输入内容" class="layui-textarea" style="height: 40px;min-height: 40px"></textarea>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">到期时间</label>
+				<div class="layui-input-inline">
+					<input type="text" name="objectEndTime" id="test1" placeholder="请输入" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">状态</label>
+				<div class="layui-input-inline" style="width: 350px">
+					<input type="radio" name="state" value="1" title="启用">
+					<input type="radio" name="state" value="2" title="禁用" checked>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">排序</label>
+				<div class="layui-input-inline" style="width: 100px;margin-right: 150px">
+					<input type="text" name="sort" placeholder="请输入" autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-input-inline" style="width: 100px;height: 38px;line-height: 38px">
+					<button type="button" id="updateKey" class="layui-btn layui-btn layui-btn-sm">更新秘钥</button>
+				</div>
+			</div>
+			<!--   影藏域-->
+			<input type="hidden" name="objectId" />
+			<div class="layui-form-item layui-hide">
+				<input type="button" lay-submit lay-filter="LAY-object-front-submit" id="LAY-object-front-submit" value="确认">
+			</div>
+		</div>
+
+		<script src="../../layuiadmin/layui/layui.js"></script>
+		<script>
+			var resData;
+
+			function child(obj) {
+				console.log(JSON.stringify(obj));
+				resData = obj;
+			}
+			layui.config({
+				base: '../../layuiadmin/' //静态资源所在路径
+			}).extend({
+				index: 'lib/index' //主入口模块
+			}).use(['index', 'form', 'upload', 'laydate','common'], function() {
+				var $ = layui.$,
+					form = layui.form,
+					admin = layui.admin,
+					laydate = layui.laydate,
+					common=layui.common,
+					upload = layui.upload;
+				var type = resData.type;
+				var objectId = resData.objectId;
+				$("[name='objectId']").val(objectId);
+				/*日期事件*/
+				
+
+				if (type == 1) {
+					getNum()
+
+					function getNum() {
+						var chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+							'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
+							'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+						];
+						var nums = "";
+						for (var i = 0; i < 32; i++) {
+							var id = parseInt(Math.random() * 61);
+							nums += chars[id];
+						}
+						$("[name='objectCode']").val(nums);
+					}
+					laydate.render({
+						elem: '#test1',
+						min: '2017-1-1',
+						type: 'datetime',
+						value: new Date(),
+						done: function(value, date, endDate) {
+							//console.log(value); //得到日期生成的值，如：2017-08-18
+							// console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+							//console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+					
+						}
+					});
+				} else {
+					common.get("obj/selectById", {
+						"objectId": objectId
+					}, function(res) {
+						//console.log(JSON.stringify(res))
+						$("[name='objectName']").val(res.data.objectName);
+						$("[name='objectCode']").val(res.data.objectCode);
+						$("[name='note']").val(res.data.note);
+						$("[name='objectKey']").val(res.data.objectKey);
+						$("[name='objectEndTime']").val(res.data.objectEndTime);
+						$("[name='sort']").val(res.data.sort);
+						if (res.data.state == 1) {
+							$("[name='state']").eq(0).attr('checked', 'true');
+						}
+						form.render("radio");
+					});
+
+
+				}
+
+				$("#updateKey").click(function() {
+					common.post("obj/updateKey", {
+						"objectId": objectId
+					}, function(res) {
+						layer.msg(res.msg, {
+							offset: '15px',
+							icon: 1,
+							time: 1000
+						}, function() {
+							//console.log(JSON.stringify(res))
+							$("[name='objectName']").val(res.data.objectName);
+							$("[name='objectCode']").val(res.data.objectCode);
+							$("[name='note']").val(res.data.note);
+							$("[name='objectKey']").val(res.data.objectKey);
+							$("[name='objectEndTime']").val(res.data.objectEndTime);
+							$("[name='sort']").val(res.data.sort);
+							if (res.data.state == 1) {
+								$("[name='state']").eq(0).attr('checked', 'true');
+							}
+							form.render("radio");
+						});
+
+					})
+
+				});
+
+
+			})
+		</script>
+	</body>
+</html>

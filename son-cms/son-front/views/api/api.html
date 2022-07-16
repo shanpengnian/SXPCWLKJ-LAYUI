@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>API管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+<div class="layui-fluid ">
+    <div class="layui-col-md12">
+        <div class="layui-card" >
+            <div class="layui-card-body">
+                <div style="padding-bottom: 10px;">
+<!--                    <button class="layui-btn layuiadmin-btn-useradmin" data-type="batchdel">删除</button>-->
+                    <button class="layui-btn layuiadmin-btn-useradmin" data-type="add">添加</button>
+                </div>
+                <table id="LAY-api-back-manage" lay-filter="LAY-api-back-manage"></table>
+                <script type="text/html" id="table-operation">
+                    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
+                </script>
+                <div id="layuiPage" style="float: right;padding-right: 20px;padding-top: 10px"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../layuiadmin/layui/layui.js"></script>
+<script th:inline="none">
+    layui.config({
+        base: '../../layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index','table','laypage','layer','upload','common'], function(){
+        var $ = layui.$
+            ,form = layui.form
+            ,admin = layui.admin
+            ,upload = layui.upload
+			,common=layui.common
+            ,table = layui.table;
+
+        var laypage = layui.laypage
+            ,layer = layui.layer;
+
+
+        /*列表分页*/
+        selectlist(1,null)
+        var pageType = true;     //初始化分页状态，默认ture
+        var searchJson=null;     //搜素json  ，默认null
+        function selectlist(currpage,searchJson) {
+            //console.log(currpage)
+            //console.log(JSON.stringify(pram))
+            var data={}
+            if(searchJson==null){
+                data={"currpage":currpage}
+            }else {
+                /*搜索*/
+                data={
+                    "currpage":currpage,
+                    "keyword":searchJson.keyword
+                }
+            }
+            
+			common.get("api/queryApiPage",data,function(res){
+				table.render({
+				    elem: '#LAY-api-back-manage'
+				    ,data:res.data
+				    ,cols: [[
+				        {type: 'checkbox', fixed: 'left'}
+				        ,{field: 'apiId',  width: 60,title: 'ID',  align: 'center' }
+				        ,{field: 'apiName', title: 'API名称',  align: 'center' }
+				        ,{field: 'apiUrl', title: 'URL',  align: 'center'}
+				        ,{field: 'apiSite', title: '地址' , align: 'center'}
+				        ,{field: 'apiKey', title: '秘钥', align: 'center'}
+				        ,{field: 'apiOne', title: '参数1',width: 100, align: 'center'}
+				        ,{field: 'apiTwo', title: '参数2',width: 100, sort: true, align: 'center'}
+				        ,{field: 'apiThree', title: '参数3',width: 100, sort: true, align: 'center'}
+				        ,{title: '操作', width: 150, align: 'center', fixed: 'right', toolbar: '#table-operation'}
+				    ]]
+				    ,limit: 50
+				    ,text:{none:'居然什么也木有···'}
+				});
+				if (pageType) {
+				    /*初始化分页*/
+				    pageIndex(res.count, res.showSize);
+				}
+			});
+
+            //分页 总条数  每页显示数量  注意这个最好和后台对应不可随意填写避免数据紊乱
+            function pageIndex(count,limit) {
+                //实例化分页
+                laypage.render({
+                    elem: 'layuiPage'
+                    ,count: count
+                    ,limit:limit
+                    ,layout: ['prev', 'next', 'page']
+                    ,jump: function(obj){
+                        //console.log(obj)
+                        if(!pageType){
+                            if(searchJson==null){
+                                selectlist(obj.curr,null)
+                            }else {
+                                selectlist(obj.curr,searchJson)
+                            }
+                        }
+                        pageType=false
+                    }
+                });
+            }
+        }
+
+
+        //监听工具条
+        table.on('tool(LAY-api-back-manage)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'del'){
+                layer.confirm('确定删除吗？', function(index) {
+					common.get("api/deleteApiByApiId",{"apiId":data.apiId},function(res){
+                            layer.msg(res.msg, {
+                                offset: '15px'
+                                ,icon: 1
+                                ,time: 1500
+                            }, function(){
+                                selectlist(1,null)
+                                layer.close(index); //关闭弹层
+                                //location.reload()
+                            });
+                        });
+                });
+            }else if(obj.event === 'edit'){
+                //$("#jubu").load(location.href+"#jubu");
+                var tr = $(obj.tr);
+                //console.log(JSON.stringify(data))
+                layer.open({
+                    type: 2
+                    ,title: '编辑API'
+                    ,content: 'add_api.html'
+                    ,maxmin: true
+                    ,area: ['500px', '450px']
+                    ,btn: ['确定', '取消']
+                    ,yes: function(index, layero){
+                        var iframeWindow = window['layui-layer-iframe'+ index]
+                            ,submitID = 'LAY-api-front-submit'
+                            ,submit = layero.find('iframe').contents().find('#'+ submitID);
+                        //监听提交
+                        iframeWindow.layui.form.on('submit('+ submitID +')', function(data){
+                            var field = data.field; //获取提交的字段
+                            console.log(JSON.stringify(field))
+                            //提交 Ajax 成功后，静态更新表格中的数据
+							common.post("api/updateApiByApiId",field,function(res){
+								layer.msg(res.msg, {
+								    offset: '15px'
+								    ,icon: 1
+								    ,time: 1500
+								}, function(){
+								    selectlist(1,null)
+								    layer.close(index); //关闭弹层
+								    //location.reload()
+								    //table.reload('LAY-api-back-manage'); //数据刷新
+								    //layer.close(index); //关闭弹层
+								});
+							});
+                        });
+                        submit.trigger('click');
+                    },
+					success: function(layero, index) {
+					  //START：传递参数
+					  var iframe = window['layui-layer-iframe' + index];
+					  var resDat = {
+					  	"type": 2,
+					  	"apiId": data.apiId
+					  }
+					  iframe.child(resDat);
+					  //END：传递参数
+					}
+                });
+            }
+        });
+
+        //事件
+        var active = {
+            add: function(){
+                layer.open({
+                    type: 2
+                    ,title: '添加API'
+                    ,content: 'add_api.html'
+                    ,maxmin: true
+                    ,area: ['500px', '450px']
+                    ,btn: ['确定', '取消']
+                    ,yes: function(index, layero){
+                        var iframeWindow = window['layui-layer-iframe'+ index]
+                            ,submitID = 'LAY-api-front-submit'
+                            ,submit = layero.find('iframe').contents().find('#'+ submitID);
+                        //监听提交
+                        iframeWindow.layui.form.on('submit('+ submitID +')', function(data){
+                            var field = data.field; //获取提交的字段
+                            //console.log(JSON.stringify(field))
+                            //提交 Ajax 成功后，静态更新表格中的数据
+							common.post("api/insertApi",field,function(res){
+								layer.msg(res.msg, {
+								    offset: '15px'
+								    ,icon: 1
+								    ,time: 1500
+								}, function(){
+								    selectlist(1,null)
+								    layer.close(index); //关闭弹层
+								    //location.reload()
+								    //table.reload('LAY-api-back-manage'); //数据刷新
+								    //layer.close(index); //关闭弹层
+								});
+							});
+                        });
+                        submit.trigger('click');
+                    },
+					success: function(layero, index) {
+					  //START：传递参数
+					  var iframe = window['layui-layer-iframe' + index];
+					  var resDat = {
+					  	"type": 2,
+					  	"apiId": data.apiId
+					  }
+					  iframe.child(resDat);
+					  //END：传递参数
+					}
+                });
+            }
+        };
+
+        $('.layui-btn.layuiadmin-btn-useradmin').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+
+
+</script>
+</body>
+</html>
+

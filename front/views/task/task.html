@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>定时管理</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+	</head>
+	<body>
+
+		<div class="layui-fluid">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-body">
+						<div style="padding-bottom: 10px;">
+							<button class="layui-btn layuiadmin-btn-admin" data-type="add"><i class="layui-icon">&#xe608;</i> 添加</button>
+							<button class="layui-btn layuiadmin-btn-admin" data-type="open">启用</button>
+							<button class="layui-btn layuiadmin-btn-admin" data-type="close">禁用</button>
+						</div>
+						<table id="LAY-task-back-manage" lay-filter="LAY-task-back-manage"></table>
+						<script type="text/html" id="table-operation">
+							{{# if(d.taskState==1){ }}
+                    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="close"><i
+                            class="layui-icon layui-icon-stop"></i>停用</a>
+                    {{# }else{ }}
+                    <a class="layui-btn layui-btn-xs" lay-event="open"><i
+                            class="layui-icon layui-icon-open"></i>启用</a>
+                    {{#  } }}
+                    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i
+                            class="layui-icon layui-icon-edit"></i>编辑</a>
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i
+                            class="layui-icon layui-icon-delete"></i>删除</a>
+
+                </script>
+						<script type="text/html" id="taskState">
+							{{# if(d.taskState==1){ }}
+                    <i class="layui-icon layui-icon-ok" style="font-size: 20px; color: #20800a;font-weight: 800"></i>
+                    {{# }else{ }}
+                    <i class="layui-icon layui-icon-close" style="font-size: 20px; color: #ff5321;font-weight: 800"></i>
+                    {{# } }}
+                </script>
+						<div id="layuiPage" style="float: right;padding-right: 20px;padding-top: 10px"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>-->
+		<script src="../../layuiadmin/layui/layui.js"></script>
+		<script>
+			layui.config({
+				base: '../../layuiadmin/', // 配置一个可访问地址
+			}).extend({
+				index: 'lib/index' //主入口模块
+			}).use(['index', 'layer', 'laytpl', 'view', 'form', 'admin', 'table', 'laypage', 'common'], function(exports) {
+				var $ = layui.$,
+					layer = layui.layer,
+					laytpl = layui.laytpl,
+					setter = layui.setter,
+					view = layui.view,
+					table = layui.table,
+					admin = layui.admin,
+					laypage = layui.laypage,
+					common = layui.common,
+					form = layui.form;
+				var $body = $('body');
+
+				var taskNum = function(d) {
+					return d.taskNum + " 次"
+				}
+				var data = [];
+
+				/*列表分页*/
+				selectlist(1, null)
+				var pageType = true; //初始化分页状态，默认ture
+				function selectlist(currpage) {
+					var data = {
+						"currpage": currpage
+					}
+					//console.log(JSON.stringify(data))
+					
+					common.get("task/listPage",data,function(res) {
+							//data=res.data;
+							//console.log(JSON.stringify(res))
+							table.render({
+								elem: '#LAY-task-back-manage',
+								data: res.data,
+								title: '定时器表',
+								toolbar: '#toolbarDemo' //操作1:启用自定义模板表格头部工具栏
+									,
+								cols: [
+									[{
+										type: 'checkbox',
+										fixed: 'left'
+									}, {
+										field: 'taskName',
+										width: 250,
+										title: '定时名称',
+										align: 'center'
+									}, {
+										field: 'taskCode',
+										width: 120,
+										title: '定时编码'
+									}, {
+										field: 'taskFunction',
+										width: 110,
+										title: '执行方法',
+										align: 'center'
+									}, {
+										field: 'taskNum',
+										width: 110,
+										title: '执行次数',
+										align: 'center',
+										templet: taskNum
+									}, {
+										field: 'taskStartTime',
+										width: 170,
+										title: '生效时间',
+										align: 'center',
+										sort: true
+									}, {
+										field: 'taskEndTime',
+										width: 170,
+										title: '失效时间',
+										align: 'center',
+										sort: true
+									}, {
+										field: 'taskNote',
+										title: '描述',
+										align: 'center',
+										sort: true
+									}, {
+										field: 'taskState',
+										width: 80,
+										title: '状态',
+										align: 'center',
+										templet: '#taskState'
+									}, {
+										title: '操作',
+										width: 200,
+										align: 'center',
+										fixed: 'right',
+										toolbar: '#table-operation'
+									}]
+								],
+								limit: 50,
+								text: {
+									none: '居然什么也木有···'
+								}
+							});
+							if (pageType) {
+								/*初始化分页*/
+								pageIndex(res.count, res.showSize);
+							}
+						});
+				}
+
+				//分页 总条数  每页显示数量  注意这个最好和后台对应不可随意填写避免数据紊乱
+				function pageIndex(count, limit) {
+					//实例化分页
+					laypage.render({
+						elem: 'layuiPage',
+						count: count,
+						limit: limit,
+						layout: ['prev', 'next', 'page'],
+						jump: function(obj) {
+							//console.log(obj)
+							if (!pageType) {
+								if (searchJson == null) {
+									selectlist(obj.curr)
+								} else {
+									selectlist(obj.curr)
+								}
+							}
+							pageType = false
+						}
+					});
+				}
+
+
+				//监听工具条
+				table.on('tool(LAY-task-back-manage)', function(obj) {
+					var data = obj.data;
+					/*禁用*/
+					if (obj.event === 'close') {
+						var mycars = new Array()
+						mycars[0] = data.taskId
+						layer.confirm('确定要禁用此定时器吗？', function(index) {
+							var ipt = {
+								"taskId": mycars,
+								"state": 2
+							}
+							//console.log(JSON.stringify(ipt))
+							//执行 Ajax 后重载
+							common.get("task/updateTaskState",ipt,function(res) {
+									layer.msg(res.msg, {
+										offset: '15px',
+										icon: 1,
+										time: 1200
+									}, function() {
+										selectlist(1, null)
+									});
+								});
+						});
+						/*启用*/
+					} else if (obj.event === 'open') {
+						var mycars = new Array()
+						mycars[0] = data.taskId
+						layer.confirm('确定要启用此定时器吗？', function(index) {
+							var ipt = {
+								"taskId": mycars,
+								"state": 1
+							}
+							//console.log(JSON.stringify(ipt))
+							//执行 Ajax 后重载
+							common.get("task/updateTaskState",ipt,function(res) {
+									layer.msg(res.msg, {
+										offset: '15px',
+										icon: 1,
+										time: 1200
+									}, function() {
+										selectlist(1, null)
+									});
+								});
+						});
+						/*编辑*/
+					} else if (obj.event === 'edit') {
+						var tr = $(obj.tr);
+						//console.log(data)
+						//console.log(tr)
+						layer.open({
+							type: 2,
+							title: '编辑定时器',
+							content: 'task_add.html',
+							area: ['840px', '95%'],
+							btn: ['确定', '取消'],
+							yes: function(index, layero) {
+								var iframeWindow = window['layui-layer-iframe' + index],
+									submitID = 'LAY-task-submit',
+									submit = layero.find('iframe').contents().find('#' + submitID);
+
+								//监听提交
+								iframeWindow.layui.form.on('submit(' + submitID + ')', function(data) {
+									var field = data.field; //获取提交的字段
+									//console.log(JSON.stringify(field))
+									//提交 Ajax 成功后，静态更新表格中的数据
+									common.get("task/updateTask",field,function(res) {
+											layer.msg(res.msg, {
+												offset: '15px',
+												icon: 1,
+												time: 1000
+											}, function() {
+												layer.close(index); //关闭弹层
+												selectlist(1, null)
+											});
+										});
+									
+
+								});
+
+								submit.trigger('click');
+							},
+							success: function(layero, index) {
+                              //START：传递参数
+                              var iframe = window['layui-layer-iframe' + index];
+                              var resDat = {
+                              	"type": 2,
+                              	"taskId": data.taskId
+                              }
+                              iframe.child(resDat);
+                              //END：传递参数
+							}
+						})
+					} else if (obj.event === 'del') {
+						var tr = $(obj.tr);
+						//console.log(data)
+						//console.log(tr)
+						layer.confirm('确定要删除此定时器吗？', function(index) {
+							common.get("task/deleteTask",{"taskId": data.taskId},function(res) {
+									layer.msg(res.msg, {
+										offset: '15px',
+										icon: 1,
+										time: 1000
+									}, function() {
+										layer.close(index); //关闭弹层
+										selectlist(1, null)
+									});
+								});
+						});
+					}
+				});
+
+
+				//事件
+				var active = {
+					/*添加*/
+					add: function() {
+							layer.open({
+								type: 2,
+								title: '添加定时',
+								content: 'task_add.html',
+								area: ['840px', '95%'],
+								btn: ['确定', '取消'],
+								yes: function(index, layero) {
+									var iframeWindow = window['layui-layer-iframe' + index],
+										submitID = 'LAY-task-submit',
+										submit = layero.find('iframe').contents().find('#' + submitID);
+									//监听提交
+									iframeWindow.layui.form.on('submit(' + submitID + ')', function(data) {
+										var field = data.field; //获取提交的字段
+										//console.log(JSON.stringify(field))
+										//提交 Ajax 成功后，静态更新表格中的数据
+										common.get("task/addtask",field,function(res) {
+												layer.msg(res.msg, {
+													offset: '15px',
+													icon: 1,
+													time: 1500
+												}, function() {
+													if (res.state == 1) {
+														layer.close(index); //关闭弹层
+														table.reload('LAY-task-submit'); //数据刷新
+														selectlist(1, null)
+														//location.reload()
+													}
+												});
+											});
+									});
+
+									submit.trigger('click');
+								}
+							});
+						},
+						success: function(layero, index) {
+						  //START：传递参数
+						  var iframe = window['layui-layer-iframe' + index];
+						  var resDat = {
+						  	"type": 1,
+						  	"taskId": 0
+						  }
+						  iframe.child(resDat);
+						  //END：传递参数
+						}
+						/*启用*/
+						,
+					open: function() {
+						var checkStatus = table.checkStatus('LAY-task-back-manage'),
+							checkData = checkStatus.data; //得到选中的数据
+						//console.log(JSON.stringify(checkStatus))
+						if (checkData.length === 0) {
+							return layer.msg('请选择数据');
+						}
+						var mycars = new Array()
+						for (var i = 0; i < checkData.length; i++) {
+							mycars[i] = checkData[i].taskId
+						}
+						layer.confirm('确定启用定时器吗？', function(index) {
+							var ipt = {
+								"taskId": mycars,
+								"state": 1
+							}
+							//console.log(JSON.stringify(ipt))
+							//执行 Ajax 后重载
+							common.get("task/updateTaskState",ipt,function(res) {
+									layer.msg(res.msg, {
+										offset: '15px',
+										icon: 1,
+										time: 1200
+									}, function() {
+										selectlist(1, null)
+									});
+								});
+						});
+					},
+					/*禁用*/
+					close: function() {
+						var checkStatus = table.checkStatus('LAY-task-back-manage'),
+							checkData = checkStatus.data; //得到选中的数据
+
+						if (checkData.length === 0) {
+							return layer.msg('请选择数据');
+						}
+						var mycars = new Array()
+						for (var i = 0; i < checkData.length; i++) {
+							mycars[i] = checkData[i].taskId
+						}
+						layer.confirm('确定禁用定时器吗？', function(index) {
+							var ipt = {
+								"taskId": mycars,
+								"state": 2
+							}
+							//console.log(JSON.stringify(ipt))
+							//执行 Ajax 后重载
+							common.get("task/updateTaskState",ipt,function(res) {
+									layer.msg(res.msg, {
+										offset: '15px',
+										icon: 1,
+										time: 1200
+									}, function() {
+										selectlist(1, null)
+									});
+								});
+						});
+					}
+				}
+				$('.layui-btn.layuiadmin-btn-admin').on('click', function() {
+					var type = $(this).data('type');
+					active[type] ? active[type].call(this) : '';
+				});
+
+			});
+		</script>
+	</body>
+</html>

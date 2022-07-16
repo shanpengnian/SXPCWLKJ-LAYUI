@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<html>
+		<head>
+			<meta charset="utf-8">
+			<title>邮件服务</title>
+			<meta name="renderer" content="webkit">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+			<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+			<link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+		</head>
+		<body>
+
+			<div class="layui-fluid">
+				<div class="layui-row layui-col-space15">
+					<div class="layui-col-md6">
+						<div class="layui-card">
+							<div class="layui-card-header">邮件服务</div>
+							<div class="layui-card-body" style="height: 450px">
+
+								<div class="layui-form" wid100 lay-filter="">
+									<div class="layui-form-item">
+										<label class="layui-form-label">SMTP服务器</label>
+										<div class="layui-input-inline">
+											<input type="text" name="smtpServer" class="layui-input">
+										</div>
+										<div class="layui-form-mid layui-word-aux">如：smtp.163.com</div>
+									</div>
+									<div class="layui-form-item">
+										<label class="layui-form-label">SMTP端口号</label>
+										<div class="layui-input-inline" style="width: 80px;">
+											<input type="text" name="port" lay-verify="number" class="layui-input">
+										</div>
+										<div class="layui-form-mid layui-word-aux">一般为 25 或 465</div>
+									</div>
+									<div class="layui-form-item">
+										<label class="layui-form-label">发件人邮箱</label>
+										<div class="layui-input-inline">
+											<input type="text" name="sendEmail" lay-verify="email" autocomplete="off" class="layui-input">
+										</div>
+									</div>
+									<div class="layui-form-item">
+										<label class="layui-form-label">发件人昵称</label>
+										<div class="layui-input-inline">
+											<input type="text" name="sendNickname" autocomplete="off" class="layui-input">
+										</div>
+									</div>
+									<div class="layui-form-item">
+										<label class="layui-form-label">邮箱登入密码</label>
+										<div class="layui-input-inline">
+											<input type="password" name="sendPassword" autocomplete="off" class="layui-input">
+										</div>
+									</div>
+									<div class="layui-form-item">
+										<div class="layui-input-block">
+											<button class="layui-btn" lay-submit lay-filter="set_system_email">确认保存</button>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="layui-col-md6">
+						<div class="layui-card">
+							<div class="layui-card-header">发送邮件</div>
+							<div class="layui-card-body" style="height: 450px">
+
+								<div class="layui-form" wid100 lay-filter="">
+									<div class="layui-form-item">
+										<label class="layui-form-label">发送邮件标题</label>
+										<div class="layui-input-inline">
+											<input type="text" name="subject" lay-verify="required" placeholder="请输入邮件标题" value="测试" class="layui-input">
+										</div>
+										<div class="layui-form-mid layui-word-aux">邮件标题</div>
+									</div>
+									<div class="layui-form-item">
+										<label class="layui-form-label">发送邮件账号</label>
+										<div class="layui-input-inline">
+											<input type="text" name="receptionEmail" lay-verify="email" placeholder="接收人邮件账号" value="" class="layui-input">
+										</div>
+										<div class="layui-form-mid layui-word-aux">接收人邮件账号</div>
+									</div>
+									<div class="layui-form-item">
+										<textarea name="" id="edit">这里是<span
+                                    style="color: #e03e2d;"><em>email</em></span>的内容</textarea>
+									</div>
+
+									<div class="layui-form-item">
+										<div class="layui-input-block" style="width: 82%;text-align: right">
+											<button class="layui-btn" lay-submit lay-filter="send_email">确认发送</button>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<script src="../../layuiadmin/layui/layui.js"></script>
+			<script>
+				layui.config({
+					base: '../../layuiadmin/' //静态资源所在路径
+				}).extend({
+					index: 'lib/index', //主入口模块
+					tinymce: 'tinymce'
+				}).use(['index', 'layer', 'laytpl', 'view', 'form', 'admin', 'table', 'laypage', 'tinymce', 'common'], function(exports) {
+					var $ = layui.$,
+						layer = layui.layer,
+						laytpl = layui.laytpl,
+						setter = layui.setter,
+						view = layui.view,
+						table = layui.table,
+						admin = layui.admin,
+						laypage = layui.laypage,
+						tinymce = layui.tinymce,
+						common = layui.common,
+						form = layui.form,
+						util = layui.util;
+
+
+                     common.get("email/selectEmail",{},function(res){
+						 $("[name='smtpServer']").val(res.data.smtpServer);
+						  $("[name='port']").val(res.data.port);
+						   $("[name='sendEmail']").val(res.data.sendEmail);
+						    $("[name='sendNickname']").val(res.data.sendNickname);
+							$("[name='sendPassword']").val(res.data.sendPassword);
+					 });
+
+					tinymce.init({
+						selector: "#edit", // 编辑器选择器
+						auto_focus: true, //自动获取焦点
+						toolbar: true, //隐藏工具栏
+						menubar: false, //隐藏菜单栏
+						statusbar: false, //隐藏状态栏
+						width: '100%',
+						height: 250,
+						target: 'el',
+						automatic_uploads: true, // 图片自动上传
+						images_upload_handler: function(blobInfo, success, failure) {
+							var form = new FormData();
+							form.append('files', blobInfo.blob(), blobInfo.filename());
+
+							$.ajax({
+								url: layui.setter.requeryUrl + "txtFileUpload",
+								type: "post",
+								data: form,
+								headers: {
+									"Access-Control-Allow-Origin": "*",
+									"token": getToken()
+								},
+								processData: false,
+								contentType: false,
+								success: function(data) {
+									success(data.location);
+								},
+								error: function(e) {
+									alert("图片上传失败");
+								}
+							});
+						},
+						file_picker_callback: function(callback, value, meta) {
+							var input = document.createElement('input');
+							input.setAttribute('type', 'file');
+							input.onchange = function() {
+								var file = this.files[0];
+								var form = new FormData();
+								form.append("files", file);
+
+								$.ajax({
+									url: layui.setter.requeryUrl + "txtFileUpload",
+									type: "post",
+									headers: {
+										"Access-Control-Allow-Origin": "*",
+										"token": getToken()
+									},
+									data: form,
+									processData: false,
+									contentType: false,
+									success: function(data) {
+										callback(data.location);
+									},
+									error: function(e) {
+										alert("图片上传失败");
+									}
+								});
+							};
+
+							input.click();
+
+						},
+						image_class_list: [{
+								title: 'None',
+								value: ''
+							},
+							{
+								title: 'Left',
+								value: 'alignleft'
+							}, // 图片向左对齐
+							{
+								title: 'Center',
+								value: 'aligncenter'
+							}, // 图片居中对齐
+							{
+								title: 'Right',
+								value: 'alignright'
+							} // 图片向右对齐
+						],
+						setup: function(editor) {
+							console.log("ID为: " + editor.id + " 的编辑器即将初始化.");
+						},
+						init_instance_callback: function(editor) {
+							console.log("ID为: " + editor.id + " 的编辑器已初始化完成.");
+
+						}
+					});
+
+
+					//监听提交
+					form.on('submit(set_system_email)', function(data) {
+						//layer.msg(JSON.stringify(data.field));
+						// {"smtpServer":"11111","port":"22","sendEmail":"333@qq.com","sendNickname":"333","sendPassword":"333"}
+						common.get("email/updateEmail", data.field, function(res) {
+							if (res.state == 1) {
+								layer.msg(res.msg, {
+									offset: '15px',
+									icon: 1,
+									time: 1500
+								}, function() {
+
+								});
+							} else {
+								layer.alert(res.msg, {
+									skin: 'layui-layer-lan',
+									closeBtn: 0,
+									anim: 4 //动画类型
+								});
+							}
+
+						});
+
+						return false;
+					});
+
+					//监听提交
+					form.on('submit(send_email)', function(data) {
+						var content = tinymce.get('#edit').getContent()
+						//console.log(content)
+						//layer.msg(content);
+						//{"smtpServer":"11111","port":"22","sendEmail":"333@qq.com","sendNickname":"333","sendPassword":"333"}
+						common.post("email/sendEmail", {
+							"content": content,
+							"subject": data.field.subject,
+							"receptionEmail": data.field.receptionEmail
+						}, function(res) {
+							layer.msg(res.msg, {
+								offset: '15px',
+								icon: 1,
+								time: 1500
+							}, function() {
+
+							});
+						});
+
+						return false;
+					});
+				});
+			</script>
+		</body>
+	</html>

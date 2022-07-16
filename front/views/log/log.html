@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>日志管理</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+	</head>
+	<body>
+
+		<div class="layui-fluid">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-body">
+						<div style="padding-bottom: 10px;padding-top: 10px">
+							<div class="layui-inline">
+								<!-- 注意：这一层元素并不是必须的 -->
+								<div style="float: left;margin-right: 10px;margin-top: 5px"><span>选择日志日期:</span></div>
+								<div style="float: left">
+									<input type="text" class="layui-input" id="test1" style="width: 120px">
+								</div>
+							</div>
+							<!-- <div class="layui-inline" style="float: right">
+                        <div class="layui-btn-group">
+                            <button type="button" class="layui-btn layui-btn-sm" lay-event="LAYTABLE_COLS">
+                                <i class="layui-icon layui-icon-cols" title="筛选列"></i></span>
+                            </button>
+                            <button type="button" class="layui-btn layui-btn-sm" lay-event="LAYTABLE_EXPORT">
+                                <i class="layui-icon layui-icon-export" title="导出"></i></span>
+                            </button>
+                            <button type="button" class="layui-btn layui-btn-sm" lay-event="LAYTABLE_PRINT">
+                                <i class="layui-icon layui-icon-print" title="打印"></i>
+                            </button>
+                        </div>
+                    </div>-->
+						</div>
+						<table id="LAY-log-back-manage" lay-filter="LAY-log-back-manage"></table>
+						<script type="text/html" id="table-operation">
+							<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i
+                            class="layui-icon layui-icon-edit"></i>编辑</a>
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i
+                            class="layui-icon layui-icon-delete"></i>删除</a>
+                </script>
+						<script type="text/html" id="logLevel">
+							{{# if(d.logLevel==1){ }}
+                    <span class="layui-badge layui-bg-blue">普通日志</span>
+                    {{# }else if(d.logLevel==2){ }}
+                    <span class="layui-badge layui-bg-orange">重要日志</span>
+                    {{# }else if(d.logLevel==3){ }}
+                    <span class="layui-badge">系统报错</span>
+                    {{# }else if(d.logLevel==4){ }}
+                    <span class="layui-badge layui-bg-black">一级漏洞</span>
+                    {{# } }}
+                </script>
+						<script type="text/html" id="logType">
+							{{# if(d.logType==1){ }}
+                    <span class="layui-badge layui-bg-blue">增加</span>
+                    {{# }else if(d.logType==2){ }}
+                    <span class="layui-badge layui-bg-orange">删除</span>
+                    {{# }else if(d.logType==3){ }}
+                    <span class="layui-badge">修改</span>
+                    {{# }else if(d.logType==4){ }}
+                    <span class="layui-badge layui-bg-black">查询</span>
+                    {{# } }}
+                </script>
+						<div id="layuiPage" style="float: right;padding-right: 20px;padding-top: 10px"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../layuiadmin/layui/layui.js"></script>
+		<!--<script src="/layuiadmin/plugin/layui_exts/excel.js"></script>-->
+		<script>
+			layui.config({
+				base: '../../layuiadmin/', // 配置一个可访问地址
+			}).extend({
+				index: 'lib/index' //主入口模块
+			}).use(['index', 'layer', 'laytpl', 'view', 'form', 'admin', 'table', 'laypage','laydate', 'common'], function(exports) {
+				var $ = layui.$,
+					layer = layui.layer,
+					laytpl = layui.laytpl,
+					setter = layui.setter,
+					view = layui.view,
+					table = layui.table,
+					admin = layui.admin,
+					laypage = layui.laypage,
+					laydate=layui.laydate
+					common = layui.common,
+					form = layui.form;
+				var $body = $('body');
+
+				/*日期事件*/
+				laydate.render({
+					elem: '#test1',
+					min: '2017-1-1',
+					theme: 'molv',
+					value: new Date(),
+					done: function(value, date, endDate) {
+						//console.log(value); //得到日期生成的值，如：2017-08-18
+						// console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+						//console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+
+						selectlist(1, {
+							"selectTime": value,
+							"keyword": ""
+						})
+						searchJson = {
+							"selectTime": value,
+							"keyword": ""
+						};
+					}
+				});
+
+				var data = [];
+
+				/*列表分页*/
+				selectlist(1, null)
+				var pageType = true; //初始化分页状态，默认ture
+				var searchJson = null; //搜素json  ，默认null
+				function selectlist(currpage, searchJson) {
+					var data = {}
+					if (searchJson == null) {
+						data = {
+							"currpage": currpage
+						}
+					} else {
+						/*搜索*/
+						data = {
+							"currpage": currpage,
+							"keyword": searchJson.keyword,
+							"selectTime": searchJson.selectTime
+						}
+					}
+					//console.log(JSON.stringify(data))
+					common.get("log/queryLogPage",data,function(res) {
+							data = res.data;
+							//console.log(JSON.stringify(res))
+							table.render({
+								elem: '#LAY-log-back-manage',
+								data: res.data,
+								title: '日志表',
+								toolbar: '#toolbarDemo' //操作1:启用自定义模板表格头部工具栏
+									,
+								cols: [
+									[{
+											type: 'checkbox',
+											fixed: 'left'
+										}, {
+											field: 'logLevel',
+											width: 100,
+											title: '日志级别',
+											align: 'center',
+											templet: '#logLevel'
+										}, {
+											field: 'logType',
+											width: 100,
+											title: '操作类型',
+											align: 'center',
+											templet: '#logType'
+										}, {
+											field: 'userName',
+											width: 100,
+											title: '用户名称',
+											align: 'center'
+										}, {
+											field: 'logTime',
+											width: 170,
+											title: '日志时间',
+											align: 'center',
+											sort: true
+										}, {
+											field: 'logIp',
+											width: 180,
+											title: 'IP记录',
+											align: 'center'
+										}, {
+											field: 'logDesc',
+											title: '日志描述',
+											align: 'center'
+										}
+										// ,{title: '操作', width: 150, align: 'center', fixed: 'right', toolbar: '#table-operation'}
+									]
+								],
+								limit: 50,
+								text: {
+									none: '居然什么也木有···'
+								}
+							});
+							if (pageType) {
+								/*初始化分页*/
+								pageIndex(res.count, res.showSize);
+							}
+						});
+					
+				}
+
+				//分页 总条数  每页显示数量  注意这个最好和后台对应不可随意填写避免数据紊乱
+				function pageIndex(count, limit) {
+					//实例化分页
+					laypage.render({
+						elem: 'layuiPage',
+						count: count,
+						limit: limit,
+						layout: ['prev', 'next', 'page'],
+						jump: function(obj) {
+							//console.log(obj)
+							if (!pageType) {
+								if (searchJson == null) {
+									selectlist(obj.curr, null)
+								} else {
+									selectlist(obj.curr, searchJson)
+								}
+							}
+							pageType = false
+						}
+					});
+				}
+			});
+		</script>
+	</body>
+</html>

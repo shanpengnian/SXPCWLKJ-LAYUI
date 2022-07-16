@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>控制台</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+		<link rel="stylesheet" href="../../plugin/jQueryRunning/css/jquery.running.css">
+	</head>
+	<body>
+
+		<div class="layui-fluid">
+			<div class="layui-row layui-col-space15">
+				<div class="layui-col-xs12 layui-col-sm12 layui-col-md7 layui-col-lg7">
+					<div class="layui-row layui-col-space15">
+						<div class="layui-col-xs12 layui-col-sm12 layui-col-md6">
+							<div class="layui-card">
+								<div class="layui-card-header">快捷方式</div>
+								<div class="layui-card-body">
+
+									<div class="layui-carousel layadmin-carousel layadmin-shortcut">
+										<div carousel-item>
+											<ul class="layui-row layui-col-space10">
+												<li class="layui-col-xs3">
+													<a lay-href="user/user.html">
+														<i class="layui-icon layui-icon-user"></i>
+														<cite>用户管理</cite>
+													</a>
+												</li>
+												<li class="layui-col-xs3">
+													<a lay-href="log/log.html">
+														<i class="layui-icon layui-icon-chart"></i>
+														<cite>系统日志</cite>
+													</a>
+												</li>
+												<li class="layui-col-xs3">
+													<a lay-href="member/member.html">
+														<i class="layui-icon layui-icon-group"></i>
+														<cite>会员列表</cite>
+													</a>
+												</li>
+												<!-- <li class="layui-col-xs3">
+													<a lay-href="member/member_add.html">
+														<i class="layui-icon layui-icon-addition"></i>
+														<cite>添加会员</cite>
+													</a>
+												</li> -->
+											</ul>
+
+
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 layui-col-sm12 layui-col-md6">
+							<div class="layui-card">
+								<div class="layui-card-header">状态</div>
+								<div class="layui-card-body">
+
+									<div class="layui-carousel layadmin-carousel layadmin-backlog">
+										<div class="layui-row">
+											<div class="layui-col-xs4 layui-col-sm4 layui-col-md4 layui-row"
+												style="text-align: center">
+												<div
+													style="width: 100%;height: 40px;text-align: center;line-height: 40px">
+													<span>JVM负载</span>
+												</div>
+												<div style="width: 100%;height: 110px;text-align: center">
+													<canvas id="my_jvm" width="50" height="50"></canvas>
+												</div>
+												<div
+													style="width: 100%;height: 40px;text-align: center;line-height: 40px">
+													<span id="fyzaitxt">运行流畅</span>
+												</div>
+											</div>
+											<div class="layui-col-xs4 layui-col-sm4 layui-col-md4 layui-row"
+												style="text-align: center">
+												<div
+													style="width: 100%;height: 40px;text-align: center;line-height: 40px">
+													<span>CPU使用率</span>
+												</div>
+												<div style="width: 100%;height: 110px;text-align: center">
+													<canvas id="cpu_html" width="50" height="50"></canvas>
+												</div>
+												<div
+													style="width: 100%;height: 40px;text-align: center;line-height: 40px">
+													<span class="sysCpu"></span>
+												</div>
+											</div>
+											<div class="layui-col-xs4 layui-col-sm4 layui-col-md4 layui-row"
+												style="text-align: center">
+												<div
+													style="width: 100%;height: 40px;text-align: center;line-height: 40px">
+													<span>内存使用率</span>
+												</div>
+												<div style="width: 100%;height: 110px;text-align: center">
+													<canvas id="my_neicun" width="50" height="50"></canvas>
+												</div>
+												<div
+													style="width: 100%;height: 40px;text-align: center;line-height: 40px">
+													<span id="sysShenyuNeicun"></span>/<span id="sysNeicun"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class=" layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<div class="layui-row layui-col-space15">
+								<div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+									<div class="layui-card">
+										<div class="layui-card-header">数据概览</div>
+										<div class="layui-card-body">
+
+											<div class="layui-carousel layadmin-carousel layadmin-dataview"
+												data-anim="fade" lay-filter="LAY-index-dataview">
+												<div carousel-item id="LAY-index-dataview">
+													<div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i>
+													</div>
+													<!-- <div></div>
+													<div></div> -->
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layui-col-xs12 layui-col-sm12 layui-col-md5 layui-col-lg5">
+					<div class="layui-row layui-col-space15">
+
+						<div  class="layui-col-xs12 layui-col-sm12 layui-col-md12 layui-col-lg6">
+							<div class="layui-card">
+								<div class="layui-card-header">系统余额</div>
+								<div class="layui-card-body layui-text" style="height: 185px;">
+									<div class="layui-row layui-col-space15">
+
+										<div class="layui-col-xs6 layui-col-sm6 layui-col-md5">
+											<div style="text-align: center;padding: 10px 0px;color: white">
+												<div
+													style="width: 100%;background-color:#f9b977;padding: 5px 0px;border-radius: 5px">
+													<h4>余额</h4>
+													<p style="height: 40px;line-height: 40px" id="sysPice"></p>
+												</div>
+
+											</div>
+											<div style="text-align: center;padding: 0px 0px 10px 0px;color: white">
+												<div
+													style="width: 100%;background-color: #f77d77;padding: 5px 0px;border-radius: 5px">
+													<h4>总消费</h4>
+													<p style="height: 40px;line-height: 40px" id="sysAllpice"></p>
+												</div>
+											</div>
+										</div>
+										<div class="layui-col-xs6 layui-col-sm6 layui-col-md7">
+											<div
+												style="width: 100%;background-color: #eae6e6;margin: 10px 0px;border-radius: 5px">
+												<div class="layui-row" style="padding: 5px 10px">
+													<div class="layui-col-md12" style="margin-bottom: 10px">
+														<div class="layui-input-block"
+															style="margin-left: 0px;display:flex;">
+															<div class="" style="line-height: 38px;font-size: 12px;">充值金额:</div>
+															<input type="number"
+																style="width: 45%;margin-left: 5%;text-align: center"
+																name="pice" lay-verify="pice" autocomplete="off"
+																value="10" placeholder="充值金额" class="layui-input">
+														</div>
+													</div>
+													<div class="layui-col-md12" style="margin-bottom: 10px">
+														<button type="button" class="layui-btn layui-btn-fluid"
+															id="weixinPay">
+															微信充值
+														</button>
+													</div>
+													<div class="layui-col-md12" style="margin-bottom: 10px">
+														<button type="button"
+															class="layui-btn layui-btn-normal layui-btn-fluid"
+															id="aiply">支付宝充值
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="layui-col-xs12 layui-col-sm12 layui-col-md12 layui-col-lg6">
+							<div class="layui-card" style="min-height: 245px">
+								<div class="layui-card-header">
+									联系我们
+									<i class="layui-icon layui-icon-tips" lay-tips="要支持的噢" lay-offset="5"></i>
+								</div>
+								<div class="layui-card-body layui-text layadmin-text">
+									<p>
+										陕西品创网络成立于2018年,专注承接各类运营系统,App,小程序,官网,商场网站的定制开发,欢迎联系我定制App,小程序,PC网站,运营系统。
+									</p>
+
+									<p><i class="layui-icon layui-icon-login-qq"
+											style="font-size: 16px; color: #1E9FFF;"></i> : 942879858 </p>
+									<p><i class="layui-icon layui-icon-login-wechat"
+											style="font-size: 16px; color: #108001;"></i> : shanpengnian </p>
+									<p>—— 陕西品创网络（<a href="https://www.sxpcwlkj.com/" target="_blank">官网</a>）</p>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+				<div class="layui-col-xs12 layui-col-sm12 layui-col-md5 layui-col-lg5" style="margin-top: -8px;">
+					<div class="layui-row layui-col-space15">
+						<div class="layui-col-xs12 layui-col-sm12 layui-col-md12" style="">
+							<div class="layui-card" style="height: 395px">
+								<div class="layui-card-header">版本信息</div>
+								<div class="layui-card-body layui-text">
+									<table class="layui-table">
+										<colgroup>
+											<col width="150">
+											<col>
+										</colgroup>
+										<tbody>
+											<tr>
+												<td>管理系统名称</td>
+												<td id="sysName">
+
+												</td>
+											</tr>
+
+											<tr>
+												<td>管理系统版本</td>
+												<td id="sysVersion">
+
+												</td>
+											</tr>
+											<tr>
+												<td>服务器系统类型</td>
+												<td id="sysXiTong">
+
+												</td>
+											</tr>
+											<tr>
+												<td>服务器系统版本</td>
+												<td id="getSysXiTongVersion">
+
+												</td>
+											</tr>
+											<tr>
+												<td>服务器CPU数</td>
+												<td class="sysCpu">
+
+												</td>
+											</tr>
+											<tr>
+												<td>服务器服务IP</td>
+												<td id="sysIp">
+
+												</td>
+											</tr>
+
+											<tr>
+												<td>JVM版本</td>
+												<td id="sysJvmVersion">
+
+												</td>
+											</tr>
+											<tr>
+												<td>时区</td>
+												<td id="sysShiqu">
+
+												</td>
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="layer_notice"
+			style="width: 150px;height: 180px;padding: 10px;background-color: white;text-align: center;display: none">
+			<img id="payImg" src="https://jifugou.oss-cn-zhangjiakou.aliyuncs.com/00-common/buy_df.png"
+				style="width: 150px;height: 150px;">
+			<p style="margin-top: 10px">微信扫码支付</p>
+		</div>
+		<script src="../../layuiadmin/layui/layui.js?t=1"></script>
+		<script type="text/javascript" src="../../plugin/jQueryRunning/js/jquery.min.js"></script>
+		<script type="text/javascript" src="../../plugin/cavasProgress/js/progress.js"></script>
+		<script>
+			layui.config({
+				base: '../../layuiadmin/' //静态资源所在路径
+			}).extend({
+				index: 'lib/index' //主入口模块
+			}).use(['index',  'form', 'common', 'admin', 'carousel', 'echarts'], function() {
+				var $ = layui.$,
+					layer = layui.layer,
+					laytpl = layui.laytpl,
+					setter = layui.setter,
+					view = layui.view,
+					common = layui.common,
+					admin = layui.admin,
+					form = layui.form,
+					admin = layui.admin,
+					carousel = layui.carousel,
+					element = layui.element,
+					device = layui.device(),
+					echarts = layui.echarts;
+					
+					
+					//轮播切换
+					$('.layadmin-carousel').each(function(){
+					  var othis = $(this);
+					  carousel.render({
+					    elem: this
+					    ,width: '100%'
+					    ,arrow: 'none'
+					    ,interval: othis.data('interval')
+					    ,autoplay: othis.data('autoplay') === true
+					    ,trigger: (device.ios || device.android) ? 'click' : 'hover'
+					    ,anim: othis.data('anim')
+					  });
+					});
+					
+					element.render('progress');
+				common.get("home/getUserAddNum",{},function(res){
+					console.log(JSON.stringify(res))
+					
+					var echartsApp = [], options = [
+					 
+					  //新增的用户量
+					  {
+					    title: {
+					      text: '最近一周新增的用户量',
+					      x: 'center',
+					      textStyle: {
+					        fontSize: 14
+					      }
+					    },
+					    tooltip : { //提示框
+					      trigger: 'axis',
+					      formatter: "{b}<br>新增用户：{c}"
+					    },
+					    xAxis : [{ //X轴
+					      type : 'category',
+					      data : res.data.day
+					    }],
+					    yAxis : [{  //Y轴
+					      type : 'value'
+					    }],
+					    series : [{ //内容
+					      type: 'line',
+					      data:res.data.num,
+					    }]
+					  }
+					]
+					,elemDataView = $('#LAY-index-dataview').children('div')
+					,renderDataView = function(index){
+					  echartsApp[index] = echarts.init(elemDataView[index], layui.echartsTheme);
+					  echartsApp[index].setOption(options[index]);
+					  //window.onresize = echartsApp[index].resize;
+					  admin.resize(function(){
+					    echartsApp[index].resize();
+					  });
+					};
+					
+					//没找到DOM，终止执行
+					if(!elemDataView[0]) return;
+					
+				
+					renderDataView(0);
+				})	
+					
+				
+				
+				
+				
+				
+				//监听数据概览轮播
+				var carouselIndex = 0;
+				carousel.on('change(LAY-index-dataview)', function(obj){
+				  renderDataView(carouselIndex = obj.index);
+				});	
+					
+				
+				
+				//服务器性能检测	
+				var p1 = new Progress({
+					el: 'cpu_html', //canvas元素id
+					deg: 0.0001, //绘制角度
+					timer: 1, //绘制时间
+					lineWidth: 5, //线宽
+					lineBgColor: '#e2e2e2', //底圆颜色
+					lineColor: '#00aaff', //动态圆颜色
+					textColor: '#000', //文本颜色
+					fontSize: 20, //字体大小
+					circleRadius: 100 //圆半径
+				});
+				var p2 = new Progress({
+					el: 'my_neicun', //canvas元素id
+					deg: 0.0001, //绘制角度
+					timer: 1, //绘制时间
+					lineWidth: 6, //线宽
+					lineBgColor: '#e2e2e2', //底圆颜色
+					lineColor: '#e4393c', //动态圆颜色
+					textColor: '#000', //文本颜色
+					fontSize: 20, //字体大小
+					circleRadius: 100 //圆半径
+				});
+				var p3 = new Progress({
+					el: 'my_jvm', //canvas元素id
+					deg: 0.0001, //绘制角度
+					timer: 5, //绘制时间
+					lineWidth: 6, //线宽
+					lineBgColor: '#e2e2e2', //底圆颜色
+					lineColor: '#50b1ff', //动态圆颜色
+					textColor: '#000', //文本颜色
+					fontSize: 20, //字体大小
+					circleRadius: 100 //圆半径
+				});
+				//系统余额
+				selectSysMoney()
+
+				function selectSysMoney() {
+					common.get("home/selectSysMoney", {}, function(res) {
+						$("#sysAllpice").text(res.data.sysAllpice + "元")
+						$("#sysPice").text(res.data.sysPice + "元")
+					});
+				}
+
+				//系统信息
+				selectSysinfo()
+
+				function selectSysinfo() {
+					common.get("home/selectSysinfo", {}, function(res) {
+
+						console.log(res.data)
+						$("#sysName").text(res.data.sysName)
+						$("#sysVersion").text(res.data.sysVersion)
+						$("#sysIp").text(res.data.sysIp)
+						$("#sysJvmVersion").text(res.data.sysJvmVersion)
+						$("#sysShiqu").text(res.data.sysShiqu)
+						$(".sysCpu").text(res.data.sysCpu)
+						$("#sysXiTong").text(res.data.sysXiTong)
+						$("#getSysXiTongVersion").text(res.data.getSysXiTongVersion)
+						let fuzai = res.data.sysCupFuzai
+						if (fuzai < 1) {
+							fuzai = 1;
+						}
+						if (res.data.sysCupFuzai < 25) {
+							p1 = new Progress({
+								el: 'cpu_html', //canvas元素id
+								deg: fuzai, //绘制角度
+								timer: 3, //绘制时间
+								lineWidth: 5, //线宽
+								lineBgColor: '#e2e2e2', //底圆颜色
+								lineColor: '#00FF01', //动态圆颜色
+								textColor: '#000', //文本颜色
+								fontSize: 20, //字体大小
+								circleRadius: 100 //圆半径
+							});
+
+						} else if (fuzai >= 25 && fuzai < 90) {
+							p1 = new Progress({
+								el: 'cpu_html', //canvas元素id
+								deg: fuzai, //绘制角度
+								timer: 3, //绘制时间
+								lineWidth: 5, //线宽
+								lineBgColor: '#e2e2e2', //底圆颜色
+								lineColor: '#00aa00', //动态圆颜色
+								textColor: '#000', //文本颜色
+								fontSize: 20, //字体大小
+								circleRadius: 100 //圆半径
+							});
+							$("#fyzaitxt").text("运行正常")
+
+						} else if (fuzai >= 90 && fuzai <= 100) {
+							p1 = new Progress({
+								el: 'cpu_html', //canvas元素id
+								deg: fuzai, //绘制角度
+								timer: 3, //绘制时间
+								lineWidth: 5, //线宽
+								lineBgColor: '#e2e2e2', //底圆颜色
+								lineColor: '#FF5500', //动态圆颜色
+								textColor: '#000', //文本颜色
+								fontSize: 20, //字体大小
+								circleRadius: 100 //圆半径
+							});
+							$("#fyzaitxt").text("运行堵塞")
+
+						}
+						var sysShenyuNeicun = res.data.sysShenyuNeicun;
+						var sysNeicun = res.data.sysNeicun;
+						$("#sysShenyuNeicun").text(sysShenyuNeicun + "M")
+						$("#sysNeicun").text(sysNeicun + "M")
+						//内存
+						p2 = new Progress({
+							el: 'my_neicun', //canvas元素id
+							deg: res.data.sysNeicunlv * 100, //绘制角度
+							timer: 2, //绘制时间
+							lineWidth: 6, //线宽
+							lineBgColor: '#e2e2e2', //底圆颜色
+							lineColor: '#e4393c', //动态圆颜色
+							textColor: '#000', //文本颜色
+							fontSize: 20, //字体大小
+							circleRadius: 100 //圆半径
+						});
+
+						if (res.data.sysJvmlv > 90) {
+							p3 = new Progress({
+								el: 'my_jvm', //canvas元素id
+								deg: res.data.sysJvmlv, //绘制角度
+								timer: 5, //绘制时间
+								lineWidth: 6, //线宽
+								lineBgColor: '#ff0000', //底圆颜色
+								lineColor: '#50b1ff', //动态圆颜色
+								textColor: '#000', //文本颜色
+								fontSize: 20, //字体大小
+								circleRadius: 100 //圆半径
+							});
+						} else {
+							p3 = new Progress({
+								el: 'my_jvm', //canvas元素id
+								deg: res.data.sysJvmlv < 1 ? 1 : res.data.sysJvmlv, //绘制角度
+								timer: 5, //绘制时间
+								lineWidth: 6, //线宽
+								lineBgColor: '#e2e2e2', //底圆颜色
+								lineColor: '#50b1ff', //动态圆颜色
+								textColor: '#000', //文本颜色
+								fontSize: 20, //字体大小
+								circleRadius: 100 //圆半径
+							});
+						}
+
+					})
+				}
+				setInterval(function() {
+					//selectSysinfo()
+				}, 10000);
+
+
+				function getToken() {
+					return layui.data(setter.tableName).token;
+				}
+				$("#aiply").click(function(res) {
+					var pice = $("[name='pice']").val();
+					if (pice <= 0) {
+						layer.msg("金额输入有误");
+						return false;
+					}
+					common.get("Plugin/voucher", {
+						"piceNum": pice,
+						"productId": 1,
+						"orderCount": 1
+					}, function(res) {
+						var orderId = res.data;
+
+						layer.alert(
+							"1:扫码付款后请不要关闭支付宝充值页面;<br>2:等待系统自动返回充值结果;<br>3:提前关闭会造成充值失败;<br>4:充值结束后刷新此页面查看余额。", {
+								skin: 'layui-layer-molv' //样式类名
+									,
+								btn: ['去付款'],
+								closeBtn: 0
+							},
+							function(index) {
+								//window.location.href = "${ctx}/alipay/goAlipay?orderId="+orderId+"&describe=集福购会员充值";
+								window.open(layui.setter.requeryUrl + "Plugin/goAlipay?orderId=" +
+									orderId + "&describe=集福购会员充值&token=" +
+									getToken())
+								layer.close(index);
+								var index = parent.layer.getFrameIndex(window
+								.name); //先得到当前iframe层的索引
+								parent.layer.close(index); //再执行关闭
+								parent.location.reload();
+							});
+
+						// common.get("alipay/goAlipay", {
+						// 	"orderId": id,
+						// 	"describe": "系统余额充值"
+						// }, function(res) {
+						// 	console.log(res.data)
+						// 	// //res即为后端返回的form表单
+						// 	// //js创建一个div将form表单添加上去
+						// 	// const div = document.createElement('div')
+						// 	// div.innerHTML = res.data;
+						// 	// document.body.appendChild(div)
+						// 	// //调用form表单
+						// 	// document.forms[0].submit();
+
+						// });
+
+					});
+
+				});
+
+				$("#weixinPay").click(function() {
+					$(".display").css({
+						"display": ""
+					});
+					var pice = $("[name='pice']").val();
+					if (pice <= 0) {
+						layer.msg("金额输入有误");
+						return false;
+					}
+					//微信下单
+					common.get("Plugin/voucher", {
+						"piceNum": pice,
+						"productId": 1,
+						"orderCount": 1
+					}, function(res) {
+						var id = res.data;
+						admin.req({
+							url: layui.setter.requeryUrl + 'Plugin/getQRCode',
+							data: {
+								"orderId": id,
+								"describe": "系统余额充值"
+							},
+							done: function(res) {
+								$("#payImg").attr('src', res.data);
+								huiDiao(id);
+							}
+						});
+					});
+
+					var index = layer.open({
+						type: 1,
+						shade: false,
+						title: false, //不显示标题
+						content: $('.layer_notice'), //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+						cancel: function() {
+							$("[name='pice']").val("10")
+							$(".display").css({
+								"display": "none"
+							});
+							clearInterval(time);
+						}
+					});
+					var i = 0;
+					var time;
+
+					function huiDiao(orderId) {
+						//console.log(orderId)
+						time = setInterval(function() {
+							//console.log(i++)
+							common.get("Plugin/notifyWeChatPnPay", {
+								"orderId": orderId
+							}, function(res) {
+								if (res.state == 1) {
+									clearInterval(time)
+									layer.msg(res.msg, {
+										offset: '15px',
+										icon: 1,
+										time: 1500
+									}, function() {
+										layer.close(index); //关闭弹层
+										location.reload();
+									});
+								}
+							});
+						}, 1500);
+					}
+				});
+			});
+		</script>
+
+	</body>
+</html>

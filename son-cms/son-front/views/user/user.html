@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>layuiAdmin</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+	</head>
+	<body>
+
+		<div class="layui-fluid">
+			<div class="layui-card">
+				<div class="layui-form layui-card-header layuiadmin-card-header-auto">
+					<div class="layui-form-item">
+						<div class="layui-inline">
+							<label class="layui-form-label">用户名</label>
+							<div class="layui-input-block">
+								<input type="text" name="loginname" placeholder="请输入" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">手机</label>
+							<div class="layui-input-block">
+								<input type="text" name="telphone" placeholder="请输入" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">QQ</label>
+							<div class="layui-input-block">
+								<input type="text" name="qq" placeholder="请输入" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">角色</label>
+							<div class="layui-input-block">
+								<select name="role" id="LAY-user-add-role-code"> </select>
+							</div>
+						</div>
+						<div class="layui-inline">
+							<button class="layui-btn layuiadmin-btn-admin" lay-submit lay-filter="LAY-user-back-search">
+								<i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="layui-card-body">
+					<div style="padding-bottom: 10px;">
+						<button class="layui-btn layuiadmin-btn-admin" data-type="add"><i class="layui-icon">&#xe608;</i> 添加</button>
+						<button class="layui-btn layuiadmin-btn-admin" data-type="updateuser">启用</button>
+						<button class="layui-btn layuiadmin-btn-admin" data-type="batchdel">禁用</button>
+					</div>
+
+					<table id="LAY-user-back-manage" lay-filter="LAY-user-back-manage"></table>
+					<script type="text/html" id="buttonTpl">
+						{{#  if(d.check =='1'){ }}
+						<button class="layui-btn layui-btn-xs">正常</button>
+						{{#  } else { }}
+						<button class="layui-btn layui-btn-primary layui-btn-xs">禁用</button>
+						{{#  } }}
+					</script>
+					<script type="text/html" id="table-useradmin-admin">
+						<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+						{{# if(d.role == '超级管理员'){ }}
+						<a class="layui-btn layui-btn-disabled layui-btn-xs"><i class="layui-icon layui-icon-close"></i>禁用</a>
+						{{# }else if(d.check =='1'){ }}
+						<a class="layui-btn layui-btn-danger layui-btn-xs " lay-event="close"><i class="layui-icon layui-icon-close"></i>禁用</a>
+						{{#  } else { }}
+						<a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="start"><i class="layui-icon layui-icon-ok"></i>启用</a>
+						{{#  } }}
+					</script>
+				</div>
+
+
+			</div>
+			<div id="layuiPage" style="float: right;padding-right: 20px"></div>
+		</div>
+
+
+		<script src="../../layuiadmin/layui/layui.js"></script>
+		<script>
+			layui.config({
+				base: '../../layuiadmin/' //静态资源所在路径
+			}).extend({
+				index: 'lib/index' //主入口模块
+				
+			}).use(['index', 'layer', 'laytpl', 'view', 'form', 'admin', 'table', 'laypage', 'common'], function(exports) {
+				var $ = layui.$,
+					layer = layui.layer,
+					laytpl = layui.laytpl,
+					setter = layui.setter,
+					view = layui.view,
+					table = layui.table,
+					admin = layui.admin,
+					laypage = layui.laypage,
+					common = layui.common,
+					form = layui.form;
+
+				function getToken() {
+					return layui.data(setter.tableName).token;
+				}
+				/*可添加的角色编码*/
+				select()
+
+				function select() {
+					common.get("user/selectAllRole", {}, function(res) {
+						var html = "<option  value='0'>全部</option>";
+						$.each(res.data, function(key, value) {
+							html += "<option  value='" + value.roleId + "'>" + value.roleName + "</option>";
+						})
+						$('#LAY-user-add-role-code').html(html);
+						form.render("select");
+					});
+				}
+
+				var email = function(d) {
+					return d.email != null && d.email.length > 0 ? d.email : "无设置";
+				};
+				var balance = function(d) {
+					return d.balance + "元"
+				};
+
+				selectlist(1, null)
+				var pageType = true; //初始化分页状态，默认ture
+				var searchJson = null; //搜素json  ，默认null
+				function selectlist(currpage, searchJson) {
+					var index = layer.load(2, {
+						time: 10 * 1000
+					});
+					//console.log(currpage)
+					//console.log(JSON.stringify(pram))
+					var data = {}
+					if (searchJson == null) {
+						data = {
+							"currpage": currpage
+						}
+					} else {
+						data = {
+							"currpage": currpage,
+							"roleType": searchJson.roleType,
+							"userName": searchJson.userName,
+							"userPhone": searchJson.userPhone,
+							"userQq": searchJson.userQq
+						}
+					}
+					common.get("user/queryUserInfoPage", data, function(res) {
+						layer.close(index);
+						table.render({
+							elem: '#LAY-user-back-manage',
+							data: res.data,
+							title: '用户表',
+							toolbar: '#toolbarDemo',
+							cols: [
+								[{
+									type: 'checkbox',
+									fixed: 'left'
+								}, {
+									field: 'id',
+									width: 80,
+									title: 'ID',
+									sort: true,
+									align: 'center',
+									display: 'none'
+								}, {
+									field: 'loginname',
+									title: '用户名',
+									width: 120,
+									align: 'center'
+								}, {
+									field: 'telphone',
+									title: '手机',
+									align: 'center',
+									width: 120
+								}, {
+									field: 'email',
+									title: '邮箱',
+									templet: email,
+									width: 180
+								}, {
+									field: 'qq',
+									title: 'QQ',
+									align: 'center',
+									width: 130
+								}, {
+									field: 'role',
+									title: '等级',
+									width: 100,
+									align: 'center'
+								}, {
+									field: 'balance',
+									title: '余额',
+									width: 100,
+									align: 'center',
+									templet: balance
+								}, {
+									field: 'creationTime',
+									title: '加入时间',
+									sort: true,
+									align: 'center',
+									width: 150
+								}, {
+									field: 'check',
+									title: '状态',
+									templet: '#buttonTpl',
+									width: 90,
+									align: 'center'
+								}, {
+									field: 'describe',
+									title: '备注',
+									align: 'center'
+								}, {
+									title: '操作',
+									width: 150,
+									align: 'center',
+									fixed: 'right',
+									toolbar: '#table-useradmin-admin'
+								}]
+							],
+							limit: 50,
+							text: {
+								none: '居然什么也木有···'
+							}
+						});
+
+						if (pageType) {
+							/*初始化分页*/
+							pageIndex(res.count, res.showSize);
+						}
+					});
+				}
+
+				//分页 总条数  每页显示数量  注意这个最好和后台对应不可随意填写避免数据紊乱
+				function pageIndex(count, limit) {
+					//实例化分页
+					laypage.render({
+						elem: 'layuiPage',
+						count: count,
+						limit: limit,
+						layout: ['prev', 'next', 'page'],
+						jump: function(obj) {
+							//console.log(obj)
+							if (!pageType) {
+								if (searchJson == null) {
+									selectlist(obj.curr, null)
+								} else {
+									selectlist(obj.curr, searchJson)
+								}
+							}
+							pageType = false
+						}
+					});
+				}
+
+				form.on('submit(LAY-user-back-search)', function(data) {
+					searchJson = null;
+					var field = data.field;
+					//console.log(field)
+					searchJson = {
+						"roleType": field.role,
+						"userName": field.loginname,
+						"userPhone": field.telphone,
+						"userQq": field.qq
+					}
+					selectlist(1, searchJson)
+					//执行重载
+					/* table.reload('LAY-user-back-manage', {
+					     where: field
+					 });*/
+				});
+
+
+				//监听工具条
+				table.on('tool(LAY-user-back-manage)', function(obj) {
+					var data = obj.data;
+					/*禁用*/
+					if (obj.event === 'close') {
+						var mycars = new Array()
+						mycars[0] = data.id
+						layer.confirm('确定要禁用此用户吗？', function(index) {
+							var ipt = {
+								"userId": mycars,
+								"type": 2
+							}
+							//console.log(JSON.stringify(ipt))
+							//layer.close(index);
+							//执行 Ajax 后重载
+							common.post("user/updateUserByUserId", ipt, function(res) {
+								layer.msg(res.msg, {
+									offset: '15px',
+									icon: 1,
+									time: 1500
+								}, function() {
+									table.reload('LAY-user-back-manage');
+									selectlist(1, null)
+									//location.reload()
+								});
+							});
+						});
+						/*启用*/
+					} else if (obj.event === 'start') {
+						var mycars = new Array()
+						mycars[0] = data.id
+						layer.confirm('确定启用此用户吗？', function(index) {
+							var ipt = {
+								"userId": mycars,
+								"type": 1
+							}
+							//console.log(JSON.stringify(ipt))
+
+							//执行 Ajax 后重载
+							common.post("user/updateUserByUserId", ipt, function(res) {
+								layer.msg(res.msg, {
+									offset: '15px',
+									icon: 1,
+									time: 1500
+								}, function() {
+									table.reload('LAY-user-back-manage');
+									selectlist(1, null)
+									//location.reload()
+								});
+							});
+						});
+						/*编辑*/
+					} else if (obj.event === 'edit') {
+						var tr = $(obj.tr);
+						// userId='+data.id
+						layer.open({
+							type: 2,
+							title: '编辑管理员',
+							content: 'add_user.html',
+							area: ['480px', '700px'],
+							btn: ['确定', '取消'],
+							yes: function(index, layero) {
+								var iframeWindow = window['layui-layer-iframe' + index],
+									submitID = 'LAY-user-front-submit',
+									submit = layero.find('iframe').contents().find('#' + submitID);
+								//监听提交
+								iframeWindow.layui.form.on('submit(' + submitID + ')', function(data) {
+									var field = data.field; //获取提交的字段
+									//console.log(JSON.stringify(field))
+									//提交 Ajax 成功后，静态更新表格中的数据
+									common.post("user/updateUserInfo",data.field,function(res) {
+											layer.msg(res.msg, {
+												offset: '15px',
+												icon: 1,
+												time: 1500
+											}, function() {
+												layer.close(index); //关闭弹层
+												selectlist(1, null)
+											});
+										});
+								});
+
+								submit.trigger('click');
+							},
+							success: function(layero, index) {
+									//START：传递参数
+									var iframe = window['layui-layer-iframe' + index];
+									var resDat = {
+										"type": 2,
+										"userId": data.id
+									}
+									iframe.child(resDat);
+									//END：传递参数
+							}
+						})
+					}
+				});
+
+				//事件
+				var active = {
+					/*添加*/
+					add: function() {
+							layer.open({
+								type: 2,
+								area: ['480px', '600px'],
+								btn: ['确定', '取消'],
+								title: "添加用户",
+								content: 'add_user.html', //url 为子布局的url路径
+								success: function(layero,index) {
+									//START：传递参数
+									var iframe = window['layui-layer-iframe' + index];
+									var resDat = {
+										"type": 1,
+										"userId": 0
+									}
+									iframe.child(resDat);
+									//END：传递参数
+								},
+								yes: function(index, layero) {
+									var iframeWindow = window['layui-layer-iframe' + index],
+										submitID = 'LAY-user-front-submit',
+										submit = layero.find('iframe').contents().find('#' + submitID);
+									//监听提交
+									iframeWindow.layui.form.on('submit(' + submitID + ')', function(data) {
+										var field = data.field; //获取提交的字段
+										console.log(JSON.stringify(field))
+										//提交 Ajax 成功后，静态更新表格中的数据
+
+										common.get("user/addUserInfo", data.field, function(res) {
+											layer.msg(res.msg, {
+												offset: '15px',
+												icon: 1,
+												time: 1500
+											}, function() {
+												if (res.state == 1) {
+													layer.close(index); //关闭弹层
+													table.reload('LAY-user-back-manage'); //数据刷新
+													selectlist(1, null)
+												}
+											});
+										});
+
+									});
+
+									submit.trigger('click');
+								}
+							});
+						},
+					/*启用*/
+					updateuser: function() {
+						var checkStatus = table.checkStatus('LAY-user-back-manage'),
+							checkData = checkStatus.data; //得到选中的数据
+
+						if (checkData.length === 0) {
+							return layer.msg('请选择数据');
+						}
+						var mycars = new Array()
+						for (var i = 0; i < checkData.length; i++) {
+							mycars[i] = checkData[i].id
+						}
+						layer.confirm('确定启用此用户吗？', function(index) {
+							var ipt = {
+								"userId": mycars,
+								"type": 1
+							}
+							// console.log(JSON.stringify(ipt))
+							//执行 Ajax 后重载
+							common.post("user/updateUserByUserId", ipt, function(res) {
+								layer.msg(res.msg, {
+									offset: '15px',
+									icon: 1,
+									time: 1500
+								}, function() {
+									table.reload('LAY-user-back-manage');
+									selectlist(1, null)
+								});
+							});
+						});
+					},
+					/*禁用*/
+					batchdel: function() {
+						var checkStatus = table.checkStatus('LAY-user-back-manage'),
+							checkData = checkStatus.data; //得到选中的数据
+
+						if (checkData.length === 0) {
+							return layer.msg('请选择数据');
+						}
+						var mycars = new Array()
+						for (var i = 0; i < checkData.length; i++) {
+							mycars[i] = checkData[i].id
+						}
+
+						layer.confirm('确定禁用此用户吗？', function(index) {
+							var ipt = {
+								"userId": mycars,
+								"type": 2
+							}
+							console.log(JSON.stringify(ipt))
+							//执行 Ajax 后重载
+							common.post("user/updateUserByUserId", ipt, function(res) {
+								layer.msg(res.msg, {
+									offset: '15px',
+									icon: 1,
+									time: 1500
+								}, function() {
+									table.reload('LAY-user-back-manage');
+									selectlist(1, null)
+								});
+							});
+						});
+					}
+				}
+				$('.layui-btn.layuiadmin-btn-admin').on('click', function() {
+					var type = $(this).data('type');
+					active[type] ? active[type].call(this) : '';
+				});
+
+			});
+		</script>
+	</body>
+</html>

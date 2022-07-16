@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxpcwlkj.mapper.UserMapper">
+
+    <!-- 查询员工列表分页 -->
+    <select id="queryUserPage" parameterType="map" resultType="com.sxpcwlkj.entity.User">
+	    ${selectsql}
+	</select>
+    <!-- 查询员工总条数 -->
+    <select id="queryUserCount" parameterType="map" resultType="int">
+	    ${countsql}
+	</select>
+
+    <!-- 查询角色列表分页  -->
+    <select id="queryRolePage" parameterType="map" resultType="com.sxpcwlkj.entity.Role">
+	    ${selectsql}
+	</select>
+
+    <!-- 查询角色总条数 -->
+    <select id="queryRoleCount" parameterType="map" resultType="int">
+	    ${countsql}
+	</select>
+    <!-- 根据角色编号查询角色信息 -->
+    <select id="queryRoleByRoleId" parameterType="int" resultType="com.sxpcwlkj.entity.Role">
+	    select * from p_role where role_id = #{roleId}
+	</select>
+
+    <!-- 根据角色编号修改角色信息 -->
+    <update id="updateRoleByRoleId" parameterType="com.sxpcwlkj.entity.Role">
+ 		update p_role set role_name = #{roleName} , role_desc = #{roleDesc},role_type=#{roleType},role_rank=#{roleRank} where role_id = #{roleId}
+ 	</update>
+
+    <!-- 新增角色 -->
+    <insert id="addRole" parameterType="role" useGeneratedKeys="true" keyProperty="roleId" keyColumn="role_id">
+ 		INSERT INTO p_role (role_name,role_desc,role_code_id,role_type,role_rank) VALUE(#{roleName},#{roleDesc},#{roleCodeId},#{roleType},#{roleRank})
+ 	</insert>
+
+    <!-- 根据角色编号删除角色 -->
+    <delete id="deleteRoleByRoleId" parameterType="int">
+ 		delete from p_role where role_id = #{roleId}
+ 	</delete>
+
+	<!-- 根据角色编号删除角色和权限的关系 -->
+	<delete id="deleteRoleFunctionByRoleId" parameterType="int">
+ 		delete from p_role_fun where role_id = #{roleId}
+ 	</delete>
+
+	<!-- 修改角色权限 -->
+	<insert id="addRoleFunction" >
+ 		insert into p_role_fun(role_id,fun_id) values(#{roleId},#{funId})
+ 	</insert>
+
+	<!--  根据角色编号查询权限-->
+	<select id="queryFunctionByRoleId" parameterType="int" resultType="com.sxpcwlkj.entity.Function">
+ 		SELECT f.* FROM p_role_fun rf INNER JOIN p_function f ON rf.fun_id = f.fun_id WHERE rf.role_id = #{roleId}
+ 	</select>
+
+	<!-- 查询总权限 -->
+	<select id="queryFunctionAll" resultType="com.sxpcwlkj.entity.Function">
+ 		select * from p_function ORDER BY `sort` ASC
+ 	</select>
+
+	<!-- 根据权限编号查询子权限  -->
+	<select id="queryFunctionByFatherIdGetSonFun" parameterType="int" resultType="com.sxpcwlkj.entity.Function">
+ 		select * from p_function where father_id = #{funId}
+ 	</select>
+
+	<!-- 根据手机号查询员工  -->
+	<select id="queryUserName" parameterType="String"  resultType="com.sxpcwlkj.entity.User">
+		SELECT `user_id`,`user_account`,`user_phone`,`user_email`,`user_name` FROM p_user where user_account= #{userAccount}
+	</select>
+	<!--根据手机号查询-->
+    <select id="queryUserPhone" resultType="com.sxpcwlkj.entity.User">
+		SELECT `user_id`,`user_account`,`user_phone`,`user_email`,`user_name` FROM p_user where user_phone = #{userPhone}
+	</select>
+
+    <!-- 根据员工编号修改会员资料 -->
+	<update id="updateUserByUserInfo" parameterType="com.sxpcwlkj.entity.User" >
+		UPDATE p_user SET `user_account` = #{userAccount} ,user_phone=#{userPhone},`user_email` = #{userEmail},user_qq=#{userQq},icon=#{icon} WHERE user_id = #{userId}
+	</update>
+
+    <!-- 根据员工编号修改头像信息 -->
+    <update id="updateUserImgByUserId" parameterType="com.sxpcwlkj.entity.User">
+        update p_user set icon = #{icon} where user_id = #{userId}
+    </update>
+    <!-- 修改员工密码 -->
+    <update id="forgetUserPassWord" parameterType="com.sxpcwlkj.entity.User">
+        update p_user set user_password= #{userPassword} where user_phone=#{userPhone}
+    </update>
+
+	<!-- 员工授权 -->
+	<insert id="updateAuthorizationUser">
+ 		insert into p_user_role(user_id,role_id) values(#{userId},#{roleId})
+ 	</insert>
+
+	<!-- 根据员工编号查询员工信息 -->
+	<select id="queryUserByUserId" parameterType="int" resultType="com.sxpcwlkj.entity.User">
+		SELECT  m.`available_money` AS balance ,re.`role_name` AS roleName,  u.* FROM p_user u  LEFT JOIN  `p_user_money` m ON u.`user_id`=m.`user_id` LEFT JOIN `p_user_role` f ON f.`user_id` = u.user_id LEFT JOIN `p_role` re  ON  f.`role_id`=re.`role_id`  WHERE u.`user_id`=#{userId}
+	</select>
+</mapper>

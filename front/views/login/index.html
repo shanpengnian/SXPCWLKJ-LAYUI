@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>智能管理系统</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<link href="https://jifugou.oss-cn-zhangjiakou.aliyuncs.com/00-app/logo.png" rel="shortcut icon" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/login.css" media="all">
+		<style>
+			body{
+            width: 100%;
+            height: 100%;
+            background: url("../../img/background/login-bg.jpg") fixed center center no-repeat!important;
+            background-size:100% 100%;
+        }
+    </style>
+	</head>
+	<body>
+
+		<div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
+
+			<div class="layadmin-user-login-main">
+				<div class="layadmin-user-login-box layadmin-user-login-header">
+					<h2>智能管理系统</h2>
+					<p>人工智能</p>
+				</div>
+				<div class="layadmin-user-login-box layadmin-user-login-body layui-form">
+					<div class="layui-form-item">
+						<label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
+						<input type="text" name="userAccount" id="LAY-user-login-username" lay-verify="nickname" placeholder="用户名" class="layui-input">
+					</div>
+					<div class="layui-form-item">
+						<label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
+						<input type="password" name="userPassword" id="LAY-user-login-password" lay-verify="pass" placeholder="密码" class="layui-input">
+					</div>
+					<div class="layui-form-item">
+						<div class="layui-row">
+							<div class="layui-col-xs7">
+								<label class="layadmin-user-login-icon layui-icon layui-icon-vercode" for="LAY-user-login-vercode"></label>
+								<input type="text" name="verCode" id="LAY-user-login-vercode" lay-verify="required" placeholder="图形验证码" class="layui-input">
+							</div>
+							<div class="layui-col-xs5">
+								<div style="margin-left: 10px;" id="LAY-get-vercode">
+									<img src="http://file.jfgapp.com/1000000061946136.jpg" class="layadmin-user-login-codeimg" id="LAY-user-get-vercode">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="layui-form-item" style="margin-bottom: 20px;">
+						<!--                <input type="checkbox" name="remember" lay-skin="primary" title="记住密码">-->
+						<a href="/admin/password" class="layadmin-user-jump-change layadmin-link" style="margin-top: 7px;">忘记密码？</a>
+					</div>
+					<div class="layui-form-item">
+						<button id="loginsubmit" class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-login-submit">登 入</button>
+					</div>
+					<div class="layui-trans layui-form-item layadmin-user-login-other">
+						<label>社交账号登入</label>
+						<a href="javascript:;"><i id="qq" class="layui-icon layui-icon-login-qq"></i></a>
+						<a href="javascript:;"><i id="wechat" class="layui-icon layui-icon-login-wechat"></i></a>
+						<a href="javascript:;"><i id="weibo" class="layui-icon layui-icon-login-weibo"></i></a>
+
+						<a href="" class="layadmin-user-jump-change layadmin-link">注册帐号</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="layui-trans layadmin-user-login-footer">
+				<p>© 2018 <a href="" target="_blank">www.sxpcwlkj.com</a></p>
+				<p>
+					<span><a href="" target="_blank">关于我们</a></span>
+					<span><a href="" target="_blank">使用指南</a></span>
+					<span><a href="" target="_blank">返回首页</a></span>
+				</p>
+			</div>
+		</div>
+		<script src="../../layuiadmin/layui/layui.js"></script>
+		<script>
+			layui.config({
+				base: '../../layuiadmin/' //静态资源所在路径
+			}).extend({
+				index: 'lib/index' //主入口模块
+			}).use(['index','form','common'], function() {
+				var $ = layui.$,
+					layer = layui.layer,
+					laytpl = layui.laytpl,
+					setter = layui.setter,
+					view = layui.view,
+					admin = layui.admin,
+					common=layui.common,
+					form = layui.form;
+
+				var $body = $('body');
+
+				//自定义验证
+				form.verify({
+					nickname: function(value, item) { //value：表单的值、item：表单的DOM对象
+							if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
+								return '用户名不能有特殊字符';
+							}
+							if (/(^\_)|(\__)|(\_+$)/.test(value)) {
+								return '用户名首尾不能出现下划线\'_\'';
+							}
+							if (/^\d+\d+\d$/.test(value)) {
+								return '用户名不能全为数字';
+							}
+						}
+
+						//我们既支持上述函数式的方式，也支持下述数组的形式
+						//数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
+						,
+					pass: [
+						/^[\S]{6,12}$/, '密码必须6到12位，且不能出现空格'
+					]
+				});
+
+				$body.on('click', '#qq', function() {
+					var othis = $(this);
+					layer.tips('暂没投入使用', '#qq', {
+						tips: 3
+					});
+				});
+				$body.on('click', '#wechat', function() {
+					var othis = $(this);
+					layer.tips('暂没投入使用', '#qq', {
+						tips: 3
+					});
+				});
+				$body.on('click', '#weibo', function() {
+					var othis = $(this);
+					layer.tips('暂没投入使用', '#qq', {
+						tips: 3
+					});
+				});
+				//键盘回车事件
+				document.onkeyup = function(e) { //按键信息对象以函数参数的形式传递进来了，就是那个e
+					var code = e.charCode || e.keyCode; //取出按键信息中的按键代码(大部分浏览器通过keyCode属性获取按键代码，但少部分浏览器使用的却是charCode)
+					if (code == 13) {
+						//此处编写用户敲回车后的代码
+						$("#loginsubmit").click();
+					}
+				}
+				
+				var random=common.randomString(6)
+				//更换图形验证码
+				// $body.on('click', '#LAY-get-vercode', function() {
+				// 	var othis = $(this);
+				// 	this.src = layui.setter.requeryUrl + 'user/imageCodeEx?randomString=' +randomString
+				// });
+				$("#LAY-get-vercode").click(function(){
+					showAuth()
+				});
+				
+				//更换验证码
+				showAuth()
+				function showAuth() {
+					common.get("user/imageCodeEx",{"random":random},function(res){
+						$("#LAY-user-get-vercode").attr("src", res.data);
+					})
+					
+				}
+				form.render();
+				//提交
+				form.on('submit(LAY-user-login-submit)', function(obj) {
+					//请求登入接口
+					var index = layer.load(2, {
+						time: 10 * 1000
+					});
+					obj.field.random=random
+					$.ajax({
+						url: layui.setter.requeryUrl + 'user/userLogin',
+						type: 'POST',
+						dataType: 'json',
+						data: obj.field,
+						success: function(res) {
+							layer.close(index);
+							if (res.state == 1) {
+								//请求成功后，写入 access_token
+								layui.data(setter.tableName, {
+									key: setter.request.tokenName,
+									value: res.data.token
+								});
+								layui.data(setter.tableName, {
+									key: "USER",
+									value: res.data.user
+								});
+								//登入成功的提示与跳转
+								layer.msg('登入成功', {
+									offset: '15px',
+									icon: 1,
+									time: 1000
+								}, function() {
+									//location.href = layui.setter.requeryUrl + "admin"; //后台主页
+									location.href = '../index.html'; //后台主页
+								});
+							} else {
+
+								layer.msg(res.msg, {
+									offset: '15px',
+									icon: 1,
+									time: 700
+								}, function() {
+									if (res.state == -1) {
+										$("#LAY-user-login-username").val("");
+										$("#LAY-user-login-password").val("");
+										$("#LAY-user-login-vercode").val("");
+										showAuth();
+									}
+									if (res.state == -3) {
+										$("#LAY-user-login-password").val("");
+										$("#LAY-user-login-vercode").val("");
+										showAuth();
+									}
+									if (res.state == -4) {
+										$("#LAY-user-login-vercode").val("");
+										showAuth();
+									}
+
+								});
+
+							}
+						},
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

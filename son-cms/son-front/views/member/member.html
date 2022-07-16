@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>layuiAdmin</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+	</head>
+	<body>
+
+		<div class="layui-fluid">
+			<div class="layui-card">
+				<div class="layui-form layui-card-header layuiadmin-card-header-auto">
+					<div class="layui-form-item">
+						<div class="layui-inline">
+							<label class="layui-form-label">用户名</label>
+							<div class="layui-input-block">
+								<input type="text" name="objName" placeholder="请输入" autocomplete="off"
+									class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">手机</label>
+							<div class="layui-input-block">
+								<input type="text" name="objPhone" placeholder="请输入" autocomplete="off"
+									class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<button class="layui-btn layuiadmin-btn-admin" lay-submit lay-filter="LAY-user-back-search">
+								<i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="layui-card-body">
+					<div style="padding-bottom: 10px;">
+						<button class="layui-btn layuiadmin-btn-admin" data-type="addobj"><i
+								class="layui-icon">&#xe608;</i> 添加</button>
+						<button class="layui-btn layuiadmin-btn-admin" data-type="openobj">启用</button>
+						<button class="layui-btn layuiadmin-btn-admin" data-type="closeobj">禁用</button>
+					</div>
+
+					<table id="LAY-obj-div-id" lay-filter="LAY-obj-div-id"></table>
+					<script type="text/html" id="currentTableBar">
+						<a class="layui-btn layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
+						<a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+					</script>
+					
+					<script type="text/html" id="memberState">
+					{{# if(d.memberState =='1'){ }}
+						<button class="layui-btn layui-btn-xs">正常</button>
+						{{# } else { }}
+							<button class="layui-btn layui-btn-primary layui-btn-xs">禁用</button>
+							{{# } }}
+					</script>
+					
+					<script type="text/html" id="memberSex">
+					{{# if(d.memberSex ==1){ }}
+						<span>保密</span>
+					{{# } else if(d.memberSex==2){ }}
+						<span>男</span>
+					{{# } else if(d.memberSex==3){ }}
+						<span>女</span>
+					{{# } }}
+					</script>
+				</div>
+
+
+			</div>
+			<div id="layuiPage" style="float: right;padding-right: 20px"></div>
+		</div>
+
+
+		<script src="../../layuiadmin/layui/layui.js"></script>
+		<script>
+			layui.config({
+				base: '../../layuiadmin/' //静态资源所在路径
+			}).extend({
+				index: 'lib/index' //主入口模块
+
+			}).use(['index', 'layer', 'laytpl', 'view', 'form', 'admin', 'table', 'laypage', 'common'], function(exports) {
+				var $ = layui.$,
+					layer = layui.layer,
+					laytpl = layui.laytpl,
+					setter = layui.setter,
+					view = layui.view,
+					table = layui.table,
+					admin = layui.admin,
+					laypage = layui.laypage,
+					common = layui.common,
+					form = layui.form;
+
+				function getToken() {
+					return layui.data(setter.tableName).token;
+				}
+
+
+				var email = function(d) {
+					return d.email != null && d.email.length > 0 ? d.email : "无设置";
+				};
+				var balance = function(d) {
+					return d.balance + "元"
+				};
+
+				selectlist(1, null)
+				var pageType = true; //初始化分页状态，默认ture
+				var searchJson = null; //搜素json  ，默认null
+				function selectlist(currpage, searchJson) {
+					var index = layer.load(2, {
+						time: 10 * 1000
+					});
+					//console.log(currpage)
+					//console.log(JSON.stringify(pram))
+					var data = {}
+					if (searchJson == null) {
+						data = {
+							"currpage": currpage
+						}
+					} else {
+						data = {
+							"showSize": 20,
+							"currpage": currpage,
+							"ojbName": searchJson.ojbName,
+							"ojbPhone": searchJson.ojbPhone
+						}
+					}
+					common.get("adminMember/selectPage", data, function(res) {
+						layer.close(index);
+						table.render({
+							elem: '#LAY-obj-div-id',
+							data: res.data,
+							title: '用户表',
+							toolbar: '#toolbarDemo',
+							cols: [
+								[{
+										type: "checkbox",
+										width: 50,
+										fixed: "left"
+									},
+									{
+										field: 'memberName',
+										title: '昵称',
+										sort: true,
+										width: 100,
+									},
+									{
+										field: 'memberPhone',
+										title: '手机号',
+										sort: true,
+										width: 130,
+										align: 'center'
+									},
+									{
+										field: 'memberAccount',
+										title: '账号',
+										sort: true,
+										width: 90,
+									},
+									
+									{
+										field: 'memberSex',
+										title: '性别',
+										templet: '#memberSex',
+										sort: true,
+										width: 90,
+										align: 'center'
+									},
+									{
+										field: 'addTime',
+										title: '注册时间',
+										templet: '#addTime',
+										sort: true,
+										width: 180,
+										align: 'center'
+									},
+									
+									{
+										field: 'updateTime',
+										title: '最后登录时间',
+										templet: '#updateTime',
+										sort: true,
+										width: 180,
+										align: 'center'
+									},
+									{
+										field: 'memberNote',
+										title: '备注',
+										sort: true
+									},
+									{
+										field: 'memberState',
+										title: '状态',
+										templet: '#memberState',
+										width: 90,
+										align: 'center'
+									},
+									
+									{
+										title: '操作',
+										width: 125,
+										templet: '#currentTableBar',
+										fixed: "right",
+										align: "center"
+									}
+								]
+							],
+							limit: data.showSize,
+							text: {
+								none: '居然什么也木有···'
+							}
+						});
+
+						if (pageType) {
+							/*初始化分页*/
+							pageIndex(res.count, res.showSize);
+						}
+					});
+				}
+
+				//分页 总条数  每页显示数量  注意这个最好和后台对应不可随意填写避免数据紊乱
+				function pageIndex(count, limit) {
+					//实例化分页
+					laypage.render({
+						elem: 'layuiPage',
+						count: count,
+						limit: limit,
+						layout: ['prev', 'next', 'page'],
+						jump: function(obj) {
+							//console.log(obj)
+							if (!pageType) {
+								if (searchJson == null) {
+									selectlist(obj.curr, null)
+								} else {
+									selectlist(obj.curr, searchJson)
+								}
+							}
+							pageType = false
+						}
+					});
+				}
+
+				form.on('submit(LAY-user-back-search)', function(data) {
+					searchJson = null;
+					var field = data.field;
+					//console.log(field)
+					searchJson = {
+						"ojbName": field.ojbName,
+						"ojbPhone": field.ojbPhone
+					}
+					selectlist(1, searchJson)
+				});
+
+
+				//监听工具条
+				table.on('tool(LAY-obj-div-id)', function(obj) {
+					var data = obj.data;
+					/*编辑*/
+					if (obj.event === 'edit') {
+						var tr = $(obj.tr);
+						// userId='+data.id
+						layer.open({
+							type: 2,
+							title: '编辑用户',
+							content: 'add_member.html',
+							area: ['480px', '750px'],
+							btn: ['确定', '取消'],
+							yes: function(index, layero) {
+								var iframeWindow = window['layui-layer-iframe' + index],
+									submitID = 'LAY-obj-from-submit',
+									submit = layero.find('iframe').contents().find('#' + submitID);
+								//监听提交
+								iframeWindow.layui.form.on('submit(' + submitID + ')', function(
+								data) {
+									var field = data.field; //获取提交的字段
+									//console.log(JSON.stringify(field))
+									//提交 Ajax 成功后，静态更新表格中的数据
+									common.post("adminMember/updateById", data.field, function(
+										res) {
+										layer.msg(res.msg, {
+											offset: '15px',
+											icon: 1,
+											time: 1500
+										}, function() {
+											if (res.code==0&&res.state == 1) {
+												layer.close(index); //关闭弹层
+												selectlist(1, null)
+											}
+										});
+									});
+								});
+
+								submit.trigger('click');
+							},
+							success: function(layero, index) {
+								//START：传递参数
+								var iframe = window['layui-layer-iframe' + index];
+								var resDat = {
+									"type": 2,
+									"objId": data.memberId
+								}
+								iframe.child(resDat);
+								//END：传递参数
+							}
+						})
+					}else if(obj.event === 'delete'){
+						layer.confirm('确定要删除吗？', {
+						  btn: ['删除','取消'] //按钮
+						}, function(){
+						  common.get("adminMember/deleteById",{"memberId":data.memberId},function(res){
+							  layer.msg(res.msg, {
+							  	offset: '15px',
+							  	icon: 1,
+							  	time: 1500
+							  }, function() {
+							  	if (res.code==0&&res.state == 1) {
+							  		
+							  		selectlist(1, null)
+							  	}
+							  });
+						  })
+						}, function(){
+						 
+						});
+					}
+				});
+
+				//事件
+				var active = {
+					/*添加*/
+					addobj: function() {
+						layer.open({
+							type: 2,
+							area: ['480px', '750px'],
+							btn: ['确定', '取消'],
+							title: "添加用户",
+							content: 'add_member.html', //url 为子布局的url路径
+							success: function(layero, index) {
+								//START：传递参数
+								var iframe = window['layui-layer-iframe' + index];
+								var resDat = {
+									"type": 1,
+									"objId": 0
+								}
+								iframe.child(resDat);
+								//END：传递参数
+							},
+							yes: function(index, layero) {
+								var iframeWindow = window['layui-layer-iframe' + index],
+									submitID = 'LAY-obj-from-submit',
+									submit = layero.find('iframe').contents().find('#' + submitID);
+								//监听提交
+								iframeWindow.layui.form.on('submit(' + submitID + ')', function(
+								data) {
+									var field = data.field; //获取提交的字段
+									console.log(JSON.stringify(field))
+									//提交 Ajax 成功后，静态更新表格中的数据
+                                    
+									common.get("adminMember/insertMember", data.field, function(
+									res) {
+										layer.msg(res.msg, {
+											offset: '15px',
+											icon: 1,
+											time: 1500
+										}, function() {
+											if (res.code==0&&res.state == 1) {
+												layer.close(index); //关闭弹层
+												selectlist(1, null)
+											}
+										});
+									});
+
+								});
+
+								submit.trigger('click');
+							}
+						});
+					},
+					/*启用*/
+					openobj: function() {
+						var checkStatus = table.checkStatus('LAY-obj-div-id'),
+							checkData = checkStatus.data; //得到选中的数据
+
+						if (checkData.length === 0) {
+							return layer.msg('请选择数据');
+						}
+						var mycars = new Array()
+						for (var i = 0; i < checkData.length; i++) {
+							mycars[i] = checkData[i].memberId
+						}
+						var ipt = {
+							"memberId": mycars,
+							"type": 1
+						}
+						var index = layer.load(1); 
+						common.post("adminMember/updateState",ipt,function(res){
+							layer.msg(res.msg, {
+								offset: '15px',
+								icon: 1,
+								time: 1500
+							}, function() {
+								if (res.code==0&&res.state == 1) {
+									layer.close(index); //关闭弹层
+									selectlist(1, null)
+								}
+							});
+						})
+						
+					},
+					/*禁用*/
+					closeobj: function() {
+						var checkStatus = table.checkStatus('LAY-obj-div-id'),
+							checkData = checkStatus.data; //得到选中的数据
+						
+						if (checkData.length === 0) {
+							return layer.msg('请选择数据');
+						}
+						var mycars = new Array()
+						for (var i = 0; i < checkData.length; i++) {
+							mycars[i] = checkData[i].memberId
+						}
+						var ipt = {
+							"memberId": mycars,
+							"type": 2
+						}
+						var index = layer.load(1); 
+						common.post("adminMember/updateState",ipt,function(res){
+							layer.msg(res.msg, {
+								offset: '15px',
+								icon: 1,
+								time: 1500
+							}, function() {
+								if (res.code==0&&res.state == 1) {
+									layer.close(index); //关闭弹层
+									selectlist(1, null)
+								}
+							});
+						})
+					},
+					
+				}
+				$('.layui-btn.layuiadmin-btn-admin').on('click', function() {
+					var type = $(this).data('type');
+					active[type] ? active[type].call(this) : '';
+				});
+
+			});
+		</script>
+	</body>
+</html>
